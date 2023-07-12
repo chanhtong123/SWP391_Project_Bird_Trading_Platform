@@ -183,15 +183,16 @@
                                         </div>
                                         <div class="tab-pane fade " id="tab-2">
                                             <div class="container">
-                                                
-                                                    <div class="row">
 
-                                                        <c:forEach items="${orderItem}" var="order">
+                                                <div class="row">
 
-                                                            <div class="col-md-6">
-                                                                 <div class="form-group">
+                                                    <c:forEach items="${orderItem}" var="order">
+                                                        <c:set var="orderItemId" value="${order.orderItemId}" />
+                                                        <c:set var="orderStatus" value="${status[orderItemId]}" />
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
                                                                 <div class="order-item bg-light p-4">
-                                                                   
+
                                                                     <div class="row">
                                                                         <div class="col-md-3">
                                                                             <img style="width: 100px; height: 100px;" src="${order.imageUrl}" alt="Product Image">
@@ -199,23 +200,24 @@
                                                                         <div class="col-md-9">
                                                                             <div class="order-info">
                                                                                 <div><h3>${order.productName}</h3></div>
-                                                                                <div>x${order.quantity}</div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-md-12 text-right">
                                                                             <div class="order-price color-red">$${order.price}</div>
+                                                                            <div>${orderStatus}</div>
+                                                                            <c:if test="${orderStatus eq 'Complete'}">
                                                                             <div class="order-feedback">
                                                                                 <button onclick="openFeedbackModal(${order.orderItemId})" data-orderitemid="${order.orderItemId}" class="btn btn-primary">Feedback</button>
                                                                                 <div id="feedbackStatus_${order.orderItemId}" style="display: none;"></div>
                                                                             </div>
+                                                                            </c:if>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-
+                                                        </div>  
                                                     </c:forEach>
 
 
