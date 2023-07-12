@@ -33,6 +33,10 @@
         <!-- THEME STYLES-->
         <link href="assets/css/main.min.css" rel="stylesheet" />
         <!-- PAGE LEVEL STYLES-->
+        
+        
+        
+        
     </head>
 
     <body class="fixed-navbar">
@@ -43,7 +47,7 @@
             <!-- START HEADER-->
             <header class="header">
                 <div class="page-brand">
-                    <a class="link" href="UserServlet?action=list">
+                    <a class="link" href="UserServlet?action=list2">
                         <span class="brand">Admin 
                             <span class="brand-tip"> Page</span>
                         </span>
@@ -68,15 +72,13 @@
                     <!-- END TOP-LEFT TOOLBAR-->
                     <!-- START TOP-RIGHT TOOLBAR-->
                     <ul class="nav navbar-toolbar">
-
-                      <li class="dropdown dropdown-user">
+                        <li class="dropdown dropdown-user">
                             <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
                                 <img src="./assets/img/admin-avatar.png" />
                                 <span></span>${userlogin.username}<i class="fa fa-angle-down m-l-5"></i></a>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="UserServlet?action=profile"><i class="fa fa-user"></i>Hồ sơ</a>
-                                
-                                
+                               
                                 <a class="dropdown-item" href="UserServlet?action=logout"><i class="fa fa-power-off"></i>Đăng xuất</a>
                             </ul>
 
@@ -603,19 +605,7 @@
         <script src="assets/js/app.min.js" type="text/javascript"></script>
         <!-- PAGE LEVEL SCRIPTS-->
         <script type="text/javascript">
-                                                $(function () {
-                                                    $('#example-table').DataTable({
-                                                        pageLength: 10,
-                                                        //"ajax": './assets/demo/data/table_data.json',
-                                                        /*"columns": [
-                                                         { "data": "name" },
-                                                         { "data": "office" },
-                                                         { "data": "extn" },
-                                                         { "data": "start_date" },
-                                                         { "data": "salary" }
-                                                         ]*/
-                                                    });
-                                                })
+                                              
                                                 function confirmDelete(userId) {
                                                     Swal.fire({
                                                         title: 'Xác nhận xóa',
@@ -736,6 +726,11 @@
 <!-- PAGE LEVEL SCRIPTS-->
 <script src="./assets/js/scripts/dashboard_1_demo.js" type="text/javascript"></script>
 <script src="./assets/js/scripts/form-plugins.js" type="text/javascript"></script>
+
+
+
+
+
     </body>
 
 </html>
