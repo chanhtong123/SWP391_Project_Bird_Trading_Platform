@@ -1,0 +1,29 @@
+.product-detail-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 12rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+.product-detail-name{
+  border-bottom: solid 1px;
+ 
+}
+.product-detail-image{
+  width: 15rem;
+}
+
+.add-to-cart-button input{
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(14, 167, 14);
+  color: white;
+  padding: 15px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  font-weight: bold;
+  font-size: medium;
+}
+.add-to-cart-button input:hover{
+  opacity: 0.9;
+}

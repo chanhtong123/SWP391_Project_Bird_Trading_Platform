@@ -1,0 +1,204 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    background-color: orange;
+}
+.nav-bar {    
+    display: flex;
+    justify-content:space-between;
+    margin-top: 10px;
+}
+.subnav {    
+    position: relative;
+    top: 0px;
+}
+
+.right-section a{
+    padding: 15px;
+}
+
+.subnav .subnavbtn {
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navbar a:hover, .subnav:hover .subnavbtn {
+    background-color: red;
+}
+.sub-nav-profile .nav-item,
+.subnav .nav-item{
+    display: inline-block;
+}
+
+.subnav .subnav-content{
+    display: none;
+    position: absolute;
+    top: 49px;
+    right: 382px;
+    background-color: rgb(251, 248, 248);
+    width: 17rem;
+    height: 17rem;
+    z-index: 1;
+}
+.sub-nav-profile{
+    position: relative;
+    top: 0px;
+}
+
+.sub-nav-profile .subnav-content{
+    display: none;
+    position: absolute;
+    top: 49px;
+    right: 282px;
+    background-color: rgb(251, 248, 248);
+    width: 17rem;
+    height: 17rem;
+    z-index: 1;
+}
+
+.sub-nav-profile .subnav-content-a {
+    display: none;
+    position: absolute;
+    top: 49px;
+    right: 2px;
+    background-color: rgb(251, 248, 248);
+    z-index: 1;
+    padding: 10px;
+}
+
+.sub-nav-profile .subnav-content-a a{
+    background-color: aliceblue;
+    padding: 10px 50px 10px 50px;
+    display: flex;;
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    height: 33.33%;
+    color: rgb(67, 66, 66);
+}
+.link-login{
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+}
+.subnav-content a {
+    color: black;
+    background-color: aliceblue;
+    text-decoration: none;
+    padding-left: 2rem;
+    padding-right: 2.2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+}
+
+.subnav-content a:hover,
+.subnav-content-a a:hover{
+    background-color: #eee;
+    color: black;
+}
+
+.nav-item{
+    padding: 15px;
+}
+
+.nav-item:hover .subnav-content,
+.nav-item:hover .subnav-content-a{
+    display: block;
+}
+.notification-message{
+    margin-top: 75px;
+    text-align: center;
+    color: rgb(67, 66, 66);
+}
+
+.left-section { 
+    display: flex;   
+    padding: 15px;
+    margin-left: 17rem;  
+}
+.right-section {
+    display: flex;
+}
+
+.header-with-search{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100px;
+    padding-left: 50px;
+}   
+.logo-image{  
+    width: 10rem;
+}
+
+.logo-container {
+    width: 100%;
+    height: 70%;
+    overflow: hidden;
+}
+
+.search-bar{
+    display: flex;
+    justify-content: center;
+    padding-left: 200px; 
+}
+
+.search-bar input[type="submit"]{
+    padding: 5px;
+}
+
+.search-bar input[type="text"]{
+    padding: 5px 25px 5px 25px;
+    width: 400px;
+}
+
+.search-button-logo{
+    width: 30px;
+    background-color: black;
+}
+.search-button{
+    width: 70px;
+    margin-left: -5px;
+}
+.search-input{
+    border-radius: 5px;
+    padding: 10px;
+    width: 600px;
+    height: 40px;
+    border-style: solid;
+}
+.search-input::placeholder{
+    font-size: 20px;
+}
+.cart-section{
+    position: absolute;
+    right: 100px;
+}
+.cart-logo{
+    width: 45px;
+}
+.category-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+.cart-link{
+    background-color: transparent;
+}
+.category{
+    margin-right: 10px;
+}

@@ -1,0 +1,42 @@
+.main-grid{
+  margin-top: 200px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  margin-left: 50px;
+  margin-right: 50px;
+  column-gap: 20px;
+  row-gap: 20px;
+}
+
+.product-preview{
+  margin: 0;
+  background-color: rgb(250, 247, 242);
+  cursor: pointer;
+}
+.price-and-quantity{
+  display: flex;
+  justify-content: space-between;
+}
+.price-and-quantity p{
+  margin-top: 5px;
+}
+.product-image{
+    width:  17rem;
+    height: 17rem;
+    
+}
+.product-name{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.product-name p{
+  margin-top: 5px;
+  color: black;
+}
+.price{
+  color: red;
+}
+.sold{
+  color: rgb(147, 145, 145);
+}
