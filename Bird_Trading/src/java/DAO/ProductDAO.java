@@ -50,6 +50,25 @@ public class ProductDAO extends DBHelper {
         return products;
     }
 
+   public ProductDTO increaseProductQuantityBySttPT(int sttPT, int quantity) {
+    ProductDTO product = null;
+    try {
+        String sql = "UPDATE [Product] SET [quantity] = [quantity] + ? WHERE [STT_PT] = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, quantity);
+        ps.setInt(2, sttPT);
+        int rowsAffected = ps.executeUpdate();
+
+        if (rowsAffected > 0) {
+            product = getProductBySttPT(sttPT); // Gọi hàm khác để lấy thông tin sản phẩm đã được cập nhật
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return product;
+}
+
+
     public ArrayList<ProductDTO> getAllProductsByProductId(String productId) {
         ArrayList<ProductDTO> products = new ArrayList<>();
         try {

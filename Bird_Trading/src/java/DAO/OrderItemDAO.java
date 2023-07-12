@@ -44,6 +44,31 @@ public class OrderItemDAO extends DBHelper {
         }
     }
 
+    public OrderItemDTO getOrderItem(int orderItemId) {
+        OrderItemDTO orderItem = null;
+        try {
+            String query = "SELECT quantity, STT_PT FROM OrderItem WHERE order_item_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, orderItemId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                int quantity = resultSet.getInt("quantity");
+                int sttPT = resultSet.getInt("STT_PT");
+
+                orderItem = new OrderItemDTO();
+                orderItem.setQuantity(quantity);
+                orderItem.setSttPT(sttPT);
+            }
+
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return orderItem;
+    }
+
     public BigDecimal calculateTotalPriceByDateRange(String startDate, String endDate) {
         BigDecimal totalPrice = BigDecimal.ZERO;
         try {
@@ -124,6 +149,23 @@ public class OrderItemDAO extends DBHelper {
         boolean success = false;
         try {
             String query = "UPDATE OrderItem SET status_orderItem = 'Delivery in progress' WHERE order_item_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, orderItemid);
+            int rowsUpdated = preparedStatement.executeUpdate();
+            if (rowsUpdated > 0) {
+                success = true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return success;
+    }
+
+    public boolean updateStatusByOrderItemIdDelete(int orderItemid) {
+        boolean success = false;
+        try {
+            String query = "UPDATE OrderItem SET status_orderItem = 'Delete' WHERE order_item_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setInt(1, orderItemid);
@@ -223,8 +265,7 @@ public class OrderItemDAO extends DBHelper {
         return orderItems;
     }
 
-    
-     public List<OrderItemDTO> getOrderItemsByDateRange(String startDate, String endDate) {
+    public List<OrderItemDTO> getOrderItemsByDateRange(String startDate, String endDate) {
         List<OrderItemDTO> orderItems = new ArrayList<>();
         try {
             String query = "SELECT oi.order_item_id, oi.order_id, oi.STT_PT, oi.store_id, oi.quantity, oi.price, oi.product_name, oi.image_url, oi.categoryName, oi.orderItem_date "
@@ -235,7 +276,6 @@ public class OrderItemDAO extends DBHelper {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, startDate + " 00:00:00");
             preparedStatement.setString(2, endDate + " 23:59:59");
-          
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -261,7 +301,6 @@ public class OrderItemDAO extends DBHelper {
 
         return orderItems;
     }
-   
 
     public List<OrderItemDTO> getCompletedOrderItems() {
         List<OrderItemDTO> completedOrderItems = new ArrayList<>();
@@ -462,6 +501,35 @@ public class OrderItemDAO extends DBHelper {
         return totalPrice;
     }
 
+    
+     public static void main(String[] args) {
+        // Tạo kết nối tới cơ sở dữ liệu
+   
+
+        // Tạo đối tượng DAO
+        OrderItemDAO orderItemDAO = new OrderItemDAO();
+
+        // Gọi phương thức getOrderItem để lấy số lượng và STT_PT dựa trên order_item_id
+        int orderItemId = 1; // Thay thế bằng order_item_id bạn muốn kiểm tra
+        OrderItemDTO orderItem = orderItemDAO.getOrderItem(orderItemId);
+
+        // Kiểm tra kết quả
+        if (orderItem != null) {
+            int quantity = orderItem.getQuantity();
+            int sttPT = orderItem.getSttPT();
+            System.out.println("Số lượng: " + quantity);
+            System.out.println("STT_PT: " + sttPT);
+        } else {
+            System.out.println("Không tìm thấy order_item_id: " + orderItemId);
+        }
+
+        // Đóng kết nối
+       
+    }
+    
+    
+    
+    
     public BigDecimal calculateTotalPrice() {
         BigDecimal totalPrice = BigDecimal.ZERO;
         try {

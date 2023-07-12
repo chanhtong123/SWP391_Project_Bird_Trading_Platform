@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="DAO.ProductDAO"%>
 <%@page import="DTO.ProductDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -63,17 +64,24 @@
                 </ul>
                 <!-- END TOP-LEFT TOOLBAR-->
                 <!-- START TOP-RIGHT TOOLBAR-->
-                <ul class="nav navbar-toolbar">
-                    <li class="dropdown dropdown-user">
-                        <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                            <img src="./assets/img/admin-avatar.png" />
-                            <span></span>${userlogin.username}<i class="fa fa-angle-down m-l-5"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="UserServlet?action=profile"><i class="fa fa-user"></i>Profile</a>
-                            <a class="dropdown-item" href="UserServlet?action=logout"><i class="fa fa-power-off"></i>Logout</a>
-                        </ul>
-                    </li>
-                </ul>
+              <ul class="nav navbar-toolbar">
+                        <li class="dropdown dropdown-user">
+                            <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
+                                <img src="./assets/img/admin-avatar.png" />
+                                <span></span>${userlogin.username}<i class="fa fa-angle-down m-l-5"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="UserServlet?action=profile"><i class="fa fa-user"></i>Hồ sơ</a>
+                                <c:if test="${userlogin != null && userlogin.role eq 'User'}">
+                                    <a class="dropdown-item" href="storeRegister.jsp"><i class="fa fa-user"></i>Đăng ký của hàng</a>
+                                </c:if>
+                                <c:if test="${userlogin != null && userlogin.role eq 'Store Manager'}">
+                                    <a class="dropdown-item" href="StoreHomeServlet"><i class="fa fa-file"></i>Cửa hàng</a>
+                                </c:if>
+                                <a class="dropdown-item" href="UserServlet?action=logout"><i class="fa fa-power-off"></i>Đăng xuất</a>
+                            </ul>
+
+                        </li>
+                    </ul>
                 <!-- END TOP-RIGHT TOOLBAR-->
             </div>
         </header>
@@ -168,7 +176,7 @@
                         <div>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal" >Lưu Thông Tin Mới</button>
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <a href="AdminHomeServlet" class="btn btn-primary">Quay Về Trang Quản Lý</a>
+                            <a href="storePage.jsp" class="btn btn-primary">Quay Về Trang Quản Lý</a>
                         </div>
 
                 </div>

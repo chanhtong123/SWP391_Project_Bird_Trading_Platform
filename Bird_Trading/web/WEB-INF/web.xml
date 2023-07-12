@@ -124,6 +124,10 @@
         <servlet-name>UpdateStatusOrderItemServlet2</servlet-name>
         <servlet-class>controller.UpdateStatusOrderItemServlet2</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateStatusOrderItemServlet3</servlet-name>
+        <servlet-class>controller.UpdateStatusOrderItemServlet3</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -231,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>UpdateStatusOrderItemServlet2</servlet-name>
         <url-pattern>/UpdateStatusOrderItemServlet2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateStatusOrderItemServlet3</servlet-name>
+        <url-pattern>/UpdateStatusOrderItemServlet3</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

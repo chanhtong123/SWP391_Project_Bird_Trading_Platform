@@ -317,15 +317,17 @@
                                                     <c:choose>
                                                         <c:when test="${order.status eq 'Order confirmation'}">
                                                             <a href="UpdateStatusOrderItemServlet?orderItemId=${order.orderItemId}" class="btn btn-bitbucket btn-sm">Xác nhận đơn hàng</a>
-
+                                                             <a href="UpdateStatusOrderItemServlet3?orderItemId=${order.orderItemId}" class="btn btn-danger btn-sm">Hủy Đơn Hàng</a>
                                                         </c:when>
                                                         <c:when test="${order.status eq 'Delivery in progress'}">
-                                                            <a href="UpdateStatusOrderItemServlet2?orderItemId=${order.orderItemId}" class="btn btn-openid btn-sm"> Đang Giao Hàngg</a>
+                                                            <a href="UpdateStatusOrderItemServlet2?orderItemId=${order.orderItemId}" class="btn btn-openid btn-sm"> Đang Giao Hàng</a>
 
                                                         </c:when>
-                                                        <c:when test="${order.status eq 'Complete'}">
-                                                            <!-- Trường hợp mặc định khi không khớp với bất kỳ giá trị nào -->
-                                                            <div class="btn btn-danger btn-sm">Đã Hoàn Thành</div>
+                                                        <c:when test="${order.status eq 'Complete'}">                         
+                                                            <div class="btn btn-github btn-sm">Đã Hoàn Thành</div>
+                                                        </c:when>
+                                                            <c:when test="${order.status eq 'Delete'}">                         
+                                                            <div class="btn btn-danger btn-sm">Đã Hủy Đơn</div>
                                                         </c:when>
                                                     </c:choose>
                                                 </td>
