@@ -545,7 +545,7 @@
                 <div class="page-heading">
                     <h1 class="page-title">Danh sách đăng kí cửa hàng</h1>
                 </div>
-
+<!--//ggggg-->
 
                 <div class="page-content fade-in-up">
                     <div class="ibox">
