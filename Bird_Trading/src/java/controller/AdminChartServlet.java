@@ -30,7 +30,7 @@ public class AdminChartServlet extends HttpServlet {
         String startParam = request.getParameter("start");
         String endParam = request.getParameter("end");
       
-
+//gg
         // Chuyển đổi giá trị start và end thành đối tượng Date
         Date startDate = null;
         Date endDate = null;
