@@ -185,6 +185,84 @@ public class OrderItemDAO extends DBHelper {
         return orderItems;
     }
 
+    public List<OrderItemDTO> getOrderItemsByDateRangeAndStoreId(String startDate, String endDate, int storeId) {
+        List<OrderItemDTO> orderItems = new ArrayList<>();
+        try {
+            String query = "SELECT oi.order_item_id, oi.order_id, oi.STT_PT, oi.store_id, oi.quantity, oi.price, oi.product_name, oi.image_url, oi.categoryName, oi.orderItem_date "
+                    + "FROM OrderItem oi "
+                    + "WHERE oi.orderItem_date >= ? AND oi.orderItem_date <= ? "
+                    + "AND oi.store_id = ? AND oi.status_orderItem = 'Complete'";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, startDate + " 00:00:00");
+            preparedStatement.setString(2, endDate + " 23:59:59");
+            preparedStatement.setInt(3, storeId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                OrderItemDTO orderItem = new OrderItemDTO();
+                orderItem.setOrderItemId(resultSet.getInt("order_item_id"));
+                orderItem.setOrderId(resultSet.getInt("order_id"));
+                orderItem.setSttPT(resultSet.getInt("STT_PT"));
+                orderItem.setStoreId(resultSet.getInt("store_id"));
+                orderItem.setQuantity(resultSet.getInt("quantity"));
+                orderItem.setPrice(resultSet.getBigDecimal("price"));
+                orderItem.setProductName(resultSet.getString("product_name"));
+                orderItem.setImageUrl(resultSet.getString("image_url"));
+                orderItem.setCategoryName(resultSet.getString("categoryName"));
+                orderItem.setOrderItem_date(resultSet.getTimestamp("orderItem_date"));
+                orderItems.add(orderItem);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return orderItems;
+    }
+
+    
+     public List<OrderItemDTO> getOrderItemsByDateRange(String startDate, String endDate) {
+        List<OrderItemDTO> orderItems = new ArrayList<>();
+        try {
+            String query = "SELECT oi.order_item_id, oi.order_id, oi.STT_PT, oi.store_id, oi.quantity, oi.price, oi.product_name, oi.image_url, oi.categoryName, oi.orderItem_date "
+                    + "FROM OrderItem oi "
+                    + "WHERE oi.orderItem_date >= ? AND oi.orderItem_date <= ? "
+                    + "AND  oi.status_orderItem = 'Complete'";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, startDate + " 00:00:00");
+            preparedStatement.setString(2, endDate + " 23:59:59");
+          
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                OrderItemDTO orderItem = new OrderItemDTO();
+                orderItem.setOrderItemId(resultSet.getInt("order_item_id"));
+                orderItem.setOrderId(resultSet.getInt("order_id"));
+                orderItem.setSttPT(resultSet.getInt("STT_PT"));
+                orderItem.setStoreId(resultSet.getInt("store_id"));
+                orderItem.setQuantity(resultSet.getInt("quantity"));
+                orderItem.setPrice(resultSet.getBigDecimal("price"));
+                orderItem.setProductName(resultSet.getString("product_name"));
+                orderItem.setImageUrl(resultSet.getString("image_url"));
+                orderItem.setCategoryName(resultSet.getString("categoryName"));
+                orderItem.setOrderItem_date(resultSet.getTimestamp("orderItem_date"));
+                orderItems.add(orderItem);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return orderItems;
+    }
+   
+
     public List<OrderItemDTO> getCompletedOrderItems() {
         List<OrderItemDTO> completedOrderItems = new ArrayList<>();
         try {

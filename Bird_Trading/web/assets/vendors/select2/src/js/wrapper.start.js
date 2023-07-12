@@ -9,7 +9,7 @@
 if (typeof define === 'function' && define.amd) {
 // AMD. Register as an anonymous module.
 define(['jquery'], factory);
-        } else if (typeof module === 'object' && module.exports) {
+} else if (typeof module === 'object' && module.exports) {
 // Node/CommonJS
 module.exports = function (root, jQuery) {
 if (jQuery === undefined) {
@@ -19,18 +19,18 @@ if (jQuery === undefined) {
 // if it's defined (how jquery works)
 if (typeof window !== 'undefined') {
 jQuery = require('jquery');
-        }
+}
 else {
 jQuery = require('jquery')(root);
-        }
+}
 }
 factory(jQuery);
         return jQuery;
-        };
-        } else {
+};
+} else {
 // Browser globals
 factory(jQuery);
-        }
+}
 } (function (jQuery) {
 // This is needed so we can catch the AMD loader configuration and use it
 // The inner file should be wrapped (by `banner.start.js`) in a function that

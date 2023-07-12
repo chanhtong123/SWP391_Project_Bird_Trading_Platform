@@ -80,7 +80,6 @@ public class ShopeSale extends HttpServlet {
 
         try {
             startDate = inputFormat.parse(startParam);
-            System.out.println("gg" + startDate);
             endDate = inputFormat.parse(endParam);
         } catch (java.text.ParseException ex) {
             Logger.getLogger(AdminChartServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,14 +89,19 @@ public class ShopeSale extends HttpServlet {
         SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
         String formattedStartDate = outputFormat.format(startDate);
         String formattedEndDate = outputFormat.format(endDate);
-        System.out.println("ggg" + formattedStartDate);
 
         // Gọi phương thức tính tổng giá tiền trong OrderItemDAO
         OrderItemDAO orderItemDAO = new OrderItemDAO();
-        BigDecimal totalPrice = orderItemDAO.calculateTotalPriceByDateRangeAndStoreId(formattedStartDate, formattedEndDate,storeId);
+        BigDecimal totalPrice = orderItemDAO.calculateTotalPriceByDateRangeAndStoreId(formattedStartDate, formattedEndDate, storeId);
         int totalOrderItem = orderItemDAO.countOrderItemsByDateRangeAndStoreId(startParam, endParam, storeId);
 
+        //goi danh sach orderitem theo ngay cu the
+        List<OrderItemDTO> orderItems = orderItemDAO.getOrderItemsByDateRangeAndStoreId(formattedStartDate, formattedEndDate, storeId);
+
+     
+
         // Lưu kết quả vào request attribute để sử dụng trong JSP hoặc giao diện người dùng
+        request.setAttribute("orderItems", orderItems);
         request.setAttribute("totalPrice", totalPrice);
         request.setAttribute("totalOrderItem", totalOrderItem);
 
