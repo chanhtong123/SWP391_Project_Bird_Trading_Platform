@@ -4,9 +4,9 @@
     Author     : ASUS
 --%>
 
+<%@page import="java.math.BigDecimal"%>
 <%@page import="DTO.OrderItemDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="java.math.BigDecimal"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,19 +16,16 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width initial-scale=1.0">
-        <title>Store page</title>
+        <title>Admin page</title>
         <!-- GLOBAL MAINLY STYLES-->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
         <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link href="./assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
         <link href="./assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
         <!-- PLUGINS STYLES-->
-        <link href="./assets/vendors/DataTables/datatables.min.css" rel="stylesheet" />
-
-
         <link href="./assets/vendors/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
-
+        <link href="./assets/vendors/DataTables/datatables.min.css" rel="stylesheet" />
         <link href="./assets/vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
         <link href="./assets/vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
         <link href="./assets/vendors/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
@@ -71,14 +68,15 @@
                     <!-- END TOP-LEFT TOOLBAR-->
                     <!-- START TOP-RIGHT TOOLBAR-->
                     <ul class="nav navbar-toolbar">
-                        <li class="dropdown dropdown-user">
+
+                      <li class="dropdown dropdown-user">
                             <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
                                 <img src="./assets/img/admin-avatar.png" />
                                 <span></span>${userlogin.username}<i class="fa fa-angle-down m-l-5"></i></a>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="UserServlet?action=profile"><i class="fa fa-user"></i>Hồ sơ</a>
-
-
+                                
+                                
                                 <a class="dropdown-item" href="UserServlet?action=logout"><i class="fa fa-power-off"></i>Đăng xuất</a>
                             </ul>
 
@@ -136,7 +134,7 @@
                 <!-- START PAGE CONTENT-->
                 <div class="page-heading">
                     <h1 class="page-title">Danh sách người dùng</h1>
-                </div>
+               
 
 
 
@@ -178,7 +176,6 @@
                         </div>
                     </div>
                 </div>
-
 
 
 
@@ -227,8 +224,7 @@
                         </div>    
 
 
-
-
+                       
                         <!-- Add this code inside the <div class="ibox-body"> -->
                         <% if (totalPrice != null) {%>
                         <% List<OrderItemDTO> orderItems = (List<OrderItemDTO>) request.getAttribute("orderItems");%>
@@ -264,70 +260,84 @@
                         </table>
 
                         <% }%>
-
-
+                      
                     </div>
                     <!--date end-->
 
+                </div>
+</div>
 
-                   
-                    <!-- START PAGE CONTENT-->
-                    <div class="page-content fade-in-up">
-                         <div class="page-heading">
-                        <h1 class="page-title">Tổng Tất Cả Chi Tiết Đơn Hàng</h1>
-                    </div>
-                        <div class="ibox">
+                <!-- END SIDEBAR-->
 
-                            <div class="ibox-body">
-                                <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
-                                    <thead>
+                <!-- START PAGE CONTENT-->
+                <div class="page-heading">
+                    <h1 class="page-title">Tổng Tất Cả Chi Tiết Đơn Hàng</h1>
+                </div>
+                <div class="page-content fade-in-up">
+                    <div class="ibox">
+
+                        <div class="ibox-body">
+                            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Ảnh Sản Phẩm</th>
+                                        <th>Số Lượng Đặt Hàng</th>
+                                        <th>Loại Sản Phẩm</th>
+                                        <th>Thành Tiền</th>
+                                        <th>Ngày Đăt Hàng</th>
+                                        <th>Trạng Thái Đơn Hàng</th>
+
+                                    </tr>
+                                </thead>                             
+
+                                <tbody>
+                                    <tr>
+                                        <td></td><td></td>
+                                        <td></td> <td></td>
+                                        <td></td><td></td>
+                                        <td></td> <td></td>
+                                    </tr>
+                                    <c:forEach var="order" items="${orderList}" varStatus="status">
                                         <tr>
-                                            <th>STT</th>
-                                            <th>Tên Sản Phẩm</th>
-                                            <th>Ảnh Sản Phẩm</th>
-                                            <th>Số Lượng Đặt Hàng</th>
-                                            <th>Loại Sản Phẩm</th>
-                                            <th>Thành Tiền</th>
-                                            <th>Ngày Đăt Hàng</th>
+                                            <td>${status.index + 1}</td>
+                                            <td>${order.productName}</td>
+                                            <td><img src="${order.imageUrl}" alt="Product Image" width="100px" height="100px"></td>
+                                            <td>${order.quantity}</td>
+                                            <td>${order.categoryName}</td>
+                                            <td>${order.price}</td>
+                                            <td>${order.orderItem_date}</td>
+                                            <td  >
+                                                <c:choose>
+                                                    <c:when test="${order.status eq 'Order confirmation'}">
+                                                        <a href="UpdateStatusOrderItemServlet?orderItemId=${order.orderItemId}" class="btn btn-bitbucket btn-sm">Xác nhận đơn hàng</a>
 
+                                                    </c:when>
+                                                    <c:when test="${order.status eq 'Delivery in progress'}">
+                                                        <a href="UpdateStatusOrderItemServlet2?orderItemId=${order.orderItemId}" class="btn btn-openid btn-sm"> Đang Giao Hàngg</a>
+
+                                                    </c:when>
+                                                    <c:when test="${order.status eq 'Complete'}">
+                                                        <!-- Trường hợp mặc định khi không khớp với bất kỳ giá trị nào -->
+                                                        <div class="btn btn-danger btn-sm">Đã Hoàn Thành</div>
+                                                    </c:when>
+                                                </c:choose>
+                                            </td>
 
                                         </tr>
-                                    </thead>                             
-
-                                    <tbody>
-                                        <tr>
-                                            <td></td><td></td>
-                                            <td></td> <td></td>
-                                            <td></td><td></td>
-                                            <td></td> <td></td>
-                                        </tr>
-                                        <c:forEach var="order" items="${orderList}" varStatus="status">
-                                            <tr>
-                                                <td>${status.index + 1}</td>
-                                                <td>${order.productName}</td>
-                                                <td><img src="${order.imageUrl}" alt="Product Image" width="100px" height="100px"></td>
-                                                <td>${order.quantity}</td>
-                                                <td>${order.categoryName}</td>
-                                                <td>${order.price}</td>
-                                                <td>${order.orderItem_date}</td>
-
-
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
-
-
-
                     </div>
-                    <!--end-->
 
                 </div>
+
+
+                <!--end-->
+
             </div>
-
-
             <div class="content-wrapper user-list-section section" id="user-list-section">
                 <!-- START PAGE CONTENT-->
                 <div class="page-heading">
@@ -589,24 +599,9 @@
         <script src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
         <!-- PAGE LEVEL PLUGINS-->
         <script src="./assets/vendors/DataTables/datatables.min.js" type="text/javascript"></script>
-
-        <script src="./assets/vendors/chart.js/dist/Chart.min.js" type="text/javascript"></script>
-        <script src="./assets/vendors/jvectormap/jquery-jvectormap-2.0.3.min.js" type="text/javascript"></script>
-        <script src="./assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
-        <script src="./assets/vendors/jvectormap/jquery-jvectormap-us-aea-en.js" type="text/javascript"></script>
-
-        <script src="./assets/vendors/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
-        <script src="./assets/vendors/jquery-knob/dist/jquery.knob.min.js" type="text/javascript"></script>
-        <script src="./assets/vendors/moment/min/moment.min.js" type="text/javascript"></script>
-        <script src="./assets/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-        <script src="./assets/vendors/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
-        <script src="./assets/vendors/jquery-minicolors/jquery.minicolors.min.js" type="text/javascript"></script>
         <!-- CORE SCRIPTS-->
         <script src="assets/js/app.min.js" type="text/javascript"></script>
         <!-- PAGE LEVEL SCRIPTS-->
-        <script src="./assets/js/scripts/dashboard_1_demo.js" type="text/javascript"></script>
-        <script src="./assets/js/scripts/form-plugins.js" type="text/javascript"></script>
-
         <script type="text/javascript">
                                                 $(function () {
                                                     $('#example-table').DataTable({
@@ -692,21 +687,55 @@
         </script>
 
 
+        <script type="text/javascript">
+            $(function () {
+                $('#example-table').DataTable({
+                    pageLength: 10,
+                    //"ajax": './assets/demo/data/table_data.json',
+                    /*"columns": [
+                     { "data": "name" },
+                     { "data": "office" },
+                     { "data": "extn" },
+                     { "data": "start_date" },
+                     { "data": "salary" }
+                     ]*/
+                });
+            })
+        </script>
+
+
         <script>
-            // Lắng nghe sự kiện khi giá trị của các phần tử input thay đổi
-            document.getElementById("start").addEventListener("change", sendDateRange);
-            document.getElementById("end").addEventListener("change", sendDateRange);
-
-            // Hàm xử lý sự kiện khi ngày tháng thay đổi
-            function sendDateRange() {
-                var start = document.getElementById("start").value;
-                var end = document.getElementById("end").value;
-
-                // Gửi giá trị ngày tháng về trang "AdminChartServlet"
-                var url = "ShopeSale?start=" + encodeURIComponent(start) + "&end=" + encodeURIComponent(end);
-                window.location.href = url;
+            function showDeleteConfirmationModal(productId) {
+                var deleteProductLink = document.getElementById("deleteProductLink");
+                deleteProductLink.href = "DeleteProductServlet?productId=" + productId;
+                $('#confirmDeleteModal').modal('show');
             }
         </script>
+
+        <!-- CORE PLUGINS-->
+<script src="./assets/vendors/jquery/dist/jquery.min.js" type="text/javascript"></script>
+<script src="./assets/vendors/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>
+<script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="./assets/vendors/metisMenu/dist/metisMenu.min.js" type="text/javascript"></script>
+<script src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<!-- PAGE LEVEL PLUGINS-->
+<script src="./assets/vendors/chart.js/dist/Chart.min.js" type="text/javascript"></script>
+<script src="./assets/vendors/jvectormap/jquery-jvectormap-2.0.3.min.js" type="text/javascript"></script>
+<script src="./assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+<script src="./assets/vendors/jvectormap/jquery-jvectormap-us-aea-en.js" type="text/javascript"></script>
+<script src="./assets/vendors/DataTables/datatables.min.js" type="text/javascript"></script>
+<script src="./assets/vendors/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
+<script src="./assets/vendors/jquery-knob/dist/jquery.knob.min.js" type="text/javascript"></script>
+<script src="./assets/vendors/moment/min/moment.min.js" type="text/javascript"></script>
+<script src="./assets/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+<script src="./assets/vendors/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+<script src="./assets/vendors/jquery-minicolors/jquery.minicolors.min.js" type="text/javascript"></script>
+
+<!-- CORE SCRIPTS-->
+<script src="assets/js/app.min.js" type="text/javascript"></script>
+<!-- PAGE LEVEL SCRIPTS-->
+<script src="./assets/js/scripts/dashboard_1_demo.js" type="text/javascript"></script>
+<script src="./assets/js/scripts/form-plugins.js" type="text/javascript"></script>
     </body>
 
 </html>

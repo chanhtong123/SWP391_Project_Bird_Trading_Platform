@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,9 +34,10 @@ public class AdminChartServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        HttpSession session = request.getSession();
+
         StoreDAO storeDAO = new StoreDAO();
         List<StoreRegisterDTO> storeRegisterList = storeDAO.getAllStoreRegister();
-        HttpSession session = request.getSession();
         session.setAttribute("stores", storeRegisterList); // Đặt danh sách sản phẩm vào session
         UserDAO userDAO = new UserDAO();
         ArrayList<UserDTO> users = userDAO.getAllUsers();
@@ -90,13 +92,17 @@ public class AdminChartServlet extends HttpServlet {
         //goi danh sach orderitem theo ngay cu the
         List<OrderItemDTO> orderItems = orderItemDAO.getOrderItemsByDateRange(formattedStartDate, formattedEndDate);
 
+        
+        System.out.println("totalPrice" + totalPrice);
         // Lưu kết quả vào request attribute để sử dụng trong JSP hoặc giao diện người dùng
         request.setAttribute("orderItems", orderItems);
         request.setAttribute("totalPrice", totalPrice);
         request.setAttribute("totalOrderItem", totalOrderItem);
 
         // Chuyển hướng đến trang JSP hoặc giao diện người dùng khác để hiển thị kết quả
-        request.getRequestDispatcher("adminPage.jsp").forward(request, response);
+        RequestDispatcher rd = request.getRequestDispatcher("adminPage.jsp");
+//          RequestDispatcher rd = request.getRequestDispatcher("dateTotal.jsp");
+        rd.forward(request, response);
     }
 
 }

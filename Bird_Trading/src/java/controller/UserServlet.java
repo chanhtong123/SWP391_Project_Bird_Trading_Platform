@@ -22,7 +22,9 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -192,7 +194,6 @@ public class UserServlet extends HttpServlet {
 
         ProductDAO pt = new ProductDAO();
         int countCate = pt.countVisibleProducts();
-        
 
         session.setAttribute("countCate", countCate);
         session.setAttribute("countStore", countStore);
@@ -532,7 +533,7 @@ public class UserServlet extends HttpServlet {
         UserDTO dto = (UserDTO) session.getAttribute("userlogin");
         List<OrderItemDTO> listItem = new ArrayList<>();
         UserDTO user = null;
-
+        Map<Integer, String> status = new HashMap<>();
         if (dto != null) {
             int userId = dto.getUserId();
             UserDAO userDAO = new UserDAO(); // Assuming UserDAO is available and instantiated correctly
@@ -544,10 +545,14 @@ public class UserServlet extends HttpServlet {
             OrderItemDAO orderItemDAO = new OrderItemDAO(); // Assuming OrderItemDAO is available and instantiated correctly
             for (OrderDTO order : orderDTO) {
                 List<OrderItemDTO> orderItems = orderItemDAO.getOrderItemsByOrderId(order.getOrderId());
+                String st = order.getOrderStatus();
                 listItem.addAll(orderItems);
+                for (OrderItemDTO orderItem : orderItems) {
+                    status.put(orderItem.getOrderItemId(), st);
+                }
             }
         }
-
+        request.setAttribute("status", status);
         request.setAttribute("orderItem", listItem);
         request.setAttribute("user", user);
         request.getRequestDispatcher("profile.jsp").forward(request, response);

@@ -234,6 +234,7 @@ CREATE TABLE [CartItem] (
 
 
 
+
 CREATE TABLE [Order] (
   order_id INT IDENTITY(1, 1) PRIMARY KEY,
   user_id INT,
