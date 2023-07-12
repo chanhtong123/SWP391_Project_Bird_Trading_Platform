@@ -215,6 +215,7 @@ public class OrderItemDAO extends DBHelper {
                 orderItem.setImageUrl(resultSet.getString("image_url"));
                 orderItem.setCategoryName(resultSet.getString("categoryName"));
                 orderItem.setOrderItem_date(resultSet.getDate("orderItem_date"));
+                orderItem.setStatus(resultSet.getString("status_orderItem"));
                 orderItems.add(orderItem);
             }
 
@@ -253,6 +254,7 @@ public class OrderItemDAO extends DBHelper {
                 orderItem.setImageUrl(resultSet.getString("image_url"));
                 orderItem.setCategoryName(resultSet.getString("categoryName"));
                 orderItem.setOrderItem_date(resultSet.getTimestamp("orderItem_date"));
+                orderItem.setStatus(resultSet.getString("status_orderItem"));
                 orderItems.add(orderItem);
             }
 
@@ -290,6 +292,7 @@ public class OrderItemDAO extends DBHelper {
                 orderItem.setImageUrl(resultSet.getString("image_url"));
                 orderItem.setCategoryName(resultSet.getString("categoryName"));
                 orderItem.setOrderItem_date(resultSet.getTimestamp("orderItem_date"));
+                orderItem.setStatus(resultSet.getString("status_orderItem"));
                 orderItems.add(orderItem);
             }
 
@@ -351,6 +354,7 @@ public class OrderItemDAO extends DBHelper {
                 orderItem.setProductName(resultSet.getString("product_name"));
                 orderItem.setImageUrl(resultSet.getString("image_url"));
                 orderItem.setCategoryName(resultSet.getString("categoryName"));
+                orderItem.setStatus(resultSet.getString("status_orderItem"));
                 orderItems.add(orderItem);
             }
         } catch (SQLException e) {
@@ -408,6 +412,7 @@ public class OrderItemDAO extends DBHelper {
                 orderItem.setProductName(resultSet.getString("product_name"));
                 orderItem.setImageUrl(resultSet.getString("image_url"));
                 orderItem.setCategoryName(resultSet.getString("categoryName"));
+                orderItem.setStatus(resultSet.getString("status_orderItem"));
                 orderItems.add(orderItem);
             }
         } catch (SQLException e) {
@@ -434,6 +439,7 @@ public class OrderItemDAO extends DBHelper {
                 orderItem.setProductName(resultSet.getString("product_name"));
                 orderItem.setImageUrl(resultSet.getString("image_url"));
                 orderItem.setCategoryName(resultSet.getString("categoryName"));
+                orderItem.setStatus(resultSet.getString("status_orderItem"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -501,10 +507,8 @@ public class OrderItemDAO extends DBHelper {
         return totalPrice;
     }
 
-    
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         // Tạo kết nối tới cơ sở dữ liệu
-   
 
         // Tạo đối tượng DAO
         OrderItemDAO orderItemDAO = new OrderItemDAO();
@@ -524,12 +528,8 @@ public class OrderItemDAO extends DBHelper {
         }
 
         // Đóng kết nối
-       
     }
-    
-    
-    
-    
+
     public BigDecimal calculateTotalPrice() {
         BigDecimal totalPrice = BigDecimal.ZERO;
         try {
@@ -609,7 +609,7 @@ public class OrderItemDAO extends DBHelper {
         List<OrderItemDTO> orderItems = new ArrayList<>();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM OrderItem WHERE STT_PT = (SELECT STT_PT FROM Product WHERE product_id = ?)");
         statement.setString(1, productId);
-        try ( ResultSet resultSet = statement.executeQuery()) {
+        try (ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 OrderItemDTO orderItem = new OrderItemDTO();
                 orderItem.setOrderItemId(resultSet.getInt("order_item_id"));
@@ -621,7 +621,7 @@ public class OrderItemDAO extends DBHelper {
                 orderItem.setProductName(resultSet.getString("product_name"));
                 orderItem.setImageUrl(resultSet.getString("image_url"));
                 orderItem.setCategoryName(resultSet.getString("categoryName"));
-
+                orderItem.setStatus(resultSet.getString("status_orderItem"));
                 orderItems.add(orderItem);
             }
         } catch (SQLException e) {

@@ -187,8 +187,6 @@
                                                 <div class="row">
 
                                                     <c:forEach items="${orderItem}" var="order">
-                                                        <c:set var="orderItemId" value="${order.orderItemId}" />
-                                                        <c:set var="orderStatus" value="${status[orderItemId]}" />
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <div class="order-item bg-light p-4">
@@ -206,8 +204,8 @@
                                                                     <div class="row">
                                                                         <div class="col-md-12 text-right">
                                                                             <div class="order-price color-red">$${order.price}</div>
-                                                                            <div>${orderStatus}</div>
-                                                                            <c:if test="${orderStatus eq 'Complete'}">
+                                                                            <div>${order.status}</div>
+                                                                            <c:if test="${order.status eq 'Complete'}">
                                                                             <div class="order-feedback">
                                                                                 <button onclick="openFeedbackModal(${order.orderItemId})" data-orderitemid="${order.orderItemId}" class="btn btn-primary">Feedback</button>
                                                                                 <div id="feedbackStatus_${order.orderItemId}" style="display: none;"></div>

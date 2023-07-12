@@ -533,7 +533,6 @@ public class UserServlet extends HttpServlet {
         UserDTO dto = (UserDTO) session.getAttribute("userlogin");
         List<OrderItemDTO> listItem = new ArrayList<>();
         UserDTO user = null;
-        Map<Integer, String> status = new HashMap<>();
         if (dto != null) {
             int userId = dto.getUserId();
             UserDAO userDAO = new UserDAO(); // Assuming UserDAO is available and instantiated correctly
@@ -545,14 +544,13 @@ public class UserServlet extends HttpServlet {
             OrderItemDAO orderItemDAO = new OrderItemDAO(); // Assuming OrderItemDAO is available and instantiated correctly
             for (OrderDTO order : orderDTO) {
                 List<OrderItemDTO> orderItems = orderItemDAO.getOrderItemsByOrderId(order.getOrderId());
-                String st = order.getOrderStatus();
                 listItem.addAll(orderItems);
                 for (OrderItemDTO orderItem : orderItems) {
-                    status.put(orderItem.getOrderItemId(), st);
+                    System.out.println(orderItem.getStatus());
                 }
             }
         }
-        request.setAttribute("status", status);
+        
         request.setAttribute("orderItem", listItem);
         request.setAttribute("user", user);
         request.getRequestDispatcher("profile.jsp").forward(request, response);
