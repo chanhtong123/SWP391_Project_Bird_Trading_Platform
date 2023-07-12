@@ -228,13 +228,15 @@ public class OrderItemDAO extends DBHelper {
         return orderItems;
     }
 
+  
     public List<OrderItemDTO> getOrderItemsByDateRangeAndStoreId(String startDate, String endDate, int storeId) {
         List<OrderItemDTO> orderItems = new ArrayList<>();
         try {
-            String query = "SELECT oi.order_item_id, oi.order_id, oi.STT_PT, oi.store_id, oi.quantity, oi.price, oi.product_name, oi.image_url, oi.categoryName, oi.orderItem_date "
+           String query = "SELECT oi.order_item_id, oi.order_id, oi.STT_PT, oi.store_id, oi.quantity, oi.price, oi.product_name, oi.image_url, oi.categoryName, oi.orderItem_date, oi.status_orderItem "
                     + "FROM OrderItem oi "
                     + "WHERE oi.orderItem_date >= ? AND oi.orderItem_date <= ? "
-                    + "AND oi.store_id = ? AND oi.status_orderItem = 'Complete'";
+                + "AND oi.store_id = ? AND oi.status_orderItem = 'Complete'";
+
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, startDate + " 00:00:00");
@@ -270,10 +272,10 @@ public class OrderItemDAO extends DBHelper {
     public List<OrderItemDTO> getOrderItemsByDateRange(String startDate, String endDate) {
         List<OrderItemDTO> orderItems = new ArrayList<>();
         try {
-            String query = "SELECT oi.order_item_id, oi.order_id, oi.STT_PT, oi.store_id, oi.quantity, oi.price, oi.product_name, oi.image_url, oi.categoryName, oi.orderItem_date "
+            String query = "SELECT oi.order_item_id, oi.order_id, oi.STT_PT, oi.store_id, oi.quantity, oi.price, oi.product_name, oi.image_url, oi.categoryName, oi.orderItem_date, oi.status_orderItem "
                     + "FROM OrderItem oi "
                     + "WHERE oi.orderItem_date >= ? AND oi.orderItem_date <= ? "
-                    + "AND  oi.status_orderItem = 'Complete'";
+                    + "AND oi.status_orderItem = 'Complete'";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, startDate + " 00:00:00");
@@ -303,6 +305,34 @@ public class OrderItemDAO extends DBHelper {
         }
 
         return orderItems;
+    }
+
+    public static void main(String[] args) {
+        // Tạo một đối tượng DAO (assumedOrderItemDAO là tên của lớp DAO của bạn)
+        OrderItemDAO orderItemDAO = new OrderItemDAO();
+
+        // Thiết lập ngày bắt đầu và ngày kết thúc
+        String startDate = "2023-07-10";
+        String endDate = "2023-07-11";
+
+        // Gọi phương thức getOrderItemsByDateRange từ DAO để lấy danh sách OrderItemDTO
+        List<OrderItemDTO> orderItems = orderItemDAO.getOrderItemsByDateRange(startDate, endDate);
+
+        // In danh sách OrderItemDTO
+        for (OrderItemDTO orderItem : orderItems) {
+            System.out.println("Order Item ID: " + orderItem.getOrderItemId());
+            System.out.println("Order ID: " + orderItem.getOrderId());
+            System.out.println("STT PT: " + orderItem.getSttPT());
+            System.out.println("Store ID: " + orderItem.getStoreId());
+            System.out.println("Quantity: " + orderItem.getQuantity());
+            System.out.println("Price: " + orderItem.getPrice());
+            System.out.println("Product Name: " + orderItem.getProductName());
+            System.out.println("Image URL: " + orderItem.getImageUrl());
+            System.out.println("Category Name: " + orderItem.getCategoryName());
+            System.out.println("Order Item Date: " + orderItem.getOrderItem_date());
+            System.out.println("Status: " + orderItem.getStatus());
+            System.out.println("-----------------------");
+        }
     }
 
     public List<OrderItemDTO> getCompletedOrderItems() {
@@ -507,29 +537,6 @@ public class OrderItemDAO extends DBHelper {
         return totalPrice;
     }
 
-    public static void main(String[] args) {
-        // Tạo kết nối tới cơ sở dữ liệu
-
-        // Tạo đối tượng DAO
-        OrderItemDAO orderItemDAO = new OrderItemDAO();
-
-        // Gọi phương thức getOrderItem để lấy số lượng và STT_PT dựa trên order_item_id
-        int orderItemId = 1; // Thay thế bằng order_item_id bạn muốn kiểm tra
-        OrderItemDTO orderItem = orderItemDAO.getOrderItem(orderItemId);
-
-        // Kiểm tra kết quả
-        if (orderItem != null) {
-            int quantity = orderItem.getQuantity();
-            int sttPT = orderItem.getSttPT();
-            System.out.println("Số lượng: " + quantity);
-            System.out.println("STT_PT: " + sttPT);
-        } else {
-            System.out.println("Không tìm thấy order_item_id: " + orderItemId);
-        }
-
-        // Đóng kết nối
-    }
-
     public BigDecimal calculateTotalPrice() {
         BigDecimal totalPrice = BigDecimal.ZERO;
         try {
@@ -609,7 +616,7 @@ public class OrderItemDAO extends DBHelper {
         List<OrderItemDTO> orderItems = new ArrayList<>();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM OrderItem WHERE STT_PT = (SELECT STT_PT FROM Product WHERE product_id = ?)");
         statement.setString(1, productId);
-        try (ResultSet resultSet = statement.executeQuery()) {
+        try ( ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 OrderItemDTO orderItem = new OrderItemDTO();
                 orderItem.setOrderItemId(resultSet.getInt("order_item_id"));

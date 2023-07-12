@@ -375,7 +375,7 @@
                 <!-- Shop Product Start -->
 
                 <%
-                    final int PAGE_SIZE = 9; // Số sản phẩm hiển thị trên mỗi trang
+                    final int PAGE_SIZE = 12; // Số sản phẩm hiển thị trên mỗi trang
                     int currentPage = (request.getParameter("page") != null) ? Integer.parseInt(request.getParameter("page")) : 1;
                     session.setAttribute("currentPage", currentPage);
                 %>

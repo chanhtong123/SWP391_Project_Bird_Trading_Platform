@@ -72,8 +72,11 @@ public class CartServlet extends HttpServlet {
                 cartDAO.addToCart(cartItem);
 
                 // Thêm thành công
-                ArrayList<CartDTO> cartItems = cartDAO.getCartItemsByUserId(userId);
-                session.setAttribute("CART", cartItems);
+                ArrayList<CartDTO> cartItems = cartDAO.getCartItemsByUserId(userId);         
+                session.setAttribute("CART", cartItems);   
+                
+                
+                
                 response.sendRedirect("CartServlet?action=view");
             } else {
                 // quantity <= 1

@@ -273,75 +273,75 @@
                     <!-- START PAGE CONTENT-->
                 </div>
                 <!-- END SIDEBAR-->
-                
-                    <!-- START PAGE CONTENT-->
-                     <div class="page-heading">
-                        <h1 class="page-title">Tổng Tất Cả Chi Tiết Đơn Hàng</h1>
-                    </div>
-                    <div class="page-content fade-in-up">
-                        <div class="ibox">
 
-                            <div class="ibox-body">
-                                <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
-                                    <thead>
+                <!-- START PAGE CONTENT-->
+                <div class="page-heading">
+                    <h1 class="page-title">Tổng Tất Cả Chi Tiết Đơn Hàng</h1>
+                </div>
+                <div class="page-content fade-in-up">
+                    <div class="ibox">
+
+                        <div class="ibox-body">
+                            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Ảnh Sản Phẩm</th>
+                                        <th>Số Lượng Đặt Hàng</th>
+                                        <th>Loại Sản Phẩm</th>
+                                        <th>Thành Tiền</th>
+                                        <th>Ngày Đăt Hàng</th>
+                                        <th>Trạng Thái Đơn Hàng</th>
+
+                                    </tr>
+                                </thead>                             
+
+                                <tbody>
+                                    <tr>
+                                        <td></td><td></td>
+                                        <td></td> <td></td>
+                                        <td></td><td></td>
+                                        <td></td> <td></td>
+                                    </tr>
+                                    <c:forEach var="order" items="${orderList}" varStatus="status">
                                         <tr>
-                                            <th>STT</th>
-                                            <th>Tên Sản Phẩm</th>
-                                            <th>Ảnh Sản Phẩm</th>
-                                            <th>Số Lượng Đặt Hàng</th>
-                                            <th>Loại Sản Phẩm</th>
-                                            <th>Thành Tiền</th>
-                                            <th>Ngày Đăt Hàng</th>
-                                            <th>Trạng Thái Đơn Hàng</th>
+                                            <td>${status.index + 1}</td>
+                                            <td>${order.productName}</td>
+                                            <td><img src="${order.imageUrl}" alt="Product Image" width="100px" height="100px"></td>
+                                            <td>${order.quantity}</td>
+                                            <td>${order.categoryName}</td>
+                                            <td>${order.price}</td>
+                                            <td>${order.orderItem_date}</td>
+                                            <td  >
+                                                <c:choose>
+                                                    <c:when test="${order.status eq 'Order confirmation'}">
+                                                        <a href="UpdateStatusOrderItemServlet?orderItemId=${order.orderItemId}" class="btn btn-bitbucket btn-sm">Xác nhận đơn hàng</a>
+                                                        <a href="UpdateStatusOrderItemServlet3?orderItemId=${order.orderItemId}" class="btn btn-danger btn-sm">Hủy Đơn Hàng</a>
+                                                    </c:when>
+                                                    <c:when test="${order.status eq 'Delivery in progress'}">
+                                                        <a href="UpdateStatusOrderItemServlet2?orderItemId=${order.orderItemId}" class="btn btn-openid btn-sm"> Đang Giao Hàng</a>
+                                                        <a href="UpdateStatusOrderItemServlet3?orderItemId=${order.orderItemId}" class="btn btn-danger btn-sm">Hủy Đơn Hàng</a>
+                                                    </c:when>
+                                                    <c:when test="${order.status eq 'Complete'}">                         
+                                                        <div class="btn btn-github btn-sm">Đã Hoàn Thành</div>
+                                                    </c:when>
+                                                    <c:when test="${order.status eq 'Delete'}">                         
+                                                        <div class="btn btn-danger btn-sm">Đã Hủy Đơn</div>
+                                                    </c:when>
+                                                </c:choose>
+                                            </td>
 
                                         </tr>
-                                    </thead>                             
-
-                                    <tbody>
-                                        <tr>
-                                            <td></td><td></td>
-                                            <td></td> <td></td>
-                                            <td></td><td></td>
-                                            <td></td> <td></td>
-                                        </tr>
-                                        <c:forEach var="order" items="${orderList}" varStatus="status">
-                                            <tr>
-                                                <td>${status.index + 1}</td>
-                                                <td>${order.productName}</td>
-                                                <td><img src="${order.imageUrl}" alt="Product Image" width="100px" height="100px"></td>
-                                                <td>${order.quantity}</td>
-                                                <td>${order.categoryName}</td>
-                                                <td>${order.price}</td>
-                                                <td>${order.orderItem_date}</td>
-                                                <td  >
-                                                    <c:choose>
-                                                        <c:when test="${order.status eq 'Order confirmation'}">
-                                                            <a href="UpdateStatusOrderItemServlet?orderItemId=${order.orderItemId}" class="btn btn-bitbucket btn-sm">Xác nhận đơn hàng</a>
-                                                             <a href="UpdateStatusOrderItemServlet3?orderItemId=${order.orderItemId}" class="btn btn-danger btn-sm">Hủy Đơn Hàng</a>
-                                                        </c:when>
-                                                        <c:when test="${order.status eq 'Delivery in progress'}">
-                                                            <a href="UpdateStatusOrderItemServlet2?orderItemId=${order.orderItemId}" class="btn btn-openid btn-sm"> Đang Giao Hàng</a>
-
-                                                        </c:when>
-                                                        <c:when test="${order.status eq 'Complete'}">                         
-                                                            <div class="btn btn-github btn-sm">Đã Hoàn Thành</div>
-                                                        </c:when>
-                                                            <c:when test="${order.status eq 'Delete'}">                         
-                                                            <div class="btn btn-danger btn-sm">Đã Hủy Đơn</div>
-                                                        </c:when>
-                                                    </c:choose>
-                                                </td>
-
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
-
                     </div>
 
-           
+                </div>
+
+
                 <!--end-->
 
 

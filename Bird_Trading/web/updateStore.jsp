@@ -29,7 +29,7 @@
         </style>
     </head>
 
-      <body class="fixed-navbar">
+    <body class="fixed-navbar">
         <c:if test="${sessionScope.userlogin == null && sessionScope.userlogin.role ne 'Store Manager'}">
             <c:redirect url="ShowProductsServlet"></c:redirect>
         </c:if> 
@@ -70,9 +70,16 @@
                                 <img src="./assets/img/admin-avatar.png" />
                                 <span></span>${userlogin.username}<i class="fa fa-angle-down m-l-5"></i></a>
                             <ul class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="UserServlet?action=profile"><i class="fa fa-user"></i>Profile</a>
-                                <a class="dropdown-item" href="UserServlet?action=logout"><i class="fa fa-power-off"></i>Logout</a>
+                                <a class="dropdown-item" href="UserServlet?action=profile"><i class="fa fa-user"></i>Hồ sơ</a>
+                                <c:if test="${userlogin != null && userlogin.role eq 'User'}">
+                                    <a class="dropdown-item" href="storeRegister.jsp"><i class="fa fa-user"></i>Đăng ký của hàng</a>
+                                </c:if>
+                                <c:if test="${userlogin != null && userlogin.role eq 'Store Manager'}">
+                                    <a class="dropdown-item" href="StoreHomeServlet"><i class="fa fa-file"></i>Cửa hàng</a>
+                                </c:if>
+                                <a class="dropdown-item" href="UserServlet?action=logout"><i class="fa fa-power-off"></i>Đăng xuất</a>
                             </ul>
+
                         </li>
                     </ul>
                     <!-- END TOP-RIGHT TOOLBAR-->
@@ -114,112 +121,112 @@
                                 </li>
 
                                 <li>
-                              <a href="UpdateStoreServlet?action=edit&storeId=${userlogin.userId}">Cập nhập thông tin Shop</a>
+                                    <a href="UpdateStoreServlet?action=edit&storeId=${userlogin.userId}">Cập nhập thông tin Shop</a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
             </nav>
- 
 
 
 
-        <!-- END SIDEBAR-->
+
+            <!-- END SIDEBAR-->
 
 
 
-        
-        <br><br><br>
-        <div class="gg" style="">
-            <div class="row"
-                 style="border: 0px ; border-radius: 5px; width: 1600px; height: 860px; margin: 0 auto; padding: 10px;">
-                <div class="col-sm-6" style="height: 150%;">
-                    <h2 class="myclass">Cập Nhập Thông Tin Cửa Hàng</h2>
-                    <form action="UpdateStoreServlet?action=${ACTION}" method="post" enctype="multipart/form-data">
 
-                        <div class="form-group">
-                            <label>Tên cửa Hàng</label>
-                            <input type="text" value="${INFOR.store_name}" class="form-control" name="storeName" placeholder="" >
-                        </div>
+            <br><br><br>
+            <div class="gg" style="">
+                <div class="row"
+                     style="border: 0px ; border-radius: 5px; width: 1600px; height: 860px; margin: 0 auto; padding: 10px;">
+                    <div class="col-sm-6" style="height: 150%;">
+                        <h2 class="myclass">Cập Nhập Thông Tin Cửa Hàng</h2>
+                        <form action="UpdateStoreServlet?action=${ACTION}" method="post" enctype="multipart/form-data">
 
-                        <input type="text" value="${INFOR.user_id}" class="form-control" name="userId" hidden="" >
-                        <input type="text" value="${INFOR.store_id}" class="form-control" name="storeId" hidden="">
-                    
+                            <div class="form-group">
+                                <label>Tên cửa Hàng</label>
+                                <input type="text" value="${INFOR.store_name}" class="form-control" name="storeName" placeholder="" >
+                            </div>
 
-                        
-                        
+                            <input type="text" value="${INFOR.user_id}" class="form-control" name="userId" hidden="" >
+                            <input type="text" value="${INFOR.store_id}" class="form-control" name="storeId" hidden="">
 
-                        <div class="form-group">
-                            <label>Địa chỉ</label>
-                            <input type="text" value="${INFOR.address}" class="form-control" name="adresss" placeholder="" >
-                        </div>
 
-                        <div class="form-group">
-                            <label>Số điện thoại liên lạc</label>
-                            <input type="text" value="${INFOR.phone_number}" class="form-control" name="phone" placeholder="Enter Product Name" style="height: 40px;">
-                        </div>
-                       
 
-                      
-                        <div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal" >Lưu Thông Tin Mới</button>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <a href="StoreHomeServlet" class="btn btn-primary">Quay Về Trang Quản Lý</a>
-                        </div>
 
-                </div>
 
-                <div class="col-sm-6">
-                    <br>
+                            <div class="form-group">
+                                <label>Địa chỉ</label>
+                                <input type="text" value="${INFOR.address}" class="form-control" name="adresss" placeholder="" >
+                            </div>
 
-                    <div class="form-group">
-                        <label>Ảnh đại diện của cửa hàng</label>
-                        <br/><br/>
-                        <img src="${INFOR.image}" width="500px" /><br/><br/>
-                        <input type="file" class="form-control" name="photo" placeholder="Upload Image">
+                            <div class="form-group">
+                                <label>Số điện thoại liên lạc</label>
+                                <input type="text" value="${INFOR.phone_number}" class="form-control" name="phone" placeholder="Enter Product Name" style="height: 40px;">
+                            </div>
+
+
+
+                            <div>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal" >Lưu Thông Tin Mới</button>
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <a href="StoreHomeServlet" class="btn btn-primary">Quay Về Trang Quản Lý</a>
+                            </div>
+
                     </div>
 
-                </div>
+                    <div class="col-sm-6">
+                        <br>
+
+                        <div class="form-group">
+                            <label>Ảnh đại diện của cửa hàng</label>
+                            <br/><br/>
+                            <img src="${INFOR.image}" width="500px" /><br/><br/>
+                            <input type="file" class="form-control" name="photo" placeholder="Upload Image">
+                        </div>
+
+                    </div>
 
 
 
-                <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="confirmModalLabel">Xác nhận lưu thông tin mới</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Lưu ý sau khi lưu mọi thông tin cũ sẽ biến mất. Bạn có chắc chắn muốn lưu thông tin mới?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                                <button type="submit" class="btn btn-primary" onclick="saveAndGoBack()">Lưu</button>
+                    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmModalLabel">Xác nhận lưu thông tin mới</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Lưu ý sau khi lưu mọi thông tin cũ sẽ biến mất. Bạn có chắc chắn muốn lưu thông tin mới?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                    <button type="submit" class="btn btn-primary" onclick="saveAndGoBack()">Lưu</button>
 
+                                </div>
                             </div>
                         </div>
                     </div>
+
+
+
+                    </form>
                 </div>
-
-
-
-                </form>
             </div>
         </div>
+
+
+
+
+
+
+
+
     </div>
-
-
-
-
-
-
-
-
-</div>
 </div>
 <!-- BEGIN THEME CONFIG PANEL-->
 <div class="theme-config">
@@ -369,19 +376,19 @@
 <script src="assets/js/app.min.js" type="text/javascript"></script>
 <!-- PAGE LEVEL SCRIPTS-->
 <script type="text/javascript">
-                                    $(function () {
-                                        $('#example-table').DataTable({
-                                            pageLength: 10,
-                                            //"ajax": './assets/demo/data/table_data.json',
-                                            /*"columns": [
-                                             { "data": "name" },
-                                             { "data": "office" },
-                                             { "data": "extn" },
-                                             { "data": "start_date" },
-                                             { "data": "salary" }
-                                             ]*/
-                                        });
-                                    })
+                                        $(function () {
+                                            $('#example-table').DataTable({
+                                                pageLength: 10,
+                                                //"ajax": './assets/demo/data/table_data.json',
+                                                /*"columns": [
+                                                 { "data": "name" },
+                                                 { "data": "office" },
+                                                 { "data": "extn" },
+                                                 { "data": "start_date" },
+                                                 { "data": "salary" }
+                                                 ]*/
+                                            });
+                                        })
 </script>
 
 

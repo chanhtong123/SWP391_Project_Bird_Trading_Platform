@@ -12,7 +12,8 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Bird Trading</title>
+        <link rel="png" href="logo.png" type="img/logo.png">
+        <title>Bird Trading</title>      
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
@@ -328,7 +329,9 @@
                                     <div class="p-3" style="max-width: 700px;">
                                         <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Loài Chim</h1>
                                         <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Nơi bán những chim cảnh đẹp, độc lạ và giá cả phù hợp nhất trên thị trường.</p>
-                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Bird Shop</a>
+                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+                                           href="ProductSearchServlet?action=searchByCategory&categoryName=Bird">Bird Shop</a>
+
                                     </div>
                                 </div>
                             </div>
@@ -338,7 +341,9 @@
                                     <div class="p-3" style="max-width: 700px;">
                                         <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Thức ăn</h1>
                                         <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Những thức ăn đến từ những nhà cung cấp uy tín, có độ dinh dưỡng cao cho các loài chim.</p>
-                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Bird Shop</a>
+                                      
+                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" 
+                                            href="ProductSearchServlet?action=searchByCategory&categoryName=Food">Bird Shop</a>
                                     </div>
                                 </div>
                             </div>
@@ -348,7 +353,9 @@
                                     <div class="p-3" style="max-width: 700px;">
                                         <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Lồng Chim</h1>
                                         <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Nơi có những lồng chim đẹp đầy nghệ thuật trên cả thế giới, tạo nên vè đẹp sang trọng quý tộc.</p>
-                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Bird Shop</a>
+                                       
+                                          <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+                                             href="ProductSearchServlet?action=searchByCategory&categoryName=Bird cage">Bird Shop</a>
                                     </div>
                                 </div>
                             </div>
@@ -361,7 +368,9 @@
                         <div class="offer-text">
                             <h6 class="text-white text-uppercase">Thức ăn cho chim</h6>
                             <h3 class="text-white mb-3"></h3>
-                            <a href="" class="btn btn-primary">Bird Shop</a>
+                             <a  class="btn btn-primary"
+                                            href="ProductSearchServlet?action=searchByCategory&categoryName=Food">Bird Shop</a>
+                            
                         </div>
                     </div>
                     <div class="product-offer mb-30" style="height: 200px;">
@@ -369,7 +378,7 @@
                         <div class="offer-text">
                             <h6 class="text-white text-uppercase">Phụ kiện cho chim</h6>
                             <h3 class="text-white mb-3"></h3>
-                            <a href="" class="btn btn-primary">Bird Shop</a>
+                             <a class="btn btn-primary" href="ProductSearchServlet?action=searchByCategory&categoryName=Accessory">Bird Shop</a>
                         </div>
                     </div>
                 </div>
@@ -385,19 +394,7 @@
         <div class="container-fluid pt-5">
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Danh Mục</span></h2>
             <div class="row px-xl-5 pb-3">
-                <!--                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                                    <a class="text-decoration-none" href="">
-                                        <div class="cat-item d-flex align-items-center mb-4">
-                                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                                <img class="img-fluid" src="img/chim.jpg" alt="" style="width: 100px; height: 100px ">
-                                            </div>
-                                            <div class="flex-fill pl-3">
-                                                <h6>Loài Chim</h6>
-                                                <small class="text-body">100 Products</small>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>-->
+              
 
 
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">                                            
@@ -477,7 +474,7 @@
                                 <div class="product-img position-relative overflow-hidden">                             
                                     <img class="img-fluid w-100" src="${product.image}" alt="" style="width: 150px; height: 250px">                          
                                     <div class="product-action">
-                                      
+
                                         <a class="btn btn-outline-dark btn-square"
                                            href="CartServlet?action=add&sttPt=${product.sttPT}&productName=${product.productName}&price=${product.price}&quantity=1&imageUrl=${product.image}">
                                             <i class="fa fa-shopping-cart"></i></a>
@@ -490,7 +487,7 @@
                                         <h5 style="color: red">₫${product.price}</h5><h6 class="text-muted ml-2"><del></del></h6>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-center mb-1">
-                                    
+
                                         <small>Số Lượng: ${product.quantity}</small>
                                     </div>
                                 </div>

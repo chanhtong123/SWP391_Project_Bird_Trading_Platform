@@ -174,8 +174,42 @@
                                             <td>${product.description}</td>
                                             <td>${product.price}</td>
                                             <td>${product.quantity}</td>
-                                            <td>${product.categoryName}</td>
-                                            <td>${product.status}</td>     
+                                            <td>
+                                                <%-- Apply category name mapping --%>
+                                                <c:set var="categoryName" value="${product.categoryName}" />
+                                                <c:choose>
+                                                    <c:when test="${categoryName eq 'Bird'}">
+                                                        Chim
+                                                    </c:when>
+                                                    <c:when test="${categoryName eq 'Bird cage'}">
+                                                        Lồng Chim
+                                                    </c:when>
+                                                    <c:when test="${categoryName eq 'Accessory'}">
+                                                        Phụ Kiện
+                                                    </c:when>
+                                                    <c:when test="${categoryName eq 'Food'}">
+                                                        Cám Chim
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        ${categoryName}
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td>
+                                                <%-- Apply status mapping --%>
+                                                <c:set var="status" value="${product.status}" />
+                                                <c:choose>
+                                                    <c:when test="${status eq 'Available'}">
+                                                        Có Sẵn
+                                                    </c:when>
+                                                    <c:when test="${status eq 'Out of Stock'}">
+                                                        Hết Hàng
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        ${status}
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
                                             <td><img src="${product.image}" alt="Product Image" width="100px" height="100px"></td>
                                             <td>
                                                 <div class="btn-group" role="group">

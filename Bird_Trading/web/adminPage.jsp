@@ -40,7 +40,7 @@
     </head>
 
     <body class="fixed-navbar">
-        <c:if test="${sessionScope.userlogin == null && sessionScope.userlogin.role ne 'Staff'}">
+        <c:if test="${sessionScope.userlogin == null && sessionScope.userlogin.role ne 'Admin'}">
             <c:redirect url="ShowProductsServlet"></c:redirect>
         </c:if> 
         <div class="page-wrapper">
@@ -56,7 +56,7 @@
                 </div>
                 <div class="flexbox flex-1">
                     <!-- START TOP-LEFT TOOLBAR-->
-                    <ul class="nav navbar-toolbar">
+                     <ul class="nav navbar-toolbar">
                         <li>
                             <a class="nav-link sidebar-toggler js-sidebar-toggler"><i class="ti-menu"></i></a>
                         </li>
@@ -701,11 +701,11 @@
                 $('#confirmDeleteModal').modal('show');
             }
         </script>
-
+        
+     
         <!-- CORE PLUGINS-->
-<script src="./assets/vendors/jquery/dist/jquery.min.js" type="text/javascript"></script>
-<script src="./assets/vendors/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>
-<script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+
+
 <script src="./assets/vendors/metisMenu/dist/metisMenu.min.js" type="text/javascript"></script>
 <script src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 <!-- PAGE LEVEL PLUGINS-->
@@ -726,6 +726,12 @@
 <!-- PAGE LEVEL SCRIPTS-->
 <script src="./assets/js/scripts/dashboard_1_demo.js" type="text/javascript"></script>
 <script src="./assets/js/scripts/form-plugins.js" type="text/javascript"></script>
+
+
+
+
+
+<!-- CORE PLUGINS-->
 
 
 
