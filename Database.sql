@@ -297,17 +297,23 @@ CREATE TABLE Delivery (
 
 
 
-
-CREATE TABLE Feedback (
-  feedback_id VARCHAR(10) PRIMARY KEY DEFAULT CONCAT('FB', LPAD(NEXT VALUE FOR feedback_i_sequence, 4, '0')),
-  user_id INT NOT NULL,
-  store_id INT NOT NULL,
-  rating INT NOT NULL,
-  comment NVARCHAR(500),
-  feedback_date DATETIME NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES [User](user_id),
-  FOREIGN KEY (store_id) REFERENCES Store(store_id)
+CREATE TABLE Feedback ( 
+feedback_id INT IDENTITY(1, 1) PRIMARY KEY,
+order_item_id INT,
+[user_id] INT,
+rating INT,
+comment VARCHAR(255),
+timestamp DATETIME DEFAULT GETDATE(),
+FOREIGN KEY ([user_id]) REFERENCES [User]([user_id]) 
 );
+
+
+
+
+
+
+
+
 
 
 

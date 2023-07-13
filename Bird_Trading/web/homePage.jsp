@@ -293,17 +293,16 @@
                             </div>
                             <!--search end-->
 
-
+                            <!--cart-->
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                                <!--                                <a href="" class="btn px-0">
-                                                                    <i class="fas fa-heart text-primary"></i>
-                                                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                                                                </a>-->
                                 <a href="CartServlet?action=view" class="btn px-0 ml-3">
                                     <i class="fas fa-shopping-cart text-primary"></i>
                                     <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                                 </a>
                             </div>
+                            <!--end-->
+                            
+                            
                         </div>
                     </nav>
                 </div>
@@ -341,9 +340,9 @@
                                     <div class="p-3" style="max-width: 700px;">
                                         <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Thức ăn</h1>
                                         <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Những thức ăn đến từ những nhà cung cấp uy tín, có độ dinh dưỡng cao cho các loài chim.</p>
-                                      
+
                                         <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" 
-                                            href="ProductSearchServlet?action=searchByCategory&categoryName=Food">Bird Shop</a>
+                                           href="ProductSearchServlet?action=searchByCategory&categoryName=Food">Bird Shop</a>
                                     </div>
                                 </div>
                             </div>
@@ -353,9 +352,9 @@
                                     <div class="p-3" style="max-width: 700px;">
                                         <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Lồng Chim</h1>
                                         <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Nơi có những lồng chim đẹp đầy nghệ thuật trên cả thế giới, tạo nên vè đẹp sang trọng quý tộc.</p>
-                                       
-                                          <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                                             href="ProductSearchServlet?action=searchByCategory&categoryName=Bird cage">Bird Shop</a>
+
+                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+                                           href="ProductSearchServlet?action=searchByCategory&categoryName=Bird cage">Bird Shop</a>
                                     </div>
                                 </div>
                             </div>
@@ -368,9 +367,9 @@
                         <div class="offer-text">
                             <h6 class="text-white text-uppercase">Thức ăn cho chim</h6>
                             <h3 class="text-white mb-3"></h3>
-                             <a  class="btn btn-primary"
-                                            href="ProductSearchServlet?action=searchByCategory&categoryName=Food">Bird Shop</a>
-                            
+                            <a  class="btn btn-primary"
+                                href="ProductSearchServlet?action=searchByCategory&categoryName=Food">Bird Shop</a>
+
                         </div>
                     </div>
                     <div class="product-offer mb-30" style="height: 200px;">
@@ -378,7 +377,7 @@
                         <div class="offer-text">
                             <h6 class="text-white text-uppercase">Phụ kiện cho chim</h6>
                             <h3 class="text-white mb-3"></h3>
-                             <a class="btn btn-primary" href="ProductSearchServlet?action=searchByCategory&categoryName=Accessory">Bird Shop</a>
+                            <a class="btn btn-primary" href="ProductSearchServlet?action=searchByCategory&categoryName=Accessory">Bird Shop</a>
                         </div>
                     </div>
                 </div>
@@ -394,7 +393,7 @@
         <div class="container-fluid pt-5">
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Danh Mục</span></h2>
             <div class="row px-xl-5 pb-3">
-              
+
 
 
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">                                            
