@@ -77,10 +77,10 @@ public class CartServlet extends HttpServlet {
                 
                 
                 
-                response.sendRedirect("CartServlet?action=view");
+                response.sendRedirect("ShowProductsServlet");
             } else {
                 // quantity <= 1
-                response.sendRedirect("CartServlet?action=view"); // Chuyển tới trang cart.jsp mà không thêm vào giỏ hàng
+                response.sendRedirect("ShowProductsServlet"); // Chuyển tới trang cart.jsp mà không thêm vào giỏ hàng
             }
 
         } else {

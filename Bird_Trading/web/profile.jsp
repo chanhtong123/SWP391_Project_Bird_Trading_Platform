@@ -142,7 +142,7 @@
                                                 <input name="username" type="text" value="${userlogin.username}" hidden="">
                                                 <input name="role" type="text" value="${userlogin.role}" hidden="">
                                                 <div class="form-group">
-                                                    <label>Full Name</label>
+                                                    <label>Họ và tên</label>
                                                     <input name="fullName" class="form-control" readonly="" type="text" value="${userlogin.fullname}" placeholder="Full Name">
                                                 </div>
                                                 <div class="form-group">
@@ -150,33 +150,33 @@
                                                     <input name="email" class="form-control" readonly="" type="text" value="${userlogin.email}" placeholder="Email address">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Address</label>
+                                                    <label>Địa chỉ</label>
                                                     <input name="address" class="form-control" type="text" value="${userlogin.address}" placeholder="Address">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Phone Number</label>
+                                                    <label>Số điện thoại</label>
                                                     <input name="phoneNumber" class="form-control" type="text" value="${userlogin.phoneNumber}" placeholder="Phone Number">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Old Password</label>
+                                                    <label>Mật khẩu cũ</label>
                                                     <input name="oldPassword" class="form-control" type="password" placeholder="Password">
                                                 </div>
                                                 <c:if test="${requestScope.EDIT_ERROR != null}">
                                                     <div class="error-message color-red">${requestScope.EDIT_ERROR.notMatchPassword}</div>
                                                 </c:if>
                                                 <div class="form-group">
-                                                    <label>New Password</label>
+                                                    <label>Mật khẩu mới</label>
                                                     <input name="newPassword" class="form-control" type="password" placeholder="New Password">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Confirm</label>
+                                                    <label>Nhập lại mật khẩu</label>
                                                     <input name="confirm" class="form-control" type="password" placeholder="Confirm">
                                                 </div>
                                                 <c:if test="${requestScope.EDIT_SUCCESS != null}">
                                                     <div class="error-message color-green">${requestScope.EDIT_SUCCESS}</div>
                                                 </c:if>
                                                 <div class="form-group">
-                                                    <button class="btn btn-default" type="submit">Submit</button>
+                                                    <button class="btn btn-default" type="submit">Đổi mật khẩu</button>
                                                 </div>
                                             </form>
 
@@ -206,10 +206,10 @@
                                                                             <div class="order-price color-red">$${order.price}</div>
                                                                             <div>${order.status}</div>
                                                                             <c:if test="${order.status eq 'Complete'}">
-                                                                            <div class="order-feedback">
-                                                                                <button onclick="openFeedbackModal(${order.orderItemId})" data-orderitemid="${order.orderItemId}" class="btn btn-primary">Feedback</button>
-                                                                                <div id="feedbackStatus_${order.orderItemId}" style="display: none;"></div>
-                                                                            </div>
+                                                                                <div class="order-feedback">
+                                                                                    <button id="feedbackButton" onclick="openFeedbackModal(${order.orderItemId})" data-orderitemid="${order.orderItemId}" class="btn btn-primary">Feedback</button>
+                                                                                    <div id="feedbackStatus_${order.orderItemId}" style="display: none;"></div>
+                                                                                </div>
                                                                             </c:if>
                                                                         </div>
                                                                     </div>
@@ -341,52 +341,61 @@
                 <script src="path/to/star-rating.js"></script>
                 <!-- JavaScript code to control the modal -->
                 <script>
-                                                                                    $(document).ready(function () {
-                                                                                        $('#submitFeedbackButton').click(function () {
-                                                                                            // Lấy các giá trị từ các trường nhập liệu trong modal
-                                                                                            var orderItemId = selectedOrderItemId; // Sử dụng giá trị từ biến selectedOrderItemId
-                                                                                            var userId = $('#userId').val();
-                                                                                            var rating = $('input[name="rating"]:checked').val();
-                                                                                            var comment = $('#feedbackText').val();
+                                                                                        $(document).ready(function () {
+                                                                                            $('#submitFeedbackButton').click(function () {
+                                                                                                // Lấy các giá trị từ các trường nhập liệu trong modal
+                                                                                                var orderItemId = selectedOrderItemId; // Sử dụng giá trị từ biến selectedOrderItemId
+                                                                                                var userId = $('#userId').val();
+                                                                                                var rating = $('input[name="rating"]:checked').val();
+                                                                                                var comment = $('#feedbackText').val();
 
-                                                                                            // Gửi dữ liệu bằng Ajax tới Servlet
-                                                                                            $.ajax({
-                                                                                                url: 'FeedbackServlet',
-                                                                                                type: 'POST',
-                                                                                                data: {
-                                                                                                    orderItemId: orderItemId,
-                                                                                                    userId: userId,
-                                                                                                    rating: rating,
-                                                                                                    comment: comment
-                                                                                                },
-                                                                                                success: function (response) {
-                                                                                                    // Xử lý phản hồi từ Servlet
-                                                                                                    if (response === 'sent') {
-                                                                                                        // Feedback đã được gửi thành công
-                                                                                                        $('#feedbackStatus_' + orderItemId).text('Feedback đã được gửi.');
-                                                                                                        $('#feedbackStatus_' + orderItemId).show();
-                                                                                                    } else if (response === 'alreadySent') {
-                                                                                                        // Feedback đã được gửi trước đó
-                                                                                                        $('#feedbackStatus_' + orderItemId).text('Bạn đã gửi feedback cho mục này.');
-                                                                                                        $('#feedbackStatus_' + orderItemId).show();
-                                                                                                    } else {
-                                                                                                        // Xử lý phản hồi khác (nếu có)
+                                                                                                // Gửi dữ liệu bằng Ajax tới Servlet
+                                                                                                $.ajax({
+                                                                                                    url: 'FeedbackServlet',
+                                                                                                    type: 'POST',
+                                                                                                    data: {
+                                                                                                        orderItemId: orderItemId,
+                                                                                                        userId: userId,
+                                                                                                        rating: rating,
+                                                                                                        comment: comment
+                                                                                                    },
+                                                                                                    success: function (response) {
+                                                                                                        // Xử lý phản hồi từ Servlet
+                                                                                                        if (response === 'sent') {
+                                                                                                            // Feedback đã được gửi thành công
+                                                                                                            $('#feedbackStatus_' + orderItemId).text('Feedback đã được gửi.');
+                                                                                                            $('#feedbackStatus_' + orderItemId).show();
+
+                                                                                                            // Đổi nút "Feedback" thành "Already Feedback"
+                                                                                                            $('#feedbackButton').text('Already Feedback');
+                                                                                                            $('#feedbackButton').attr('disabled', 'disabled');
+                                                                                                        } else if (response === 'alreadySent') {
+                                                                                                            // Feedback đã được gửi trước đó
+                                                                                                            $('#feedbackStatus_' + orderItemId).text('Bạn đã gửi feedback cho mục này.');
+                                                                                                            $('#feedbackStatus_' + orderItemId).show();
+
+                                                                                                            // Đổi nút "Feedback" thành "Already Feedback"
+                                                                                                            $('#feedbackButton').text('Already Feedback');
+                                                                                                            $('#feedbackButton').attr('disabled', 'disabled');
+                                                                                                        } else {
+                                                                                                            // Xử lý phản hồi khác (nếu có)
+                                                                                                        }
+
+                                                                                                        // Đóng modal
+                                                                                                        $('#feedbackModal').modal('hide');
+                                                                                                    },
+                                                                                                    error: function (xhr, status, error) {
+                                                                                                        // Xử lý lỗi (nếu có)
                                                                                                     }
-
-                                                                                                    // Đóng modal
-                                                                                                    $('#feedbackModal').modal('hide');
-                                                                                                },
-                                                                                                error: function (xhr, status, error) {
-                                                                                                    // Xử lý lỗi (nếu có)
-                                                                                                }
+                                                                                                });
                                                                                             });
                                                                                         });
-                                                                                    });
-                                                                                    function openFeedbackModal(orderItemId) {
-                                                                                        // Thực hiện các thao tác để mở modal feedback và thiết lập giá trị của selectedOrderItemId
-                                                                                        selectedOrderItemId = orderItemId;
-                                                                                        $('#feedbackModal').modal('show');
-                                                                                    }
+
+                                                                                        function openFeedbackModal(orderItemId) {
+                                                                                            // Thực hiện các thao tác để mở modal feedback và thiết lập giá trị của selectedOrderItemId
+                                                                                            selectedOrderItemId = orderItemId;
+                                                                                            $('#feedbackModal').modal('show');
+                                                                                        }
 
 
                 </script>

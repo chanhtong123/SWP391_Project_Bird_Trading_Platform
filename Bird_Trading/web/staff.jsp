@@ -27,7 +27,7 @@
         <!-- PAGE LEVEL STYLES-->
     </head>
 
-   <body class="fixed-navbar">
+    <body class="fixed-navbar">
         <c:if test="${sessionScope.userlogin == null && sessionScope.userlogin.role ne 'Staff'}">
             <c:redirect url="ShowProductsServlet"></c:redirect>
         </c:if> 
@@ -36,7 +36,7 @@
             <header class="header">
                 <div class="page-brand">
                     <a class="link" href="UserServlet?action=list">
-                        <span class="brand">Admin 
+                        <span class="brand">Staff 
                             <span class="brand-tip"> Page</span>
                         </span>
                         <span class="brand-mini">AC</span>
@@ -119,15 +119,13 @@
 
                 <div class="page-content fade-in-up">
                     <div class="ibox">
-                        <div class="ibox-head">
-                            <div class="ibox-title"> <a href="UserServlet?action=addUser" class="btn btn-primary">Add User</a></div>
-                        </div>
                         <div class="ibox">
                             <div class="table__wrap">
                                 <table class="table">
                                     <thead class="table__header">
                                         <tr class="table__row">
                                             <th class="table__cell u-text-left">Tên người dùng</th>
+                                            <th class="table__cell u-text-left">Họ và tên</th>
                                             <th class="table__cell u-text-left">Email</th>
                                             <th class="table__cell u-text-left">Địa chỉ</th>
                                             <th class="table__cell u-text-left">Số điện thoại</th>
@@ -142,17 +140,20 @@
                                             <tr class="table__row"> 
                                             <input type="hidden" value="${user.userId}" name="userId" />
                                             <td class="table__account table__cell">
-                                                <input type="text" value="${user.username}" id="username" class="form-input" name="username" readonly=""/>
+                                                ${user.username}
+                                            </td>
+                                            <td class="table__account table__cell">
+                                                ${user.fullname}
                                             </td>
                                             <input type="hidden" name="password" value="${user.password}">
                                             <td class="table__account table__cell">
-                                                <input type="email"  value="${user.email}" id="email" name="email"  class="form-input" readonly=""/>
+                                                ${user.email}
                                             </td>
                                             <td class="table__account table__cell">
-                                                <input type="text"  value="${user.address}" id="address" name="address"  class="form-input" readonly=""/>
+                                                ${user.address}
                                             </td>
                                             <td class="table__account table__cell">
-                                                <input type="text"  value="${user.phoneNumber}" id="phoneNumber" name="phoneNumber" class="form-input" readonly=""/>
+                                                ${user.phoneNumber}
                                                 <c:if test="${not empty errors.phoneFormatError}">
                                                     <p class="error-message">
                                                         ${errors.phoneFormatError}
@@ -160,20 +161,9 @@
                                                 </c:if>
                                             </td>
                                             <td class="table__account table__cell">
-                                                <select id="role" name="role" required class="form-input">
-                                                    <option value="Admin" ${user.role == 'Admin' ? 'selected' : ''}>Admin</option>
-                                                    <option value="Staff" ${user.role == 'Staff' ? 'selected' : ''}>Staff</option>
-                                                    <option value="Store Manager" ${user.role == 'Store Manager' ? 'selected' : ''}>Store Manager</option>
-                                                    <option value="User" ${user.role == 'User' ? 'selected' : ''}>User</option>
-                                                </select>
+                                                ${user.role}
                                             </td>
-                                            <td class="table__transfer table__cell u-text-center">
-                                                <button type="submit" name="action" value="edit" class="btn btn-outline-success">Sửa</button>
-                                            </td> 
                                         </form>
-                                        <td class="table__transfer table__cell u-text-center">
-                                            <button class="btn btn-outline-danger" onclick="confirmDelete(${user.userId})">Xóa</button>
-                                        </td>
                                         </tr>
 
                                     </c:forEach>
@@ -382,51 +372,51 @@
         <script src="assets/js/app.min.js" type="text/javascript"></script>
         <!-- PAGE LEVEL SCRIPTS-->
         <script type="text/javascript">
-                                                $(function () {
-                                                    $('#example-table').DataTable({
-                                                        pageLength: 10,
-                                                        //"ajax": './assets/demo/data/table_data.json',
-                                                        /*"columns": [
-                                                         { "data": "name" },
-                                                         { "data": "office" },
-                                                         { "data": "extn" },
-                                                         { "data": "start_date" },
-                                                         { "data": "salary" }
-                                                         ]*/
-                                                    });
-                                                })
-                                                function confirmDelete(userId) {
-                                                    Swal.fire({
-                                                        title: 'Xác nhận xóa',
-                                                        text: 'Bạn có chắc muốn xóa người dùng này?',
-                                                        icon: 'warning',
-                                                        showCancelButton: true,
-                                                        confirmButtonColor: '#3085d6',
-                                                        cancelButtonColor: '#d33',
-                                                        confirmButtonText: 'Xóa',
-                                                        cancelButtonText: 'Hủy'
-                                                    }).then((result) => {
-                                                        if (result.isConfirmed) {
-                                                            // Nếu người dùng xác nhận xóa, thực hiện yêu cầu xóa người dùng
-                                                            window.location.href = 'UserServlet?action=delete&userId=' + userId;
-                                                        }
-                                                    });
+                                        $(function () {
+                                            $('#example-table').DataTable({
+                                                pageLength: 10,
+                                                //"ajax": './assets/demo/data/table_data.json',
+                                                /*"columns": [
+                                                 { "data": "name" },
+                                                 { "data": "office" },
+                                                 { "data": "extn" },
+                                                 { "data": "start_date" },
+                                                 { "data": "salary" }
+                                                 ]*/
+                                            });
+                                        })
+                                        function confirmDelete(userId) {
+                                            Swal.fire({
+                                                title: 'Xác nhận xóa',
+                                                text: 'Bạn có chắc muốn xóa người dùng này?',
+                                                icon: 'warning',
+                                                showCancelButton: true,
+                                                confirmButtonColor: '#3085d6',
+                                                cancelButtonColor: '#d33',
+                                                confirmButtonText: 'Xóa',
+                                                cancelButtonText: 'Hủy'
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    // Nếu người dùng xác nhận xóa, thực hiện yêu cầu xóa người dùng
+                                                    window.location.href = 'UserServlet?action=delete&userId=' + userId;
                                                 }
-                                                function showSection(sectionName) {
-                                                    var sections = document.getElementsByClassName("section");
-                                                    var buttons = document.querySelectorAll(".nav-2-level li a");
+                                            });
+                                        }
+                                        function showSection(sectionName) {
+                                            var sections = document.getElementsByClassName("section");
+                                            var buttons = document.querySelectorAll(".nav-2-level li a");
 
-                                                    for (var i = 0; i < sections.length; i++) {
-                                                        sections[i].style.display = "none";
-                                                    }
-                                                    document.getElementById(sectionName).style.display = "block";
+                                            for (var i = 0; i < sections.length; i++) {
+                                                sections[i].style.display = "none";
+                                            }
+                                            document.getElementById(sectionName).style.display = "block";
 
-                                                    for (var i = 0; i < buttons.length; i++) {
-                                                        buttons[i].classList.remove("active");
-                                                    }
+                                            for (var i = 0; i < buttons.length; i++) {
+                                                buttons[i].classList.remove("active");
+                                            }
 
-                                                    document.querySelector(".nav-2-level li a[data-section='" + sectionName + "']").classList.add("active");
-                                                }
+                                            document.querySelector(".nav-2-level li a[data-section='" + sectionName + "']").classList.add("active");
+                                        }
 
 
 
