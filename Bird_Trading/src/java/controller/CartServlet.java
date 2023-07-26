@@ -32,6 +32,8 @@ public class CartServlet extends HttpServlet {
                 viewCart(request, response);
             } else if (action != null && action.equals("remove")) {
                 removeCartItem(request, response);
+            } else if (action != null && action.equals("showCart")) {
+                showCart(request, response);
             } else {
                 response.sendRedirect("cart.jsp");
             }
@@ -51,7 +53,7 @@ public class CartServlet extends HttpServlet {
             String productName = request.getParameter("productName");
             BigDecimal price = new BigDecimal(request.getParameter("price"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
-             CartDAO cartDAO = new CartDAO();
+            CartDAO cartDAO = new CartDAO();
             int quantityProduct = cartDAO.getProductQuantity(sttPt);
             String imageUrl = request.getParameter("imageUrl");
 
@@ -59,7 +61,7 @@ public class CartServlet extends HttpServlet {
             System.out.println("check2" + sttPt);
             // Kiểm tra quantity
             if (quantityProduct > 0) {
-                
+
                 CartDTO cartItem = new CartDTO();
                 cartItem.setSttPT(sttPt);
                 cartItem.setProductName(productName);
@@ -68,15 +70,12 @@ public class CartServlet extends HttpServlet {
                 cartItem.setImageUrl(imageUrl);
                 cartItem.setUserId(userId);
 
-                
                 cartDAO.addToCart(cartItem);
 
                 // Thêm thành công
-                ArrayList<CartDTO> cartItems = cartDAO.getCartItemsByUserId(userId);         
-                session.setAttribute("CART", cartItems);   
-                
-                
-                
+                ArrayList<CartDTO> cartItems = cartDAO.getCartItemsByUserId(userId);
+                session.setAttribute("CART", cartItems);
+
                 response.sendRedirect("ShowProductsServlet");
             } else {
                 // quantity <= 1
@@ -143,7 +142,7 @@ public class CartServlet extends HttpServlet {
 
             ArrayList<CartDTO> cartItems = cartDAO.getCartItemsByUserId(userId);
             session.setAttribute("CART", cartItems);
-            response.sendRedirect("cart.jsp");
+            response.sendRedirect("CartServlet?action=showCart");
         } else {
             // Chưa đăng nhập
             response.sendRedirect("login.jsp");
@@ -174,6 +173,10 @@ public class CartServlet extends HttpServlet {
             // Chưa đăng nhập
             response.sendRedirect("login.jsp");
         }
+    }
+
+    private void showCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 
 }

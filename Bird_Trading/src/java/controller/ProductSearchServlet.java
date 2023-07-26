@@ -53,7 +53,7 @@ public class ProductSearchServlet extends HttpServlet {
                     session.setAttribute("searchResultsByName", products);
                     response.sendRedirect("searchProducts.jsp");
                     return;
-                }
+                } else response.sendRedirect("ShowProductsServlet");
             } else if (action.equals("searchByPriceRange")) {
                 String minPriceStr = request.getParameter("minPrice");
                 String maxPriceStr = request.getParameter("maxPrice");
@@ -79,7 +79,7 @@ public class ProductSearchServlet extends HttpServlet {
                     session.setAttribute("maxPrice", maxPrice);
                     response.sendRedirect("searchProductsByPrice.jsp");
                     return;
-                }
+                } else response.sendRedirect("searchProducts.jsp");
             } else if (action.equals("searchByCategory")) {
                 String categoryName = request.getParameter("categoryName");
                 if (categoryName != null && !categoryName.isEmpty()) {
@@ -91,7 +91,7 @@ public class ProductSearchServlet extends HttpServlet {
 
                     return;
                 }
-            }
+            } 
         }
 
     }

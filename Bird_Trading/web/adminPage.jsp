@@ -10,7 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
     <head>
         <meta charset="UTF-8">
@@ -373,20 +373,20 @@
                                             <tr class="table__row"> 
                                             <input type="hidden" value="${user.userId}" name="userId" />
                                             <td class="table__account table__cell">
-                                                <input type="text" readonly="" value="${user.username}" id="username" class="form-input" name="username" size="10" />
+                                                <input type="text" readonly="" value="${user.username}" id="username" class="form-control" name="username" size="10" />
                                             </td>
                                             <td class="table__account table__cell">
-                                                <input type="text" readonly="" value="${user.fullname}" id="fullname" class="form-input" name="fullname" />
+                                                <input type="text" readonly="" value="${user.fullname}" id="fullname" class="form-control" name="fullname" />
                                             </td>
                                             <input type="hidden" name="password" value="${user.password}">
                                             <td class="table__account table__cell">
-                                                <input type="email" readonly="" value="${user.email}" id="email" name="email"  class="form-input"/>
+                                                <input type="email" readonly="" value="${user.email}" id="email" name="email"  class="form-control"/>
                                             </td>
                                             <td class="table__account table__cell">
-                                                <input type="text" readonly="" value="${user.address}" id="address" name="address"  class="form-input"/>
+                                                <input type="text" readonly="" value="${user.address}" id="address" name="address"  class="form-control"/>
                                             </td>
                                             <td class="table__account table__cell">
-                                                <input type="text" readonly=""  value="${user.phoneNumber}" id="phoneNumber" name="phoneNumber" class="form-input" size="10"/>
+                                                <input type="text" readonly=""  value="${user.phoneNumber}" id="phoneNumber" name="phoneNumber" class="form-control" size="10"/>
                                                 <c:if test="${not empty errors.phoneFormatError}">
                                                     <p class="error-message">
                                                         ${errors.phoneFormatError}
@@ -394,7 +394,7 @@
                                                 </c:if>
                                             </td>
                                             <td class="table__account table__cell">
-                                                <select id="role" name="role" required class="form-input">
+                                                <select id="role" name="role" required class="form-control">
                                                     <option value="Admin" ${user.role == 'Admin' ? 'selected' : ''}>Admin</option>
                                                     <option value="Staff" ${user.role == 'Staff' ? 'selected' : ''}>Staff</option>
                                                     <option value="Store Manager" ${user.role == 'Store Manager' ? 'selected' : ''}>Store Manager</option>
@@ -402,11 +402,11 @@
                                                 </select>
                                             </td>
                                             <td class="table__transfer table__cell u-text-center">
-                                                <button type="submit" name="action" value="edit" class="btn btn-outline-success">Sửa</button>
+                                                <button type="submit" name="action" value="edit" class="btn btn-outline-success form-control">Sửa</button>
                                             </td> 
                                         </form>
                                         <td class="table__transfer table__cell u-text-center">
-                                            <button class="btn btn-outline-danger" onclick="confirmDelete(${user.userId})">Xóa</button>
+                                            <button class="btn btn-outline-danger form-control" onclick="confirmDelete(${user.userId})">Xóa</button>
                                         </td>
                                         </tr>
 
@@ -439,8 +439,8 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="username">Username:</label>
-                                                    <input type="text" id="username" name="username" placeholder="Username" class="form-control">
+                                                    <label for="username">Tên người dùng</label>
+                                                    <input type="text" id="username" name="username" placeholder="Tên người dùng" class="form-control">
                                                     <c:if test="${not empty errors.usernameBlankError}">
                                                         <p class="error-message color-red">
                                                             ${errors.usernameBlankError}
@@ -453,8 +453,8 @@
                                                     </c:if>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="fullname">Fullname:</label>
-                                                    <input type="text" id="fullname" name="fullname" placeholder="Fullname" class="form-control">
+                                                    <label for="fullname">Họ và tên</label>
+                                                    <input type="text" id="fullname" name="fullname" placeholder="Họ và tên" class="form-control">
                                                     <c:if test="${not empty errors.fullnameBlankError}">
                                                         <p class="error-message color-red">
                                                             ${errors.fullnameBlankError}
@@ -462,8 +462,8 @@
                                                     </c:if>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="password">Password:</label>
-                                                    <input type="password" id="password" name="password" placeholder="Password" class="form-control">
+                                                    <label for="password">Mật khẩu</label>
+                                                    <input type="password" id="password" name="password" placeholder="Mật khẩu" class="form-control">
                                                     <c:if test="${not empty errors.passwordBlankError}">
                                                         <p class="error-message color-red">
                                                             ${errors.passwordBlankError}
@@ -473,7 +473,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="email">Email:</label>
+                                                    <label for="email">Email</label>
                                                     <input type="email" id="email" name="email" placeholder="Email" class="form-control">
                                                     <c:if test="${not empty errors.emailIsExisted}">
                                                         <p class="error-message color-red">
@@ -492,12 +492,12 @@
                                                     </c:if>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="address">Address:</label>
-                                                    <input type="text" id="address" name="address" placeholder="Address" class="form-control">
+                                                    <label for="address">Địa chỉ</label>
+                                                    <input type="text" id="address" name="address" placeholder="Địa chỉ" class="form-control">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="phoneNumber">Phone number:</label>
-                                                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" class="form-control">
+                                                    <label for="phoneNumber">Số điện thoại</label>
+                                                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Số điện thoại" class="form-control">
                                                     <c:if test="${not empty errors.phoneFormatError}">
                                                         <p class="error-message color-red">
                                                             ${errors.phoneFormatError}
@@ -521,7 +521,7 @@
                                                 <div class="form-group">
                                                     <label for="role">Role:</label>
                                                     <select id="role" name="role" required class="form-control">
-                                                        <option value="Admin">Admin</option>
+                                                        <option value="Staff">Staff</option>
                                                         <option value="Store Manager">Store Manager</option>
                                                         <option value="User">User</option>
                                                     </select>
@@ -529,7 +529,7 @@
                                             </div>
                                         </div>
                                         <br>
-                                        <input type="submit" id="add-button" value="Thêm" class="btn btn-primary">
+                                        <button type="submit" name="action" value="addUser" class="btn btn-primary">Thêm</button>
                                     </form>
                                 </div>
 
@@ -558,7 +558,7 @@
                                         <th class="table__cell u-text-left">Tên cửa hàng</th>
                                         <th class="table__cell u-text-left">Địa chỉ</th>
                                         <th class="table__cell u-text-left">Số điện thoại</th>
-                                        <th class="table__cell u-text-left">User ID</th>
+                                        <th class="table__cell u-text-left">ID người dùng</th>
                                         <th></th>
                                         <th></th>
                                     </tr>

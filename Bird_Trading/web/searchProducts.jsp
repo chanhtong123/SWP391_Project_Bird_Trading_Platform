@@ -15,7 +15,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Bird SHop</title>
+        <title>Bird Trading</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
@@ -137,7 +137,7 @@
                 <div class="col-lg-4">
                     <a href="ShowProductsServlet" class="text-decoration-none">
                         <span class="h1 text-uppercase text-primary bg-dark px-2">Bird</span>
-                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
+                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Trading</span>
                     </a>
                 </div>
                 <div class="col-lg-4 col-6 text-left">
@@ -266,15 +266,15 @@
                 <div class="col-lg-9">
                     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                         <a href="" class="text-decoration-none d-block d-lg-none">
-                            <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                            <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                            <span class="h1 text-uppercase text-dark bg-light px-2">Bird</span>
+                            <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Trading</span>
                         </a>
                         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="homePage.jsp" class="nav-item nav-link active">Home</a>
+                                <a href="homePage.jsp" class="nav-item nav-link active">Trang chủ</a>
                                 <a href="ProductSearchServlet?action=searchByCategory&categoryName=Bird" class="nav-item nav-link">Loài chim</a>
                                 <a href="ProductSearchServlet?action=searchByCategory&categoryName=Food" class="nav-item nav-link">Thức ăn cho chim</a>
                                 <a href="ProductSearchServlet?action=searchByCategory&categoryName=Bird cage" class="nav-item nav-link">Lồng chim</a>
@@ -305,17 +305,16 @@
                             </div>
                             <!--search end-->
 
-
+                            <!--cart-->
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                                <!--                                <a href="" class="btn px-0">
-                                                                    <i class="fas fa-heart text-primary"></i>
-                                                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                                                                </a>-->
                                 <a href="CartServlet?action=view" class="btn px-0 ml-3">
                                     <i class="fas fa-shopping-cart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;"></span>
                                 </a>
                             </div>
+                            <!--end-->
+
+
                         </div>
                     </nav>
                 </div>
@@ -324,20 +323,79 @@
         <!-- Navbar End -->
 
 
-        <!--         Breadcrumb Start 
-                <div class="container-fluid">
-                    <div class="row px-xl-5">
-                        <div class="col-12">
-                            <nav class="breadcrumb bg-light mb-30">
-                                <a class="breadcrumb-item text-dark" href="ShowProductsServlet">Home</a>
-                                <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                                <span class="breadcrumb-item active">Shop List</span>
-                            </nav>
+        <!-- Carousel Start -->
+        <div class="container-fluid mb-3">
+            <div class="row px-xl-5">
+                <div class="col-lg-8">
+                    <div id="header-carousel" class="carousel slide carousel-fade mb-30 mb-lg-0" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#header-carousel" data-slide-to="1"></li>
+                            <li data-target="#header-carousel" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item position-relative active" style=" height: 430px;">
+                                <img class="position-absolute w-100 h-100" src="img/hinh-anh-chim-vet-43.jpg" style="object-fit: cover;">
+                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                    <div class="p-3" style="max-width: 700px;">
+                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Loài Chim</h1>
+                                        <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Nơi bán những chim cảnh đẹp, độc lạ và giá cả phù hợp nhất trên thị trường.</p>
+                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+                                           href="ProductSearchServlet?action=searchByCategory&categoryName=Bird">Bird Shop</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item position-relative" style="height: 430px;">
+                                <img class="position-absolute w-100 h-100" src="img/hinh_nen_2.jpg" style="object-fit: cover;">
+                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                    <div class="p-3" style="max-width: 700px;">
+                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Thức ăn</h1>
+                                        <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Những thức ăn đến từ những nhà cung cấp uy tín, có độ dinh dưỡng cao cho các loài chim.</p>
+
+                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" 
+                                           href="ProductSearchServlet?action=searchByCategory&categoryName=Food">Bird Shop</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item position-relative" style="height: 430px;">
+                                <img class="position-absolute w-100 h-100" src="img/anh_nen_3.jpg" style="object-fit: cover;">
+                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                    <div class="p-3" style="max-width: 700px;">
+                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Lồng Chim</h1>
+                                        <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Nơi có những lồng chim đẹp đầy nghệ thuật trên cả thế giới, tạo nên vè đẹp sang trọng quý tộc.</p>
+
+                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+                                           href="ProductSearchServlet?action=searchByCategory&categoryName=Bird cage">Bird Shop</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                 Breadcrumb End -->
+                <div class="col-lg-4">
+                    <div class="product-offer mb-30" style="height: 200px;">
+                        <img class="img-fluid" src="img/anh1.jpg" alt="">
+                        <div class="offer-text">
+                            <h6 class="text-white text-uppercase">Thức ăn cho chim</h6>
+                            <h3 class="text-white mb-3"></h3>
+                            <a  class="btn btn-primary"
+                                href="ProductSearchServlet?action=searchByCategory&categoryName=Food">Bird Shop</a>
 
+                        </div>
+                    </div>
+                    <div class="product-offer mb-30" style="height: 200px;">
+                        <img class="img-fluid" src="img/anh2.jpg" alt="">
+                        <div class="offer-text">
+                            <h6 class="text-white text-uppercase">Phụ kiện cho chim</h6>
+                            <h3 class="text-white mb-3"></h3>
+                            <a class="btn btn-primary" href="ProductSearchServlet?action=searchByCategory&categoryName=Accessory">Bird Shop</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel End -->
 
         <!-- Shop Start -->
         <div class="container-fluid">
@@ -434,9 +492,9 @@
                             <nav>
                                 <ul class="pagination justify-content-center">
                                     <% if (currentPage > 1) {%>
-                                    <li class="page-item"><a class="page-link" href="?page=<%= currentPage - 1%>">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="?page=<%= currentPage - 1%>">Trang trước</a></li>
                                         <% } else { %>
-                                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item disabled"><a class="page-link" href="#">Trang trước</a></li>
                                         <% } %>
 
                                     <% for (int i = 1; i <= totalPages; i++) { %>
@@ -448,16 +506,16 @@
                                         <% } %>
 
                                     <% if (currentPage < totalPages) {%>
-                                    <li class="page-item"><a class="page-link" href="?page=<%= currentPage + 1%>">Next</a></li>
+                                    <li class="page-item"><a class="page-link" href="?page=<%= currentPage + 1%>">Trang sau</a></li>
                                         <% } else { %>
-                                    <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                                    <li class="page-item disabled"><a class="page-link" href="#">Trang sau</a></li>
                                         <% } %>
                                 </ul>
                             </nav>
                         </div>
 
                         <% } else { %>
-                        <p class="no-results">No results found by Name.</p>
+                        <p class="no-results">Không có sản phẩm có từ khóa được tìm thấy.</p>
                         <% }%>
                     </div>
                 </div>

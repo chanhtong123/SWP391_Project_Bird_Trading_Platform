@@ -110,6 +110,33 @@ public class UserDAO extends DBHelper {
         ArrayList<UserDTO> users = new ArrayList<>();
         try {
             String query = "SELECT [user_id], [username], [fullname], [password], [email], [address], [phone_number], [role]\n"
+                    + "FROM [User] WHERE [role] <> 'Admin'";
+            PreparedStatement stm = connection.prepareStatement(query);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                int userId = rs.getInt("user_id");
+                String username = rs.getString("username");
+                String fullname = rs.getString("fullname");
+                String password = rs.getString("password");
+                String email = rs.getString("email");
+                String address = rs.getString("address");
+                String phoneNumber = rs.getString("phone_number");
+                String role = rs.getString("role");
+                UserDTO user = new UserDTO(userId, username, fullname, password, email, address, phoneNumber, role);
+                users.add(user);
+            }
+
+        } catch (SQLException ex) {
+
+        }
+        return users;
+    }
+    
+        public ArrayList<UserDTO> getAllUsers1() {
+        ResultSet rs = null;
+        ArrayList<UserDTO> users = new ArrayList<>();
+        try {
+            String query = "SELECT [user_id], [username], [fullname], [password], [email], [address], [phone_number], [role]\n"
                     + "FROM [User]\n"
                     + "WHERE [role] <> 'Admin'AND [role] <> 'Staff'";
             PreparedStatement stm = connection.prepareStatement(query);

@@ -4,17 +4,11 @@
  */
 package DTO;
 
-import DAO.ProductDAO;
-import DAO.ProductDAO;
 import DTO.ProductDTO;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.naming.NamingException;
 
 /**
  *

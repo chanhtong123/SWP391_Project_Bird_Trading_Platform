@@ -168,7 +168,7 @@ public class UserServlet extends HttpServlet {
         List<StoreRegisterDTO> storeRegisterList = storeDAO.getAllStoreRegister();
         HttpSession session = request.getSession();
         session.setAttribute("stores", storeRegisterList); // Đặt danh sách sản phẩm vào session
-        ArrayList<UserDTO> users = userDAO.getAllUsers();
+        ArrayList<UserDTO> users = userDAO.getAllUsers1();
         session.setAttribute("users", users);
         RequestDispatcher rd = request.getRequestDispatcher("staff.jsp");
         rd.forward(request, response);
@@ -318,7 +318,7 @@ public class UserServlet extends HttpServlet {
             userDAO.updateUser(user);
 
         } finally {
-            response.sendRedirect("UserServlet?action=list");
+            response.sendRedirect("UserServlet?action=list2");
         }
     }
 
@@ -378,17 +378,19 @@ public class UserServlet extends HttpServlet {
         } catch (NumberFormatException e) {
 
         }
-        response.sendRedirect("UserServlet?action=list");
+        response.sendRedirect("UserServlet?action=list2");
     }
 
     private void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, SQLException {
         PrintWriter out = response.getWriter();
-        String url = "UserServlet?action=list";
+        String url = "UserServlet?action=list2";
         String username = request.getParameter("username");
-        String fullname = request.getParameter("fullname");
+        String fullname = new String(request.getParameter("fullname").getBytes("ISO-8859-1"), "UTF-8");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-        String address = request.getParameter("address");
+        String address = new String(request.getParameter("address").getBytes("ISO-8859-1"), "UTF-8");
+
+        System.out.println(fullname );
         String phoneNumber = request.getParameter("phoneNumber");
         String role = request.getParameter("role");
         boolean foundError = false;
@@ -452,7 +454,7 @@ public class UserServlet extends HttpServlet {
                 user.setRole(role);
                 boolean result = userDAO.createUser(user);
                 if (result) {
-                    url = "UserServlet?action=list";
+                    url = "UserServlet?action=list2";
                 }
             }
 
@@ -548,7 +550,7 @@ public class UserServlet extends HttpServlet {
                 }
             }
         }
-        
+
         request.setAttribute("orderItem", listItem);
         request.setAttribute("user", user);
         request.getRequestDispatcher("profile.jsp").forward(request, response);

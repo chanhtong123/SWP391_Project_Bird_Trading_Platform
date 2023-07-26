@@ -91,7 +91,7 @@
                         <li class="active">
                             <a href="javascript:;">
                                 <i class="sidebar-item-icon fa fa-table"></i>
-                                <span class="nav-label">Sản phẩm</span>
+                                <span class="nav-label">Quản lí</span>
                                 <i class="fa fa-angle-left arrow"></i>
                             </a>
                             <ul class="nav-2-level collapse in">

@@ -8,8 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html >
     <head>
         <meta charset="utf-8">
         <link rel="png" href="logo.png" type="img/logo.png">
@@ -43,6 +42,12 @@
     </head>
 
     <body>
+        <c:if test="${sessionScope.userlogin == null && sessionScope.userlogin.role eq 'Staff'}">
+            <c:redirect url="UserServlet?action=list"></c:redirect>
+        </c:if> 
+        <c:if test="${sessionScope.userlogin == null && sessionScope.userlogin.role eq 'Admin'}">
+            <c:redirect url="UserServlet?action=list2"></c:redirect>
+        </c:if> 
         <!-- Topbar Start -->
         <div class="container-fluid">
             <div class="row bg-secondary py-1 px-xl-5">
@@ -125,7 +130,7 @@
                 <div class="col-lg-4">
                     <a href="ShowProductsServlet" class="text-decoration-none">
                         <span class="h1 text-uppercase text-primary bg-dark px-2">Bird</span>
-                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
+                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Trading</span>
                     </a>
                 </div>
                 <div class="col-lg-4 col-6 text-left">
@@ -138,9 +143,7 @@
                             <input type="text" class="form-control" name="productName" placeholder="Tìm Sản Phẩm"> 
 
                             <div class="input-group-append">
-
-                                <input  class="input-group-text bg-transparent text-primary" type="submit" value="Tìm Kiếm">
-
+                                <input  class="input-group-text bg-transparent text-primary" required="" type="submit" value="Tìm Kiếm">
                             </div>
                         </div>
                     </form>
@@ -254,15 +257,15 @@
                 <div class="col-lg-9">
                     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                         <a href="" class="text-decoration-none d-block d-lg-none">
-                            <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                            <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                            <span class="h1 text-uppercase text-dark bg-light px-2">Bird</span>
+                            <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Trading</span>
                         </a>
                         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="homePage.jsp" class="nav-item nav-link active">Home</a>
+                                <a href="homePage.jsp" class="nav-item nav-link active">Trang chủ</a>
                                 <a href="ProductSearchServlet?action=searchByCategory&categoryName=Bird" class="nav-item nav-link">Loài chim</a>
                                 <a href="ProductSearchServlet?action=searchByCategory&categoryName=Food" class="nav-item nav-link">Thức ăn cho chim</a>
                                 <a href="ProductSearchServlet?action=searchByCategory&categoryName=Bird cage" class="nav-item nav-link">Lồng chim</a>
@@ -301,8 +304,8 @@
                                 </a>
                             </div>
                             <!--end-->
-                            
-                            
+
+
                         </div>
                     </nav>
                 </div>
