@@ -1,3 +1,5 @@
+![Static Badge](https://img.shields.io/badge/:badgeContent)
+
 <div align="center">
    <div style="display: flex;">
   ![Language](https://img.shields.io/badge/Language-HTML%2FCSS-orange)
