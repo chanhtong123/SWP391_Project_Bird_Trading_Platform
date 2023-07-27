@@ -394,8 +394,6 @@ CREATE TABLE Delivery (
 );
 
 
-
-
 CREATE TABLE Feedback ( 
 feedback_id INT IDENTITY(1, 1) PRIMARY KEY,
 order_item_id INT,
@@ -452,7 +450,7 @@ INSERT INTO Province (province_name, shipping_cost)
 VALUES (N'Binh Thuan', 35.000);
 
 INSERT INTO Province (province_name, shipping_cost)
-VALUES (N'Ca Mau', 30.000);
+VALUES (N'Ca Mau', 34.000);
 
 INSERT INTO Province (province_name, shipping_cost)
 VALUES (N'Cao Bang', 45.000);
