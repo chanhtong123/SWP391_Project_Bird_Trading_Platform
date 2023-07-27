@@ -20,6 +20,6 @@ Bird Trading Platform là một nền tảng giao dịch trực tuyến với m�
 1. Hãy clone repository này vào máy tính của bạn.
 
    ```bash
-   git clone https://github.com/your-username/bird-trading-platform.git
+   [git clone https://github.com/chanhtong123/SWP391_Project_Bird_Trading_Platform.git]
 
 </div>
