@@ -115,7 +115,7 @@
                                 </li>
 
                                 <li>
-                              <a href="UpdateStoreServlet?action=edit&storeId=${userlogin.userId}">Cập nhập thông tin Shop</a>
+                              <a href="UpdateStoreServlet?action=edit&userid=${userlogin.userId}">Cập nhập thông tin Shop</a>
                                 </li>
                             </ul>
                         </li>

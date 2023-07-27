@@ -82,7 +82,23 @@ public class StoreDAO extends DBHelper {
         return null;
     }
 
+    public int getUserIdByStoreId(String storeId) throws SQLException {
+        try {
+            String sql = "SELECT user_id FROM Store WHERE store_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, storeId);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                int userId = rs.getInt("user_id");
+                return userId;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1; // Trả về giá trị mặc định hoặc một giá trị đại diện cho việc không tìm thấy userId.
+    }
 
+    
 
     public StoreDTO getStoreByIdUser(int userId) throws SQLException {
         try {
@@ -422,10 +438,6 @@ public class StoreDAO extends DBHelper {
         return null;
     }
 
-    
-    
-    
-    
     ArrayList<ProductDTO> getAllProductsByStoreId(String storeId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

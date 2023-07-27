@@ -56,7 +56,8 @@ public class UpdateStoreServlet extends HttpServlet {
             switch (action) {
 
                 case "edit":
-                    int storeIdInt = Integer.parseInt(request.getParameter("storeId"));
+                    int userid = Integer.parseInt(request.getParameter("userid"));
+                    int storeIdInt = dao.getStoreIdByUserId(userid);
                     storeId = String.valueOf(storeIdInt);
 //                    storeId = "2";
                     p = dao.getStoreByIdStore(storeId);

@@ -123,7 +123,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="updateStore.jsp">Cập nhật sản phẩm</a>
+                                    <a href="UpdateStoreServlet?action=edit&userid=${userlogin.userId}">Cập nhập thông tin Shop</a>
                                 </li>
 
 
