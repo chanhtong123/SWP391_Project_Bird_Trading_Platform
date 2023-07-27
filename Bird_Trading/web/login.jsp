@@ -14,6 +14,9 @@
         <link href="lib/animate/animate.min.css" rel="stylesheet">
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+              integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+              crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
@@ -273,7 +276,7 @@
                         <h1 class="auth-form-title">
                             Đăng nhập
                         </h1><br>
-                        <form action="UserServlet?action=login" method="POST" class="login-form">
+                        <form action="UserServlet?action=login" method="POST" id="form"  class="login-form">
                             <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
                             <input class="auth-form-input" type="text" name="email" value="${param.email}" id="email" placeholder="Nhập email"/>
                             <c:if test="${not empty errors.usernameBlankError}">
@@ -296,6 +299,8 @@
                                     ${errors.wrongPasswordError}
                                 </p>
                             </c:if>
+                            <div class="g-recaptcha" data-sitekey="6LdO3P4mAAAAAH8CBTo8PalbHgQC3ePdpXZpc6s2"></div>
+                            <div id ="error"></div>
                             <div class="footer-action">
                                 <input type="submit" value="Đăng nhập" class="auth-submit"/>
                             </div>
@@ -312,6 +317,22 @@
         </div>
     </div>
     <script src="js/common.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        window.onload = function () {
+            let isValid = false;
+            const form = document.getElementById("form");
+            const error = document.getElementById("error");
+
+            form.addEventListener("submit", function (event) {
+                const response = grecaptcha.getResponse();
+                if (!response) {
+                    event.preventDefault(); // Ngăn chặn việc gửi form khi captcha không hợp lệ
+                    error.innerHTML = "Check Recaptcha Please!";
+                }
+            });
+        }
+    </script>
 </body>
 </html>
