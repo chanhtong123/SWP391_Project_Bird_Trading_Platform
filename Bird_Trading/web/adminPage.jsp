@@ -120,9 +120,6 @@
                                 <li>
                                     <a onclick="showSection('add-user-section')" href="#" data-section="add-user-section">Thêm người dùng</a>
                                 </li>
-                                <li>
-                                    <a onclick="showSection('store-register-list-section')" href="#" data-section="store-register-list-section">Duyệt cửa hàng</a>
-                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -188,9 +185,9 @@
                             <div class="form-group" id="date_5">
                                 <label class="font-normal"></label>
                                 <div class="input-daterange input-group" id="datepicker">
-                                    <input class="input-sm form-control" type="text" id="start" name="start" value="07/13/2023">
+                                    <input class="input-sm form-control" type="text" id="start" name="start" value="07/27/2023">
                                     <span class="input-group-addon p-l-10 p-r-10">đến</span>
-                                    <input class="input-sm form-control" type="text" id="end" name="end" value="07/13/2023">
+                                    <input class="input-sm form-control" type="text" id="end" name="end" value="07/27/2023">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Tra Cứu</button>
@@ -540,51 +537,7 @@
                 <!-- END PAGE CONTENT-->
 
             </div>
-            <div class="content-wrapper store-register-list-section section" id="store-register-list-section" style="display: none;">
-                <!-- START PAGE CONTENT-->
 
-                <div class="page-heading">
-                    <h1 class="page-title">Danh sách đăng kí cửa hàng</h1>
-                </div>
-<!--//ggggg-->
-
-                <div class="page-content fade-in-up">
-                    <div class="ibox">
-                        <div class="table__wrap">
-                            <table class="table">
-                                <thead class="table__header">
-                                    <tr class="table__row">
-                                        <th class="table__cell u-text-left">Tên cửa hàng</th>
-                                        <th class="table__cell u-text-left">Địa chỉ</th>
-                                        <th class="table__cell u-text-left">Số điện thoại</th>
-                                        <th class="table__cell u-text-left">ID người dùng</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <c:forEach var="storeRegister" items="${stores}">
-                                    <form method="POST" action="StoreServlet?action=registerStore">
-                                        <tr class="table__row">
-                                        <input type="text" hidden="" value="${storeRegister.store_register_id}" name="storeRegisterId" />
-                                        <td class="table__account table__cell">
-                                            <input type="text" readonly="" value="${storeRegister.store_name}" class="form-input" name="storeName" />
-                                        </td>
-                                        <td class="table__account table__cell"><input type="text" readonly="" value="${storeRegister.address}" name="address"  class="form-input"/></td>
-                                        <td class="table__account table__cell"><input type="text" readonly="" value="${storeRegister.phone_number}" name="phoneNumber" class="form-input"/></td>
-                                        <td class="table__account table__cell"><input type="text" readonly="" value="${storeRegister.user_id}" name="userId" class="form-input"/></td>
-                                        <td><input type="submit" class="btn btn-dark" value="Đồng ý"  /></td>            
-                                        <td class="table__transfer table__cell u-text-center"><a class="btn btn-outline-danger" href="StoreServlet?action=deleteRegisterStoreForm&storeRegisterId=${storeRegister.store_register_id}">Từ chối</a></td>
-                                        </tr>
-                                    </form>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- BEGIN PAGA BACKDROPS-->
         <div class="sidenav-backdrop backdrop"></div>

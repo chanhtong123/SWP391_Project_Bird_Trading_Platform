@@ -187,9 +187,9 @@
                                 <div class="form-group" id="date_5">
                                     <label class="font-normal"></label>
                                     <div class="input-daterange input-group" id="datepicker">
-                                        <input class="input-sm form-control" type="text" id="start" name="start" value="07/13/2023">
+                                        <input class="input-sm form-control" type="text" id="start" name="start" value="07/28/2023">
                                         <span class="input-group-addon p-l-10 p-r-10">đến</span>
-                                        <input class="input-sm form-control" type="text" id="end" name="end" value="07/13/2023">
+                                        <input class="input-sm form-control" type="text" id="end" name="end" value="07/28/2023">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Tra Cứu</button>

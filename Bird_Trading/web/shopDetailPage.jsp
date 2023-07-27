@@ -10,7 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
     <head>
         <meta charset="utf-8">
@@ -387,7 +387,7 @@
                                             <div class="product-img position-relative overflow-hidden">
                                                 <img class="img-fluid w-100" src="<%= productList.getImage()%>" alt="" style="width: 150px; height: 250px">
                                                 <div class="product-action">
-                                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                                    <a class="btn btn-outline-dark btn-square" href="CartServlet?action=add&sttPt=<%=productList.getSttPT()%>&productName=<%=productList.getProductName()%>&price=<%=productList.getPrice()%>&quantity=1&imageUrl=<%=productList.getImage()%>""><i class="fa fa-shopping-cart"></i></a>
                                                     <!--                                        <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                                                                                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>-->
                                                     <a class="btn btn-outline-dark btn-square" href="ProductDetailServlet?productId=<%=productList.getProductId()%>"><i class="fa fa-search"></i></a>

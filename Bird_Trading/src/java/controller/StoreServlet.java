@@ -131,7 +131,7 @@ public class StoreServlet extends HttpServlet {
             storeDAO.updateUserRole(user);
             storeDAO.deleteStoreForm(storeRegisterId);
         } finally {
-            response.sendRedirect("UserServlet?action=list2");
+            response.sendRedirect("UserServlet?action=list");
         }
     }
     
