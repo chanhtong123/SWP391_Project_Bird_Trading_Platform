@@ -395,7 +395,6 @@
                                             </td>
                                             <td class="table__account table__cell">
                                                 <select id="role" name="role" required class="form-control">
-                                                    <option value="Admin" ${user.role == 'Admin' ? 'selected' : ''}>Admin</option>
                                                     <option value="Staff" ${user.role == 'Staff' ? 'selected' : ''}>Staff</option>
                                                     <option value="Store Manager" ${user.role == 'Store Manager' ? 'selected' : ''}>Store Manager</option>
                                                     <option value="User" ${user.role == 'User' ? 'selected' : ''}>User</option>

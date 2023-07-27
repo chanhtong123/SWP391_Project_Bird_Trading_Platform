@@ -138,7 +138,7 @@ public class UserDAO extends DBHelper {
         try {
             String query = "SELECT [user_id], [username], [fullname], [password], [email], [address], [phone_number], [role]\n"
                     + "FROM [User]\n"
-                    + "WHERE [role] <> 'Admin'AND [role] <> 'Staff'";
+                    + "WHERE [role] <> 'Admin' AND [role] <> 'Staff'";
             PreparedStatement stm = connection.prepareStatement(query);
             rs = stm.executeQuery();
             while (rs.next()) {

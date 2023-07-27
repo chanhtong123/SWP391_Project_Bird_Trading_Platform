@@ -323,80 +323,6 @@
         <!-- Navbar End -->
 
 
-        <!-- Carousel Start -->
-        <div class="container-fluid mb-3">
-            <div class="row px-xl-5">
-                <div class="col-lg-8">
-                    <div id="header-carousel" class="carousel slide carousel-fade mb-30 mb-lg-0" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#header-carousel" data-slide-to="1"></li>
-                            <li data-target="#header-carousel" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item position-relative active" style=" height: 430px;">
-                                <img class="position-absolute w-100 h-100" src="img/hinh-anh-chim-vet-43.jpg" style="object-fit: cover;">
-                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                    <div class="p-3" style="max-width: 700px;">
-                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Loài Chim</h1>
-                                        <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Nơi bán những chim cảnh đẹp, độc lạ và giá cả phù hợp nhất trên thị trường.</p>
-                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                                           href="ProductSearchServlet?action=searchByCategory&categoryName=Bird">Bird Shop</a>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item position-relative" style="height: 430px;">
-                                <img class="position-absolute w-100 h-100" src="img/hinh_nen_2.jpg" style="object-fit: cover;">
-                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                    <div class="p-3" style="max-width: 700px;">
-                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Thức ăn</h1>
-                                        <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Những thức ăn đến từ những nhà cung cấp uy tín, có độ dinh dưỡng cao cho các loài chim.</p>
-
-                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" 
-                                           href="ProductSearchServlet?action=searchByCategory&categoryName=Food">Bird Shop</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item position-relative" style="height: 430px;">
-                                <img class="position-absolute w-100 h-100" src="img/anh_nen_3.jpg" style="object-fit: cover;">
-                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                    <div class="p-3" style="max-width: 700px;">
-                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Lồng Chim</h1>
-                                        <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Nơi có những lồng chim đẹp đầy nghệ thuật trên cả thế giới, tạo nên vè đẹp sang trọng quý tộc.</p>
-
-                                        <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                                           href="ProductSearchServlet?action=searchByCategory&categoryName=Bird cage">Bird Shop</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="product-offer mb-30" style="height: 200px;">
-                        <img class="img-fluid" src="img/anh1.jpg" alt="">
-                        <div class="offer-text">
-                            <h6 class="text-white text-uppercase">Thức ăn cho chim</h6>
-                            <h3 class="text-white mb-3"></h3>
-                            <a  class="btn btn-primary"
-                                href="ProductSearchServlet?action=searchByCategory&categoryName=Food">Bird Shop</a>
-
-                        </div>
-                    </div>
-                    <div class="product-offer mb-30" style="height: 200px;">
-                        <img class="img-fluid" src="img/anh2.jpg" alt="">
-                        <div class="offer-text">
-                            <h6 class="text-white text-uppercase">Phụ kiện cho chim</h6>
-                            <h3 class="text-white mb-3"></h3>
-                            <a class="btn btn-primary" href="ProductSearchServlet?action=searchByCategory&categoryName=Accessory">Bird Shop</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Carousel End -->
-
         <!-- Shop Start -->
         <div class="container-fluid">
             <div class="row px-xl-5">
@@ -412,9 +338,9 @@
                             <div class="input-group">                           
                                 <form action="ProductSearchServlet" method="GET">
                                     <input type="hidden" name="action" value="searchByPriceRange">
-                                    <label for="minPrice">Min Price:</label>
+                                    <label for="minPrice">Tối thiểu:</label>
                                     <input  type="number" id="minPrice" name="minPrice" onkeydown="return event.key !== '-'" step="any">
-                                    <label for="maxPrice">Max Price:</label>
+                                    <label for="maxPrice">Tối đa:</label>
                                     <input  type="number" id="maxPrice" name="maxPrice" onkeydown="return event.key !== '-'" step="any">
 
                                     </br>    </br> <input type="submit" value="Áp dụng" <button type="submit" class="apply-button"></button>                        

@@ -249,15 +249,15 @@
                 <div class="col-lg-9">
                     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                         <a href="" class="text-decoration-none d-block d-lg-none">
-                            <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                            <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                            <span class="h1 text-uppercase text-dark bg-light px-2">Bird</span>
+                            <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Trading</span>
                         </a>
                         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="homePage.jsp" class="nav-item nav-link active">Home</a>
+                                <a href="homePage.jsp" class="nav-item nav-link active">Trang chủ</a>
                                 <a href="ProductSearchServlet?action=searchByCategory&categoryName=Bird" class="nav-item nav-link">Loài chim</a>
                                 <a href="ProductSearchServlet?action=searchByCategory&categoryName=Food" class="nav-item nav-link">Thức ăn cho chim</a>
                                 <a href="ProductSearchServlet?action=searchByCategory&categoryName=Bird cage" class="nav-item nav-link">Lồng chim</a>
@@ -296,7 +296,7 @@
                                                                 </a>-->
                                 <a href="CartServlet?action=view" class="btn px-0 ml-3">
                                     <i class="fas fa-shopping-cart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;"></span>
                                 </a>
                             </div>
                         </div>
@@ -416,9 +416,9 @@
                                         <nav>
                                             <ul class="pagination justify-content-center">
                                                 <% if (currentPage > 1) {%>
-                                                <li class="page-item"><a class="page-link" href="?page=<%= currentPage - 1%>">Previous</a></li>
+                                                <li class="page-item"><a class="page-link" href="?page=<%= currentPage - 1%>">Trang trước</a></li>
                                                     <% } else { %>
-                                                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                                                <li class="page-item disabled"><a class="page-link" href="#">Trang trước</a></li>
                                                     <% } %>
 
                                                 <% for (int i = 1; i <= totalPages; i++) { %>
@@ -430,9 +430,9 @@
                                                     <% } %>
 
                                                 <% if (currentPage < totalPages) {%>
-                                                <li class="page-item"><a class="page-link" href="?page=<%= currentPage + 1%>">Next</a></li>
+                                                <li class="page-item"><a class="page-link" href="?page=<%= currentPage + 1%>">Trang sau</a></li>
                                                     <% } else { %>
-                                                <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                                                <li class="page-item disabled"><a class="page-link" href="#">Trang sau</a></li>
                                                     <% } %>
                                             </ul>
                                         </nav>
