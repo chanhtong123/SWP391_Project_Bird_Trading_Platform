@@ -3,7 +3,7 @@
    [![Java](https://img.shields.io/badge/Language-Java-%23f34b7d.svg?style=plastic)](https://vi.wikipedia.org/wiki/Java_(programming_language))
    # Bird Trading Platform
 
-![Bird Trading Platform Logo](Logo.png)
+![Bird Trading Platform Logo](https://github.com/chanhtong123/SWP391_Project_Bird_Trading_Platform/assets/42312195/a8be39a2-5b00-41a3-9ba6-6d7d7390ca6c)
 
 Welcome to the Bird Trading Platform! Our unique online trading platform focuses on buying and selling pet birds, food, accessories, and related products. We aim to connect customers, stores, and administrators to provide a convenient, safe, and reliable shopping experience for all bird enthusiasts.
 
