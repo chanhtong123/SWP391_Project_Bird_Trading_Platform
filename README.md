@@ -7,7 +7,7 @@
 
 
 
-   # Bird Trading Platform (h1)
+   # Bird Trading Platform
 
 ![Bird Trading Platform Logo](https://github.com/chanhtong123/SWP391_Project_Bird_Trading_Platform/assets/42312195/a8be39a2-5b00-41a3-9ba6-6d7d7390ca6c)
 
@@ -28,7 +28,7 @@
 
 
 
-## Setting (h3)
+## Setting
 
 1. Clone the Repository
 
