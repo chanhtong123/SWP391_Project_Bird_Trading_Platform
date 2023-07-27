@@ -1,11 +1,13 @@
 <div align="center">
+   <div style="display: flex;">
+  <img src="https://github.com/chanhtong123/SWP391_Project_Bird_Trading_Platform/assets/42312195/1b98d2a2-cd25-4b61-af52-cbf9a9de165d" alt="CSS" width="300" />
+  <img src="https://github.com/chanhtong123/SWP391_Project_Bird_Trading_Platform/assets/42312195/ca261555-c2fe-4823-9580-eace07d920e8" alt="HTML" width="300" />
+     <img src="https://github.com/chanhtong123/SWP391_Project_Bird_Trading_Platform/assets/42312195/c250a6f4-576a-4585-b282-44f6255ff2d6" alt="JAVA" width="300" />
+      <img src="https://github.com/chanhtong123/SWP391_Project_Bird_Trading_Platform/assets/42312195/112563b2-ce21-4ca3-83e7-717ff721b4e5" alt="TOMCAT" width="300" />
+      <img src="https://github.com/chanhtong123/SWP391_Project_Bird_Trading_Platform/assets/42312195/ece30380-d9c8-435a-b3af-62f826a5350b" alt="MICROSOFT SQL SERVER" width="300" />
+   </div>
 
-   ![css](https://github.com/chanhtong123/SWP391_Project_Bird_Trading_Platform/assets/42312195/1b98d2a2-cd25-4b61-af52-cbf9a9de165d)
-   ![html](https://github.com/chanhtong123/SWP391_Project_Bird_Trading_Platform/assets/42312195/ca261555-c2fe-4823-9580-eace07d920e8)
-   ![java](https://github.com/chanhtong123/SWP391_Project_Bird_Trading_Platform/assets/42312195/c250a6f4-576a-4585-b282-44f6255ff2d6)
-   ![tomcat](https://github.com/chanhtong123/SWP391_Project_Bird_Trading_Platform/assets/42312195/112563b2-ce21-4ca3-83e7-717ff721b4e5)
-   ![sql](https://github.com/chanhtong123/SWP391_Project_Bird_Trading_Platform/assets/42312195/ece30380-d9c8-435a-b3af-62f826a5350b)
-   # Bird Trading Platform(h1)
+   # Bird Trading Platform (h1)
 
 ![Bird Trading Platform Logo](https://github.com/chanhtong123/SWP391_Project_Bird_Trading_Platform/assets/42312195/a8be39a2-5b00-41a3-9ba6-6d7d7390ca6c)
 
