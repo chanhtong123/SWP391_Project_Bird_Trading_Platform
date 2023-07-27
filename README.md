@@ -1,6 +1,8 @@
-GET /badge/:badgeContent
+![Static Badge](https://img.shields.io/badge/Database-Microsoft%20SQL%20Server-blue)
+![Static Badge](https://img.shields.io/badge/Language-Java-red)
+![Static Badge](https://img.shields.io/badge/Framework-Tomcat-green)
+![Static Badge](https://img.shields.io/badge/Language-HTML%2FCSS-orange)
 
-![Static Badge](https://img.shields.io/badge/!%5BDatabase%5D(https%3A%2F%2Fimg.shields.io%2Fbadge%2FDatabase-Microsoft%2520SQL%2520Server-blue))
 
 
 
