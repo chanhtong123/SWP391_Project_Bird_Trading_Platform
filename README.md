@@ -1,9 +1,9 @@
-<div>
+
 ![Static Badge](https://img.shields.io/badge/Database-Microsoft%20SQL%20Server-blue)
 ![Static Badge](https://img.shields.io/badge/Language-Java-red)
 ![Static Badge](https://img.shields.io/badge/Framework-Tomcat-green)
 ![Static Badge](https://img.shields.io/badge/Language-HTML%2FCSS-orange)
-
+<div>
 
 
 
