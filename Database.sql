@@ -592,6 +592,100 @@ VALUES (N'Yen Bai', 40.000);
 
 
 
+INSERT INTO Delivery (delivery_id, province_id, user_id, total_amount, shipping_cost, address, province_name, receiver_name, phone_number)
+VALUES (1, 1, 2, 2790.000, 22.000, '81a Dinh Phong Phu', 'TP HCM', 'Dao Xuan Binh', '0962842531');
+INSERT INTO Delivery (delivery_id, province_id, user_id, total_amount, shipping_cost, address, province_name, receiver_name, phone_number)
+VALUES (2, 20, 3, 5690.000, 27.000, '279 Quoc lo 61 Phu Khoi Thanh Hoa Phung Hiep', 'Dong Nai', 'Nguyen Duc Anh', '0836220498');
+
+
+INSERT INTO [Bird_Trading].[dbo].[Order] ([order_id], [user_id], [total_amount], [order_status], [order_date])
+VALUES (1, 2, 2790.000, 'Pending', '2023-07-28 02:20:06.220');
+INSERT INTO [Bird_Trading].[dbo].[Order] ([order_id], [user_id], [total_amount], [order_status], [order_date])
+VALUES (2, 3, 5690.000, 'Pending', '2023-07-28 02:23:26.157');
+
+
+INSERT INTO [Bird_Trading].[dbo].[StoreRegister] (store_register_id, store_name, address, phone_number, user_id)
+VALUES (1, 'Thanh Tong', '367/9 Khu pho Lap Thanh, Thong Nhat, Dong Nai', '0828408053', 3);
+
+INSERT INTO [Bird_Trading].[dbo].[Feedback] ([feedback_id], [order_item_id], [user_id], [rating], [comment], [timestamp])
+VALUES 
+    (1, 1, 2, 5, 'good', '2023-07-28 02:31:48.713'),
+    (2, 15, 3, 5, 'Vet rat thong minh', '2023-07-28 02:32:09.177');
+
+
+
+
+-- Row 1
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (1, 1, 1, 1, 1, 500000, 'Vẹt xám Châu Phi', 'images/African_Grey-768x576.jpg', 'Bird', '2023-07-28 02:20:06.287', 'Complete');
+
+-- Row 2
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (2, 1, 2, 1, 1, 400000, 'Vẹt Sun Conure', 'images/sun-conure-2.jpg', 'Bird', '2023-07-28 02:20:06.290', 'Delivery in progress');
+
+-- Row 3
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (3, 1, 3, 1, 1, 350000, 'Vẹt Yến Phụng', 'images/sun-conure-3.jpg', 'Bird', '2023-07-28 02:20:06.293', 'Delivery in progress');
+
+-- Row 4
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (4, 1, 4, 1, 1, 450000, 'Vẹt Mào', 'images/vet-mao-1.jpg', 'Bird', '2023-07-28 02:20:06.293', 'Order confirmation');
+
+-- Row 5
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (5, 1, 8, 2, 1, 600000, 'Chim Sơn Ca', 'images/chim-son-ca.jpg', 'Bird', '2023-07-28 02:20:06.297', 'Order confirmation');
+
+-- Row 6
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (6, 1, 7, 1, 1, 300000, 'Vẹt Lùn', 'images/vet-lun-1.jpg', 'Bird', '2023-07-28 02:20:06.297', 'Order confirmation');
+
+-- Row 7
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (7, 1, 15, 2, 1, 70000, 'Chim Khuyên', 'images/chim-khuyen-1.jpg', 'Bird', '2023-07-28 02:20:06.297', 'Order confirmation');
+
+-- Row 8
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (8, 1, 14, 2, 1, 120000, 'Chim Khướu', 'images/chim-khuou-1.jpg', 'Bird', '2023-07-28 02:20:06.297', 'Order confirmation');
+
+-- Row 9
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (9, 2, 25, 3, 1, 780000, 'Thức ăn cho chim hoang dã Kaytee Hỗn hợp hạt giống cơ bản', 'images/cam2.jpg', 'Food', '2023-07-28 02:23:26.197', 'Order confirmation');
+
+-- Row 10
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (10, 2, 26, 3, 1, 780000, 'Thức ăn cho chim Sẻ và Hoàng Yến ZuPreem FruitBlend with Natural Fruit Flavors Extra Small Bird', 'images/cam3.jpg', 'Food', '2023-07-28 02:23:26.200', 'Order confirmation');
+
+-- Row 11
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (11, 2, 27, 3, 1, 780000, 'Zupreem Pure Fun Size S Thức Ăn Cho Chim Vẹt Cỡ Vừa', 'images/cam4.jpg', 'Food', '2023-07-28 02:23:26.200', 'Order confirmation');
+
+-- Row 12
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (12, 2, 17, 3, 1, 570000, 'Lồng Chào Mào Vuông Cao, Tre già. Báng Súng 23 Nan.', 'images/2094567168.jpg', 'Bird cage', '2023-07-28 02:23:26.203', 'Order confirmation');
+
+-- Row 13
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (13, 2, 21, 3, 1, 780000, 'Bộ 7 món đồ chơi bằng gỗ', 'images/download.jpg', 'Accessory', '2023-07-28 02:23:26.203', 'Order confirmation');
+
+-- Row 14
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (14, 2, 7, 1, 1, 300000, 'Vẹt Lùn', 'images/vet-lun-1.jpg', 'Bird', '2023-07-28 02:23:26.203', 'Order confirmation');
+
+-- Row 15
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (15, 2, 1, 1, 1, 500000, 'Vẹt xám Châu Phi', 'images/African_Grey-768x576.jpg', 'Bird', '2023-07-28 02:23:26.203', 'Complete');
+
+-- Row 16
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (16, 2, 2, 1, 1, 400000, 'Vẹt Sun Conure', 'images/sun-conure-2.jpg', 'Bird', '2023-07-28 02:23:26.203', 'Order confirmation');
+
+-- Row 17
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (17, 2, 3, 1, 1, 350000, 'Vẹt Yến Phụng', 'images/sun-conure-3.jpg', 'Bird', '2023-07-28 02:23:26.207', 'Order confirmation');
+
+-- Row 18
+INSERT INTO [Bird_Trading].[dbo].[OrderItem] ([order_item_id], [order_id], [STT_PT], [store_id], [quantity], [price], [product_name], [image_url], [categoryName], [orderItem_date], [status_orderItem])
+VALUES (18, 2, 4, 1, 1, 450000, 'Vẹt Mào', 'images/vet-mao-1.jpg', 'Bird', '2023-07-28 02:23:26.207', 'Order confirmation');
 
 
 
