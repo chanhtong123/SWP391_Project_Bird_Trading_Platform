@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
     <head>
         <meta charset="utf-8">
@@ -18,7 +18,7 @@
 
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
-    <a href="cart.jsp"></a>
+
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
@@ -268,8 +268,8 @@
                                                                 </div>
                                                                 <a href="contact.html" class="nav-item nav-link">Contact</a>-->
                             </div>
-                            
-                              <!--search store-->
+
+                            <!--search store-->
                             <div class="col-lg-4 col-6 text-left">
                                 <form action="ShopSearchServlet" method="GET">
                                     <div class="input-group">
@@ -284,8 +284,8 @@
                                 </form>
                             </div>
                             <!--search end-->
-                            
-                            
+
+
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                                 <!--                                <a href="" class="btn px-0">
                                                                     <i class="fas fa-heart text-primary"></i>
@@ -308,7 +308,7 @@
         <div class="container-fluid">
             <div class="row px-xl-5">
                 <div class="col-12">
-                   
+
                 </div>
             </div>
         </div>
@@ -318,104 +318,105 @@
         <!-- Cart Start -->
         <div class="container-fluid">
             <div class="row px-xl-5">
-                <div class="col-lg-8 table-responsive mb-5">
-                    <table id="cartTable" class="table table-light table-borderless table-hover text-center mb-0">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Cửa Hàng</th>
-                                <th>Sản phẩm</th>
-                                <th>Giá</th>
-                                <th>Số lượng</th>
-                                <th>Tổng tiền</th>
-                                <th>Xóa giỏ hàng</th>
-                            </tr>
-                        </thead>
-                        <tbody class="align-middle">
-                            <%-- Lặp qua từng mục trong giỏ hàng --%>
-                            <c:forEach var="cartItem" items="${CART}">
+                <c:if test="${empty CART}">
+                    <h3>Giỏ hàng trống</h3>
+                </c:if>
+                <c:if test="${not empty CART}">
+                    <div class="col-lg-8 table-responsive mb-5">
+                        <table id="cartTable" class="table table-light table-borderless table-hover text-center mb-0">
+                            <thead class="thead-dark">
                                 <tr>
-                                    <td class="align-middle" style="text-align: middle;">${cartItem.storename}</td>
-                                    <td class="align-middle">
-    
-                                           <img src="${cartItem.imageUrl}" alt="" style="width: 50px; height: 50px;">
-                                 
-                                    </td>
-                                    <td class="align-middle" style="text-align: middle;">${cartItem.productName}</td>
-                                    <td class="align-middle">₫${cartItem.price}</td>
-                                    <td class="align-middle">
-                                        <div class="input-group quantity mx-auto" style="width: 100px;">
-                                            <div class="input-group-btn" >
-                                                <!--                                                <form action="CartServlet" method="get">
-                                                                                                    <input type="hidden" name="action" value="update">
-                                                                                                    <input type="hidden" name="cartItemId" value="${cartItem.cartItemId}">
-                                                                                                    <input type="hidden" name="quantity" value="${cartItem.quantity - 1}">
-                                                -->                                                    <button type="submit" class="btn btn-sm btn-primary btn-minus" onclick="location.href = 'CartServlet?action=update&sttPT=${cartItem.sttPT}&cartItemId=${cartItem.cartItemId}&quantity=${cartItem.quantity - 1}'">
-                                                    <i class="fa fa-minus" ></i>
-                                                </button><!--
-                                            </form>-->
-                                            </div>
-                                            <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center cart-quantity-input" data-cartItemId="${cartItem.cartItemId}" value="${cartItem.quantity}">
-                                            <div class="input-group-btn">
-                                                <!--                                                <form action="CartServlet" method="get">
-                                                                                                    <input type="hidden" name="action" value="update">
-                                                                                                    <input type="hidden" name="cartItemId" value="${cartItem.cartItemId}">
-                                                                                                    <input type="hidden" name="quantity" value="${cartItem.quantity + 1}">
-                                                -->                                                    <button type="submit" class="btn btn-sm btn-primary btn-plus" onclick="location.href = 'CartServlet?action=update&sttPT=${cartItem.sttPT}&cartItemId=${cartItem.cartItemId}&quantity=${cartItem.quantity + 1}'">
-                                                    <i class="fa fa-plus"></i>
-                                                </button><!--
-                                                 
-                                            </form>-->
-                                            </div>
-                                        </div>
-                                    </td>
+                                    <th>Cửa Hàng</th>
+                                    <th></th>
+                                    <th>Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Xóa giỏ hàng</th>
 
-                                    <td class="align-middle">₫${cartItem.price * cartItem.quantity}</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-danger btn-remove" onclick="location.href = 'CartServlet?action=remove&cartItemId=${cartItem.cartItemId}'">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td>
                                 </tr>
-                            </c:forEach>
+                            </thead>
+                            <tbody class="align-middle">
+                                <%-- Lặp qua từng mục trong giỏ hàng --%>
+                                <c:forEach var="cartItem" items="${CART}">
+                                    <tr>
+                                        <td class="align-middle" style="text-align: middle;">${cartItem.storename}</td>
+                                        <td class="align-middle">
 
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-lg-4">
-<!--                                        <form class="mb-30" action="">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-primary">Apply Coupon</button>
+                                            <img src="${cartItem.imageUrl}" alt="" style="width: 50px; height: 50px;">
+
+                                        </td>
+                                        <td class="align-middle" style="text-align: middle;">${cartItem.productName}</td>
+                                        <td class="align-middle">₫${cartItem.price}</td>
+                                        <td class="align-middle">
+                                            <div class="input-group quantity mx-auto" style="width: 100px;">
+                                                <div class="input-group-btn" >
+                                                    <!--                                                <form action="CartServlet" method="get">
+                                                                                                        <input type="hidden" name="action" value="update">
+                                                                                                        <input type="hidden" name="cartItemId" value="${cartItem.cartItemId}">
+                                                                                                        <input type="hidden" name="quantity" value="${cartItem.quantity - 1}">
+                                                    -->                                                    <button type="submit" class="btn btn-sm btn-primary btn-minus" onclick="location.href = 'CartServlet?action=update&sttPT=${cartItem.sttPT}&cartItemId=${cartItem.cartItemId}&quantity=${cartItem.quantity - 1}'">
+                                                        <i class="fa fa-minus" ></i>
+                                                    </button><!--
+                                                </form>-->
+                                                </div>
+                                                <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center cart-quantity-input" data-cartItemId="${cartItem.cartItemId}" value="${cartItem.quantity}">
+                                                <div class="input-group-btn">
+                                                    <!--                                                <form action="CartServlet" method="get">
+                                                                                                        <input type="hidden" name="action" value="update">
+                                                                                                        <input type="hidden" name="cartItemId" value="${cartItem.cartItemId}">
+                                                                                                        <input type="hidden" name="quantity" value="${cartItem.quantity + 1}">
+                                                    -->                                                    <button type="submit" class="btn btn-sm btn-primary btn-plus" onclick="location.href = 'CartServlet?action=update&sttPT=${cartItem.sttPT}&cartItemId=${cartItem.cartItemId}&quantity=${cartItem.quantity + 1}'">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button><!--
+                                                     
+                                                </form>-->
                                                 </div>
                                             </div>
-                                        </form>-->
-                                        <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3"></span></h5>
-                                        <div class="bg-light p-30 mb-5">
-                                            <div class="border-bottom pb-2">
-<!--                                                <div class="d-flex justify-content-between mb-3">
-                                                    <h6>Subtotal</h6>
-                                                    <h6>${sessionScope.total * 1000} VND</h6>
-                                                </div>-->
-                                            </div>
-                                            <div class="pt-2">
-                                                <div class="d-flex justify-content-between mt-2">
-                                                    <h5>Tổng tiền</h5>
-                                                    <h5>${sessionScope.total * 1000} VND</h5>
-                                                </div>
-                    <form action="CheckoutServlet" method="post">
-                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" type="submit">Xác nhận</button>
-                    </form>
-                    <!--                        </div>
-                                        </div>-->
-                </div>
+                                        </td>
+
+                                        <td class="align-middle">₫${cartItem.price * cartItem.quantity}</td>
+                                        <td class="align-middle">
+                                            <button class="btn btn-sm btn-danger btn-remove" onclick="location.href = 'CartServlet?action=remove&cartItemId=${cartItem.cartItemId}'">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="bg-light p-30 mb-5">
+                            <div class="border-bottom pb-2">
+                                <!--                                                <div class="d-flex justify-content-between mb-3">
+                                                                                    <h6>Subtotal</h6>
+                                                                                    <h6>${sessionScope.total * 1000} VND</h6>
+                                                                                </div>-->
+                            </div>
+                            <div class="pt-2">
+                                <div class="d-flex justify-content-between mt-2">
+                                    <h5>Tổng tiền</h5>
+                                    <h5>${sessionScope.total * 1000} VND</h5>
+                                </div>
+                                <form action="CheckoutServlet" method="post">
+                                    <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" type="submit">Xác nhận</button>
+                                </form>
+                                <!--                        </div>
+                                                    </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
             </div>
         </div>
         <!-- Cart End -->
 
 
         <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
+        <div class="container-fluid bg-dark text-secondary mt-5 pt-5 fixed-bottom">
             <div class="row px-xl-5 pt-5">
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                     <h5 class="text-secondary text-uppercase mb-4">Thông tin liên lạc</h5>
@@ -478,111 +479,111 @@
 
 
         <script>
-                                            document.addEventListener("DOMContentLoaded", function () {
-                                                // Xử lý sự kiện khi người dùng nhấn nút tăng/giảm số lượng
-                                                var quantityInputs = document.getElementsByClassName("cart-quantity-input");
-                                                var minusButtons = document.getElementsByClassName("btn-minus");
-                                                var plusButtons = document.getElementsByClassName("btn-plus");
-                                                var removeButtons = document.getElementsByClassName("btn-remove");
-                                                var totalPrice = "${totalPrice}";
-                                                document.getElementById("totalPrice").textContent = totalPrice;
+                                                document.addEventListener("DOMContentLoaded", function () {
+                                                    // Xử lý sự kiện khi người dùng nhấn nút tăng/giảm số lượng
+                                                    var quantityInputs = document.getElementsByClassName("cart-quantity-input");
+                                                    var minusButtons = document.getElementsByClassName("btn-minus");
+                                                    var plusButtons = document.getElementsByClassName("btn-plus");
+                                                    var removeButtons = document.getElementsByClassName("btn-remove");
+                                                    var totalPrice = "${totalPrice}";
+                                                    document.getElementById("totalPrice").textContent = totalPrice;
 
-                                                for (var i = 0; i < quantityInputs.length; i++) {
-                                                    minusButtons[i].addEventListener("click", function (event) {
-                                                        updateCartItemQuantity(event.target.getAttribute("data-cartItemId"), -1);
-                                                    });
+                                                    for (var i = 0; i < quantityInputs.length; i++) {
+                                                        minusButtons[i].addEventListener("click", function (event) {
+                                                            updateCartItemQuantity(event.target.getAttribute("data-cartItemId"), -1);
+                                                        });
 
-                                                    plusButtons[i].addEventListener("click", function (event) {
-                                                        updateCartItemQuantity(event.target.getAttribute("data-cartItemId"), 1);
-                                                    });
-                                                }
+                                                        plusButtons[i].addEventListener("click", function (event) {
+                                                            updateCartItemQuantity(event.target.getAttribute("data-cartItemId"), 1);
+                                                        });
+                                                    }
 
-                                                // Xử lý sự kiện khi người dùng nhấn nút xóa
-                                                for (var i = 0; i < removeButtons.length; i++) {
-                                                    removeButtons[i].addEventListener("click", function (event) {
-                                                        var cartItemId = event.target.getAttribute("data-cartItemId");
-                                                        removeCartItem(cartItemId);
-                                                    });
-                                                }
+                                                    // Xử lý sự kiện khi người dùng nhấn nút xóa
+                                                    for (var i = 0; i < removeButtons.length; i++) {
+                                                        removeButtons[i].addEventListener("click", function (event) {
+                                                            var cartItemId = event.target.getAttribute("data-cartItemId");
+                                                            removeCartItem(cartItemId);
+                                                        });
+                                                    }
 
-                                                // Hàm cập nhật số lượng sản phẩm trong giỏ hàng
-                                                function updateCartItemQuantity(cartItemId, change) {
-                                                    var inputElement = document.querySelector('[data-cartItemId="' + cartItemId + '"]');
-                                                    var quantity = parseInt(inputElement.value) + change;
+                                                    // Hàm cập nhật số lượng sản phẩm trong giỏ hàng
+                                                    function updateCartItemQuantity(cartItemId, change) {
+                                                        var inputElement = document.querySelector('[data-cartItemId="' + cartItemId + '"]');
+                                                        var quantity = parseInt(inputElement.value) + change;
 
-                                                    // Gọi API hoặc Ajax để cập nhật số lượng sản phẩm trong cơ sở dữ liệu
-                                                    // Ví dụ:
-                                                    // fetch("/updateCartItemQuantity?cartItemId=" + cartItemId + "&quantity=" + quantity, {
-                                                    //     method: "POST"
-                                                    // }).then(function(response) {
-                                                    //     if (response.ok) {
-                                                    //         // Cập nhật số lượng thành công
-                                                    //         inputElement.value = quantity;
-                                                    //         // Cập nhật tổng giá trị
-                                                    //         updateTotalPrice(cartItemId, quantity);
-                                                    //     } else {
-                                                    //         // Cập nhật số lượng thất bại
-                                                    //         console.error("Failed to update cart item quantity");
-                                                    //     }
-                                                    // }).catch(function(error) {
-                                                    //     console.error(error);
-                                                    // });
+                                                        // Gọi API hoặc Ajax để cập nhật số lượng sản phẩm trong cơ sở dữ liệu
+                                                        // Ví dụ:
+                                                        // fetch("/updateCartItemQuantity?cartItemId=" + cartItemId + "&quantity=" + quantity, {
+                                                        //     method: "POST"
+                                                        // }).then(function(response) {
+                                                        //     if (response.ok) {
+                                                        //         // Cập nhật số lượng thành công
+                                                        //         inputElement.value = quantity;
+                                                        //         // Cập nhật tổng giá trị
+                                                        //         updateTotalPrice(cartItemId, quantity);
+                                                        //     } else {
+                                                        //         // Cập nhật số lượng thất bại
+                                                        //         console.error("Failed to update cart item quantity");
+                                                        //     }
+                                                        // }).catch(function(error) {
+                                                        //     console.error(error);
+                                                        // });
 
-                                                    // Tạm thời cập nhật số lượng và tổng giá trị một cách trực tiếp trong trình duyệt
-                                                    inputElement.value = quantity;
-                                                    updateTotalPrice(cartItemId, quantity);
-                                                }
+                                                        // Tạm thời cập nhật số lượng và tổng giá trị một cách trực tiếp trong trình duyệt
+                                                        inputElement.value = quantity;
+                                                        updateTotalPrice(cartItemId, quantity);
+                                                    }
 
-                                                // Hàm cập nhật tổng giá trị của mục trong giỏ hàng
-                                                function updateTotalPrice(cartItemId, quantity) {
-                                                    var priceElement = document.querySelector('td[data-cartItemId="' + cartItemId + '"] + td');
-                                                    var price = parseFloat(priceElement.innerHTML.substr(1));
-                                                    var totalPrice = price * quantity;
-                                                    priceElement.innerHTML = "$" + totalPrice.toFixed(2);
-                                                }
+                                                    // Hàm cập nhật tổng giá trị của mục trong giỏ hàng
+                                                    function updateTotalPrice(cartItemId, quantity) {
+                                                        var priceElement = document.querySelector('td[data-cartItemId="' + cartItemId + '"] + td');
+                                                        var price = parseFloat(priceElement.innerHTML.substr(1));
+                                                        var totalPrice = price * quantity;
+                                                        priceElement.innerHTML = "$" + totalPrice.toFixed(2);
+                                                    }
 
-                                                // Hàm xóa mục khỏi giỏ hàng
-                                                function removeCartItem(cartItemId) {
-                                                    // Gọi API hoặc Ajax để xóa mục khỏi cơ sở dữ liệu
-                                                    // Ví dụ:
-                                                    // fetch("/removeCartItem?cartItemId=" + cartItemId, {
-                                                    //     method: "POST"
-                                                    // }).then(function(response) {
-                                                    //     if (response.ok) {
-                                                    //         // Xóa thành công
-                                                    //         var rowElement = document.querySelector('tr[data-cartItemId="' + cartItemId + '"]');
-                                                    //         rowElement.remove();
-                                                    //     } else {
-                                                    //         // Xóa thất bại
-                                                    //         console.error("Failed to remove cart item");
-                                                    //     }
-                                                    // }).catch(function(error) {
-                                                    //     console.error(error);
-                                                    // });
+                                                    // Hàm xóa mục khỏi giỏ hàng
+                                                    function removeCartItem(cartItemId) {
+                                                        // Gọi API hoặc Ajax để xóa mục khỏi cơ sở dữ liệu
+                                                        // Ví dụ:
+                                                        // fetch("/removeCartItem?cartItemId=" + cartItemId, {
+                                                        //     method: "POST"
+                                                        // }).then(function(response) {
+                                                        //     if (response.ok) {
+                                                        //         // Xóa thành công
+                                                        //         var rowElement = document.querySelector('tr[data-cartItemId="' + cartItemId + '"]');
+                                                        //         rowElement.remove();
+                                                        //     } else {
+                                                        //         // Xóa thất bại
+                                                        //         console.error("Failed to remove cart item");
+                                                        //     }
+                                                        // }).catch(function(error) {
+                                                        //     console.error(error);
+                                                        // });
 
-                                                    // Tạm thời xóa mục khỏi giỏ hàng trực tiếp trong trình duyệt
-                                                    var rowElement = document.querySelector('tr[data-cartItemId="' + cartItemId + '"]');
-                                                    rowElement.remove();
-                                                }
-                                            });
+                                                        // Tạm thời xóa mục khỏi giỏ hàng trực tiếp trong trình duyệt
+                                                        var rowElement = document.querySelector('tr[data-cartItemId="' + cartItemId + '"]');
+                                                        rowElement.remove();
+                                                    }
+                                                });
         </script>
-        
+
         <script>
-    $(document).ready(function () {
-        var rows = $('#cartTable tbody tr');
+            $(document).ready(function () {
+                var rows = $('#cartTable tbody tr');
 
-        // Sắp xếp các dòng trong bảng theo store name
-        rows.sort(function (a, b) {
-            var storeNameA = $(a).find('td:eq(0)').text().trim();
-            var storeNameB = $(b).find('td:eq(0)').text().trim();
+                // Sắp xếp các dòng trong bảng theo store name
+                rows.sort(function (a, b) {
+                    var storeNameA = $(a).find('td:eq(0)').text().trim();
+                    var storeNameB = $(b).find('td:eq(0)').text().trim();
 
-            return storeNameA.localeCompare(storeNameB);
-        });
+                    return storeNameA.localeCompare(storeNameB);
+                });
 
-        // Thêm các dòng đã sắp xếp vào tbody
-        $('#cartTable tbody').empty().append(rows);
-    });
-</script>
+                // Thêm các dòng đã sắp xếp vào tbody
+                $('#cartTable tbody').empty().append(rows);
+            });
+        </script>
 
 
     </body>

@@ -33,7 +33,7 @@ public class DeliveryServlet extends HttpServlet {
 
         CartDAO cartDAO = new CartDAO();
         ArrayList<CartDTO> cartItems = cartDAO.getCartItemsByUserId(userId);
-        session.setAttribute("CART", cartItems);
+        session.setAttribute("OLD_CART", cartItems);
 
         BigDecimal totalAmount = BigDecimal.ZERO;
         for (CartDTO cartItem : cartItems) {

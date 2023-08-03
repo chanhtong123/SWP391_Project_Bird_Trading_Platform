@@ -92,7 +92,7 @@ public class CheckoutServlet extends HttpServlet {
 
         // Xóa giỏ hàng sau khi tạo đơn hàng thành công
         session.removeAttribute("CART");
-
+        session.setAttribute("OLD_CART", cartItems);
         // Chuyển hướng đến trang hoàn thành đơn hàng
         response.sendRedirect("checkOut.jsp");
     }
