@@ -349,7 +349,11 @@ CREATE TABLE [Order] (
   total_amount DECIMAL(10, 3),
   order_status VARCHAR(20), 
   order_date DATETIME,
-  FOREIGN KEY (user_id) REFERENCES [User](user_id),
+  address NVARCHAR(400) ,
+  user_name NVARCHAR(100) ,
+  phone_number NVARCHAR(20),
+  province_name NVARCHAR(100),
+  FOREIGN KEY (user_id) REFERENCES [User](user_id)
 );
 
 
@@ -386,7 +390,7 @@ CREATE TABLE Delivery (
   user_id INT NOT NULL,
   total_amount DECIMAL(10, 3) NOT NULL,
   shipping_cost DECIMAL(10, 3) NOT NULL,
-  address NVARCHAR(100) NOT NULL,
+  address NVARCHAR(400) NOT NULL,
   province_name NVARCHAR(100) NOT NULL,
   receiver_name NVARCHAR(100) NOT NULL,
   phone_number NVARCHAR(20) NOT NULL,

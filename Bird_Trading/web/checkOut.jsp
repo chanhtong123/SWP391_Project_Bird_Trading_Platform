@@ -466,124 +466,136 @@
                 <div class="col-lg-4">
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3"></span></h5>
                     <div class="bg-light p-30 mb-5">
-                        <div class="border-bottom">
-
-                        </div>
-
-
-                        <c:if test="${message eq 'Delivery created successfully.'}">
-                            <div class="border-bottom pt-3 pb-2">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <h6>Tên Người Nhận</h6>
-                                    <h6>${delivery.receiverName}</h6>
-                                </div>
-
-                                <div class="d-flex justify-content-between mb-3">
-                                    <h6>Số Điện Thoại</h6>
-                                    <h6>${delivery.phoneNumber}</h6>
-                                </div>
-
-                                <div class="d-flex justify-content-between mb-3">
-                                    <h6>Địa Chỉ</h6>
-                                    <h6>${delivery.address} (${delivery.provinceName})</h6>
-
-                                </div>
-
-                                <div class="d-flex justify-content-between mb-3">
-                                    <h6>Tổng tiền hàng</h6>
-                                    <h6>₫${delivery.totalAmount}</h6>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="font-weight-medium">Phí vận chuyển</h6>
-                                    <h6 class="font-weight-medium">₫${delivery.shippingCost}</h6>
-                                </div>
-
+                        
+                        
+                        <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3"></span></h5>
+                        <div class="bg-light p-30 mb-5">
+                            <div class="border-bottom pb-2">
+                                <!--                                                <div class="d-flex justify-content-between mb-3">
+                                                                                    <h6>Subtotal</h6>
+                                                                                    <h6>${sessionScope.total * 1000} VND</h6>
+                                                                                </div>-->
                             </div>
                             <div class="pt-2">
                                 <div class="d-flex justify-content-between mt-2">
-                                    <h5>Tổng thanh toán:</h5>
-                                    <h5 style="color: red">₫${delivery.totalAmount + delivery.shippingCost}</h5>
+                                    <h5>Tổng tiền hàng</h5>
+                                    <h5>${sessionScope.total * 1000} VND</h5>
                                 </div>
 
-                            </div>
-                        </c:if>
-                    </div>
-                    <div class="mb-5">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Checkout End -->
 
+                                <c:if test="${message eq 'Delivery created successfully.'}">
+                                    <div class="border-bottom pt-3 pb-2">
+                                        <div class="d-flex justify-content-between mb-3">
+                                            <h6>Tên Người Nhận</h6>
+                                            <h6>${delivery.receiverName}</h6>
+                                        </div>
 
-        <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
-            <div class="row px-xl-5 pt-5">
-                <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-                    <h5 class="text-secondary text-uppercase mb-4">Thông tin liên lạc</h5>
-                    <p class="mb-4">Chuyên cung cấp các loại chim</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Tp.Hồ Chí Minh</p>
-                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>binhdxse160***@fpt.edu.vn</p>
-                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84999999999</p>
-                </div>
-                <div class="col-lg-8 col-md-12">
-                    <div class="row">
-                        <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">Bird Shop</h5>
-                            <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="homePage.jsp"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Kênh bán hàng</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Của hàng</a>                               
-                                <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Liên lạc với chúng tôi</a>
+                                        <div class="d-flex justify-content-between mb-3">
+                                            <h6>Số Điện Thoại</h6>
+                                            <h6>${delivery.phoneNumber}</h6>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between mb-3">
+                                            <h6>Địa Chỉ</h6>
+                                            <h6>${delivery.address} (${delivery.provinceName})</h6>
+
+                                        </div>
+
+                                        <div class="d-flex justify-content-between mb-3">
+                                            <h6>Tổng tiền hàng</h6>
+                                            <h6>₫${delivery.totalAmount}</h6>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <h6 class="font-weight-medium">Phí vận chuyển</h6>
+                                            <h6 class="font-weight-medium">₫${delivery.shippingCost}</h6>
+                                        </div>
+
+                                    </div>
+                                    <div class="pt-2">
+                                        <div class="d-flex justify-content-between mt-2">
+                                            <h5>Tổng thanh toán:</h5>
+                                            <h5 style="color: red">₫${delivery.totalAmount + delivery.shippingCost}</h5>
+                                        </div>
+
+                                    </div>
+                                </c:if>
                             </div>
-                        </div>
-                        <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">Tài khoản của tôi</h5>
-                            <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Hồ sơ</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Giỏ hàng</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Đơn hàng</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-5">
-                            <h6 class="text-secondary text-uppercase mt-4 mb-3">Theo dõi chúng tôi</h6>
-                            <div class="d-flex">
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
+                            <div class="mb-5">
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- Footer End -->
+                <!-- Checkout End -->
 
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+                <!-- Footer Start -->
+                <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
+                    <div class="row px-xl-5 pt-5">
+                        <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+                            <h5 class="text-secondary text-uppercase mb-4">Thông tin liên lạc</h5>
+                            <p class="mb-4">Chuyên cung cấp các loại chim</p>
+                            <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Tp.Hồ Chí Minh</p>
+                            <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>binhdxse160***@fpt.edu.vn</p>
+                            <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84999999999</p>
+                        </div>
+                        <div class="col-lg-8 col-md-12">
+                            <div class="row">
+                                <div class="col-md-4 mb-5">
+                                    <h5 class="text-secondary text-uppercase mb-4">Bird Shop</h5>
+                                    <div class="d-flex flex-column justify-content-start">
+                                        <a class="text-secondary mb-2" href="homePage.jsp"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Kênh bán hàng</a>
+                                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Của hàng</a>                               
+                                        <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Liên lạc với chúng tôi</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-5">
+                                    <h5 class="text-secondary text-uppercase mb-4">Tài khoản của tôi</h5>
+                                    <div class="d-flex flex-column justify-content-start">
+                                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Hồ sơ</a>
+                                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Giỏ hàng</a>
+                                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Đơn hàng</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-5">
+                                    <h6 class="text-secondary text-uppercase mt-4 mb-3">Theo dõi chúng tôi</h6>
+                                    <div class="d-flex">
+                                        <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                                        <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                                        <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer End -->
 
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
-        <!-- Contact Javascript File -->
-        <script src="mail/jqBootstrapValidation.min.js"></script>
-        <script src="mail/contact.js"></script>
-
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+                <!-- Back to Top -->
+                <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-        <script>
-                                                function confirmOrder() {
-                                                    return confirm("Bạn có chắc chắn xác nhận đặt hàng với thông tin phía dưới?");
-                                                }
-        </script>
-    </body>
+                <!-- JavaScript Libraries -->
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+                <script src="lib/easing/easing.min.js"></script>
+                <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-</html>
+                <!-- Contact Javascript File -->
+                <script src="mail/jqBootstrapValidation.min.js"></script>
+                <script src="mail/contact.js"></script>
+
+                <!-- Template Javascript -->
+                <script src="js/main.js"></script>
+
+
+                <script>
+                                                        function confirmOrder() {
+                                                            return confirm("Bạn có chắc chắn xác nhận đặt hàng với thông tin phía dưới?");
+                                                        }
+                </script>
+                </body>
+
+                </html>

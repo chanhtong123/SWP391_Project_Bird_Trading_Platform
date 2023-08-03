@@ -403,7 +403,7 @@
                                                     <h5>Tổng tiền</h5>
                                                     <h5>${sessionScope.total * 1000} VND</h5>
                                                 </div>
-                    <form method="POST" action="CheckoutServlet?action=view">
+                    <form action="CheckoutServlet" method="post">
                         <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" type="submit">Xác nhận</button>
                     </form>
                     <!--                        </div>

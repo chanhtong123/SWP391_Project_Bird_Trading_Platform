@@ -2,10 +2,13 @@ package controller;
 
 import DAO.CartDAO;
 import DAO.DeliveryDAO;
+import DAO.OrderDAO;
 import DAO.ProductDAO;
 import DAO.ProvinceDAO;
+import DAO.UserDAO;
 import DTO.CartDTO;
 import DTO.DeliveryDTO;
+import DTO.OrderDTO;
 import DTO.UserDTO;
 
 import javax.servlet.ServletException;
@@ -82,6 +85,19 @@ public class DeliveryServlet extends HttpServlet {
         DeliveryDAO deliveryDAO = new DeliveryDAO();
         boolean success = deliveryDAO.createDelivery(delivery);
         System.out.println("ship" + totalAmount);
+
+        UserDAO dao = new UserDAO();
+        String username = dao.getUsernameById(userId);
+        System.out.println("usre name" + userId);
+
+        OrderDTO order = new OrderDTO();
+        order.setAddress(address);
+        order.setUser_name(username);
+        order.setPhone_number(Integer.parseInt(phoneNumber));
+        order.setProvince_name(provinceName);
+
+        OrderDAO orderDAO = new OrderDAO();
+        orderDAO.updateLastOrder(order);
 
         if (success) {
             // Truyền thông tin thành công sang trang createDelivery.jsp

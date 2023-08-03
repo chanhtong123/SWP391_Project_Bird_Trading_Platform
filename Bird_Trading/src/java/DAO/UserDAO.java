@@ -39,6 +39,25 @@ public class UserDAO extends DBHelper {
         }
         return result;
     }
+    
+    public String getUsernameById(int userId) {
+    String username = null;
+    try {
+        // Write SQL command to retrieve the username based on the user id
+        String sql = "SELECT username FROM [User] WHERE user_id = ?";
+        PreparedStatement stm = connection.prepareStatement(sql);
+        stm.setInt(1, userId);
+        ResultSet rs = stm.executeQuery();
+        if (rs.next()) {
+            username = rs.getString("username");
+        }
+    } catch (SQLException e) {
+        // Handle any exceptions
+        e.printStackTrace();
+    }
+    return username;
+}
+
 
     public UserDTO checkLogin(String email, String password) {
         ResultSet rs = null;
