@@ -286,13 +286,13 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>ord_id</th>
-                                        <th>username</th>
-                                        <th>so dien thoai</th>                                       
-                                        <th>diachi</th>
-                                        <th>date</th>
-                                        <th>tong tien</th>
-                                        <th>Trạng Thái Đơn Hàng</th>
+                                        <th>Mã hóa đơn</th>
+                                        <th>Tên khách hàng</th>
+                                        <th>Điện thoại liên lạc</th>                                       
+                                        <th>Địa chỉ</th>
+                                        <th>Ngày đặt hàng</th>
+                                      
+
 
                                     </tr>
                                 </thead>                             
@@ -303,35 +303,74 @@
                                         <td></td> <td></td>
                                         <td></td><td></td>
                                         <td></td> <td></td>
+                                         <td></td> <td></td>
                                     </tr>
                                     <c:forEach var="ordermoi" items="${ordermoi}" varStatus="status">
-                                        <tr>
+                                        <tr class="main-row" data-order-id="${ordermoi.orderId}">
                                             <td>${status.index + 1}</td>
                                             <td>${ordermoi.orderId}</td>
                                             <td>${ordermoi.user_name}</td>
                                             <td>${ordermoi.phone_number}</td>
-                                            <td>${ordermoi.address}</td>
+                                            <td>${ordermoi.address} (${ordermoi.province_name})</td>
                                             <td>${ordermoi.orderDate}</td>
-                                            <td>${ordermoi.totalAmount}</td>
-                                            <td  >
-                                                <c:choose>
-                                                    <c:when test="${order.status eq 'Order confirmation'}">
-                                                        <a href="UpdateStatusOrderItemServlet?orderItemId=${order.orderItemId}" class="btn btn-bitbucket btn-sm">Xác nhận đơn hàng</a>
-                                                        <a href="UpdateStatusOrderItemServlet3?orderItemId=${order.orderItemId}" class="btn btn-danger btn-sm">Hủy Đơn Hàng</a>
-                                                    </c:when>
-                                                    <c:when test="${order.status eq 'Delivery in progress'}">
-                                                        <a href="UpdateStatusOrderItemServlet2?orderItemId=${order.orderItemId}" class="btn btn-openid btn-sm"> Đang Giao Hàng</a>
-                                                        <a href="UpdateStatusOrderItemServlet3?orderItemId=${order.orderItemId}" class="btn btn-danger btn-sm">Hủy Đơn Hàng</a>
-                                                    </c:when>
-                                                    <c:when test="${order.status eq 'Complete'}">                         
-                                                        <div class="btn btn-github btn-sm">Đã Hoàn Thành</div>
-                                                    </c:when>
-                                                    <c:when test="${order.status eq 'Delete'}">                         
-                                                        <div class="btn btn-danger btn-sm">Đã Hủy Đơn</div>
-                                                    </c:when>
-                                                </c:choose>
-                                            </td>
+                                                               
 
+                                        </tr>
+
+
+                                        <tr class="sub-row" style="display: none;">
+                                            <td colspan="8"> <!-- Cột mới chứa bảng con -->
+                                                <table>
+                                                    <thead>
+                                                        <tr>                                      
+                                                            <th>STT</th>
+                                                            <th>Mã Sản Phẩm</th>
+                                                            <th>Mã Hàng Cửa</th>
+                                                            <th>Ảnh Sản Phẩm</th>
+                                                            <th>Tên sản phẩm</th>
+                                                            <th>Loại</th>
+                                                            <th>Số Lượng</th>
+                                                            <th>Giá Tiền</th>
+                                                            <th>Ngày Đặt Hàng</th>
+                                                            <th>Trạng Thái Đơn Hàng</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <c:forEach items="${orderList}" var="orderList">
+                                                         <c:if test="${orderList.orderId eq ordermoi.orderId}"> <!-- Lọc theo orderId -->
+                                                        <tr>
+                                                            <td>${orderList.orderItemId}</td>
+                                                            <td>${orderList.sttPT}</td>
+                                                            <td>${orderList.storeId}</td>
+                                                            <td><img src="${orderList.imageUrl}" alt="Product Image" width="100px" height="100px"></td>                                         
+                                                            <td>${orderList.productName}</td>
+                                                            <td>${orderList.categoryName}</td>
+                                                            <td>${orderList.quantity}</td>
+                                                            <td>${orderList.price}</td>                              
+                                                            <td>${orderList.orderItem_date}</td>
+                                                            <td>
+                                                                <c:choose>
+                                                                    <c:when test="${orderList.status eq 'Order confirmation'}">
+                                                                        <a href="UpdateStatusOrderItemServlet?orderItemId=${orderList.orderItemId}" class="btn btn-bitbucket btn-sm">Xác nhận đơn hàng</a>
+                                                                        <a href="UpdateStatusOrderItemServlet3?orderItemId=${orderList.orderItemId}" class="btn btn-danger btn-sm">Hủy Đơn Hàng</a>
+                                                                    </c:when>
+                                                                    <c:when test="${orderList.status eq 'Delivery in progress'}">
+                                                                        <a href="UpdateStatusOrderItemServlet2?orderItemId=${orderList.orderItemId}" class="btn btn-openid btn-sm"> Đang Giao Hàng</a>
+                                                                        <a href="UpdateStatusOrderItemServlet3?orderItemId=${orderList.orderItemId}" class="btn btn-danger btn-sm">Hủy Đơn Hàng</a>
+                                                                    </c:when>
+                                                                    <c:when test="${orderList.status eq 'Complete'}">                         
+                                                                        <div class="btn btn-github btn-sm">Đã Hoàn Thành</div>
+                                                                    </c:when>
+                                                                    <c:when test="${orderList.status eq 'Delete'}">                         
+                                                                        <div class="btn btn-danger btn-sm">Đã Hủy Đơn</div>
+                                                                    </c:when>
+                                                                </c:choose>
+
+                                                            </td>
+                                                        </tr>
+                                                          </c:if>
+                                                    </c:forEach>
+                                                </table>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -569,6 +608,33 @@
         $('#confirmDeleteModal').modal('show');
     }
 </script>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy tất cả các hàng chính (main-row) trong bảng
+        const mainRows = document.querySelectorAll(".main-row");
+
+        // Lặp qua từng hàng chính và thêm sự kiện click
+        mainRows.forEach((mainRow) => {
+            mainRow.addEventListener("click", function () {
+                // Lấy hàng con (sub-row) của hàng chính đó
+                const subRow = mainRow.nextElementSibling;
+
+                // Kiểm tra và điều khiển hiển thị bảng con
+                if (subRow.style.display === "none") {
+                    subRow.style.display = "table-row";
+                } else {
+                    subRow.style.display = "none";
+                }
+            });
+        });
+    });
+</script>
+
+
+
 </body>
 
 </html>
