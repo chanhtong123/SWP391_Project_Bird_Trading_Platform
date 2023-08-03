@@ -489,6 +489,29 @@ public class OrderItemDAO extends DBHelper {
             e.printStackTrace();
         }
     }
+    
+    
+    public List<Integer> getOrderIdsByStoreId(int storeId) {
+    List<Integer> orderIds = new ArrayList<>();
+    try {
+        String query = "SELECT DISTINCT order_id FROM OrderItem WHERE store_id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, storeId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            int orderId = resultSet.getInt("order_id");
+            orderIds.add(orderId);
+        }
+
+        resultSet.close();
+        preparedStatement.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return orderIds;
+}
+
 
     public List<OrderItemDTO> getAllByStoreId(int storeId) {
         List<OrderItemDTO> orderItems = new ArrayList<>();

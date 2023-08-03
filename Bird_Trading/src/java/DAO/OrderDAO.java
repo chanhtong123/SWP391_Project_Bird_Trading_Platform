@@ -37,48 +37,86 @@ public class OrderDAO extends DBHelper {
             e.printStackTrace();
         }
     }
-    
-    
-    
+
     public void updateLastOrder(OrderDTO updatedOrder) {
-    try {
-        // Lấy id của đơn hàng cuối cùng trong danh sách
-        int lastOrderId = getLastOrderId();
+        try {
+            // Lấy id của đơn hàng cuối cùng trong danh sách
+            int lastOrderId = getLastOrderId();
 
-        // Nếu không có đơn hàng nào trong danh sách, không thực hiện cập nhật
-        if (lastOrderId == -1) {
-            return;
+            // Nếu không có đơn hàng nào trong danh sách, không thực hiện cập nhật
+            if (lastOrderId == -1) {
+                return;
+            }
+
+            // Cập nhật các thông tin mới của đơn hàng cuối cùng
+            String query = "UPDATE [Order] SET address = ?, user_name = ?, phone_number = ?, province_name = ? WHERE order_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, updatedOrder.getAddress());
+            preparedStatement.setString(2, updatedOrder.getUser_name());
+            preparedStatement.setInt(3, updatedOrder.getPhone_number());
+            preparedStatement.setString(4, updatedOrder.getProvince_name());
+            preparedStatement.setInt(5, lastOrderId);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
 
-        // Cập nhật các thông tin mới của đơn hàng cuối cùng
-        String query = "UPDATE [Order] SET address = ?, user_name = ?, phone_number = ?, province_name = ? WHERE order_id = ?";
+    private int getLastOrderId() throws SQLException {
+        String query = "SELECT MAX(order_id) as last_order_id FROM [Order]";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, updatedOrder.getAddress());
-        preparedStatement.setString(2, updatedOrder.getUser_name());
-        preparedStatement.setInt(3, updatedOrder.getPhone_number());
-        preparedStatement.setString(4, updatedOrder.getProvince_name());
-        preparedStatement.setInt(5, lastOrderId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getInt("last_order_id");
+        }
+        return -1;
+    }
 
-        preparedStatement.executeUpdate();
+    public List<OrderDTO> getOrdersByIds(List<Integer> orderIds) {
+    List<OrderDTO> orders = new ArrayList<>();
+    try {
+        if (orderIds != null && !orderIds.isEmpty()) {
+            StringBuilder queryBuilder = new StringBuilder("SELECT * FROM [Order] WHERE order_id IN (");
+            for (int i = 0; i < orderIds.size(); i++) {
+                queryBuilder.append("?");
+                if (i < orderIds.size() - 1) {
+                    queryBuilder.append(",");
+                }
+            }
+            queryBuilder.append(")");
+
+            PreparedStatement preparedStatement = connection.prepareStatement(queryBuilder.toString());
+
+            for (int i = 0; i < orderIds.size(); i++) {
+                preparedStatement.setInt(i + 1, orderIds.get(i));
+            }
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                OrderDTO order = new OrderDTO();
+                order.setOrderId(resultSet.getInt("order_id"));
+                order.setUserId(resultSet.getInt("user_id"));
+                order.setTotalAmount(resultSet.getBigDecimal("total_amount"));
+                order.setOrderStatus(resultSet.getString("order_status"));
+                order.setAddress(resultSet.getString("address"));
+                order.setUser_name(resultSet.getString("user_name"));
+                order.setPhone_number(resultSet.getInt("phone_number"));
+                order.setProvince_name(resultSet.getString("province_name"));
+                order.setOrderDate(resultSet.getTimestamp("order_date"));
+                orders.add(order);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+        }
     } catch (SQLException e) {
         e.printStackTrace();
     }
+
+    return orders;
 }
 
-private int getLastOrderId() throws SQLException {
-    String query = "SELECT MAX(order_id) as last_order_id FROM [Order]";
-    PreparedStatement preparedStatement = connection.prepareStatement(query);
-    ResultSet resultSet = preparedStatement.executeQuery();
-    if (resultSet.next()) {
-        return resultSet.getInt("last_order_id");
-    }
-    return -1;
-}
-
-    
-    
-    
-    
 
     public List<OrderDTO> getAllOrders() {
         List<OrderDTO> orders = new ArrayList<>();
@@ -127,26 +165,7 @@ private int getLastOrderId() throws SQLException {
         return order;
     }
 
-    public static void main(String[] args) {
-        // Tạo một đối tượng OrderDAO
-        OrderDAO orderDAO = new OrderDAO();
-
-        // Gọi phương thức getLastOrder để lấy đơn hàng cuối cùng
-        OrderDTO lastOrder = orderDAO.getLastOrder();
-
-        // Kiểm tra và in thông tin đơn hàng cuối cùng
-        if (lastOrder != null) {
-            System.out.println("Last Order:");
-            System.out.println("Order ID: " + lastOrder.getOrderId());
-            System.out.println("User ID: " + lastOrder.getUserId());
-            System.out.println("Total Amount: " + lastOrder.getTotalAmount());
-            System.out.println("Order Status: " + lastOrder.getOrderStatus());
-            // In các thông tin khác của đơn hàng (nếu có)
-        } else {
-            System.out.println("No order found.");
-        }
-    }
-
+    
     public int getOrderCount() {
         int count = 0;
         try {
@@ -236,26 +255,7 @@ private int getLastOrderId() throws SQLException {
         return orders;
     }
 
-    // Get order by order ID
-    public OrderDTO getOrderById(int orderId) {
-        OrderDTO order = null;
-        try {
-            String query = "SELECT * FROM [Order] WHERE order_id = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, orderId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                order = new OrderDTO();
-                order.setOrderId(resultSet.getInt("order_id"));
-                order.setUserId(resultSet.getInt("user_id"));
-                order.setTotalAmount(resultSet.getBigDecimal("total_amount"));
-                order.setOrderStatus(resultSet.getString("order_status"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return order;
-    }
+  
 
     // Update an order
     public void updateOrder(OrderDTO order) {

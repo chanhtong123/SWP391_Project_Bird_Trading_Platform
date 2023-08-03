@@ -1,8 +1,10 @@
 package controller;
 
+import DAO.OrderDAO;
 import DAO.OrderItemDAO;
 import DAO.ProductDAO;
 import DAO.StoreDAO;
+import DTO.OrderDTO;
 import DTO.OrderItemDTO;
 import DTO.UserDTO;
 import java.io.IOException;
@@ -37,6 +39,7 @@ public class ShopeSale extends HttpServlet {
             // Get the list of orders by storeId
             OrderItemDAO orderDAO = new OrderItemDAO();
             List<OrderItemDTO> orderList = orderDAO.getAllByStoreId(storeId);
+            List<Integer> orderIds = orderDAO.getOrderIdsByStoreId(storeId);
 
             int quantityOrder = orderDAO.getCountByStoreId(storeId);
 
@@ -45,6 +48,13 @@ public class ShopeSale extends HttpServlet {
             int quantityPT = pt.checkTotalProductQuantityByStoreId(storeId);
 
             BigDecimal oderPrice = orderDAO.calculateTotalPriceByStoreId(storeId);
+
+            OrderDAO orderDAOs = new OrderDAO();
+            List<OrderDTO> order = orderDAOs.getOrdersByIds(orderIds);
+            
+            
+
+             session.setAttribute("ordermoi", order); // Set the order list to the session
 
             session.setAttribute("quantityOrder", quantityOrder);
             session.setAttribute("quantityPT", quantityPT);
@@ -97,8 +107,6 @@ public class ShopeSale extends HttpServlet {
 
         //goi danh sach orderitem theo ngay cu the
         List<OrderItemDTO> orderItems = orderItemDAO.getOrderItemsByDateRangeAndStoreId(formattedStartDate, formattedEndDate, storeId);
-
-     
 
         // Lưu kết quả vào request attribute để sử dụng trong JSP hoặc giao diện người dùng
         request.setAttribute("orderItems", orderItems);

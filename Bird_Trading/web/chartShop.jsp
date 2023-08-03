@@ -286,12 +286,12 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Tên Sản Phẩm</th>
-                                        <th>Ảnh Sản Phẩm</th>
-                                        <th>Số Lượng Đặt Hàng</th>
-                                        <th>Loại Sản Phẩm</th>
-                                        <th>Thành Tiền</th>
-                                        <th>Ngày Đăt Hàng</th>
+                                        <th>ord_id</th>
+                                        <th>username</th>
+                                        <th>so dien thoai</th>                                       
+                                        <th>diachi</th>
+                                        <th>date</th>
+                                        <th>tong tien</th>
                                         <th>Trạng Thái Đơn Hàng</th>
 
                                     </tr>
@@ -304,15 +304,15 @@
                                         <td></td><td></td>
                                         <td></td> <td></td>
                                     </tr>
-                                    <c:forEach var="order" items="${orderList}" varStatus="status">
+                                    <c:forEach var="ordermoi" items="${ordermoi}" varStatus="status">
                                         <tr>
                                             <td>${status.index + 1}</td>
-                                            <td>${order.productName}</td>
-                                            <td><img src="${order.imageUrl}" alt="Product Image" width="100px" height="100px"></td>
-                                            <td>${order.quantity}</td>
-                                            <td>${order.categoryName}</td>
-                                            <td>${order.price}</td>
-                                            <td>${order.orderItem_date}</td>
+                                            <td>${ordermoi.orderId}</td>
+                                            <td>${ordermoi.user_name}</td>
+                                            <td>${ordermoi.phone_number}</td>
+                                            <td>${ordermoi.address}</td>
+                                            <td>${ordermoi.orderDate}</td>
+                                            <td>${ordermoi.totalAmount}</td>
                                             <td  >
                                                 <c:choose>
                                                     <c:when test="${order.status eq 'Order confirmation'}">
