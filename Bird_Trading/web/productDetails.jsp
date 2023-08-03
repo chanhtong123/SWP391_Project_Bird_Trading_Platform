@@ -11,7 +11,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>MultiShop - Online Shop Website Template</title>
+        <title>Bird Trading</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
@@ -99,7 +99,7 @@
                 <div class="col-lg-4">
                     <a href="ShowProductsServlet" class="text-decoration-none">
                         <span class="h1 text-uppercase text-primary bg-dark px-2">Bird</span>
-                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
+                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Trading</span>
                     </a>
                 </div>
                 <div class="col-lg-4 col-6 text-left">
@@ -228,15 +228,15 @@
                 <div class="col-lg-9">
                     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                         <a href="" class="text-decoration-none d-block d-lg-none">
-                            <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                            <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                            <span class="h1 text-uppercase text-dark bg-light px-2">Bird</span>
+                            <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Trading</span>
                         </a>
                         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="homePage.jsp" class="nav-item nav-link active">Home</a>
+                                <a href="homePage.jsp" class="nav-item nav-link active">Trang chủ</a>
                                 <a href="ProductSearchServlet?action=searchByCategory&categoryName=Bird" class="nav-item nav-link">Loài chim</a>
                                 <a href="ProductSearchServlet?action=searchByCategory&categoryName=Food" class="nav-item nav-link">Thức ăn cho chim</a>
                                 <a href="ProductSearchServlet?action=searchByCategory&categoryName=Bird cage" class="nav-item nav-link">Lồng chim</a>
@@ -345,8 +345,7 @@
 
                             <div class="d-flex align-items-center mb-4 pt-2">
 
-                                
-                                <input class="px-1" type="number" name="quantity" min="1" max="100">
+                               
                                 <button class="btn btn-primary px-3" onclick="location.href = 'CartServlet?action=add&sttPt=${product.sttPT}&productName=${product.productName}&price=${product.price}&quantity=1&imageUrl=${product.image}&storeid=${product.storeId}'"><i class="fa fa-shopping-cart mr-1"></i> Add To
                                     Cart</button>
                             </div>
