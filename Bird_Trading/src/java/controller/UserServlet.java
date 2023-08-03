@@ -17,6 +17,7 @@ import DTO.ProductDTO;
 import DTO.StoreDTO;
 import DTO.StoreRegisterDTO;
 import DTO.UserDTO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
@@ -184,7 +185,7 @@ public class UserServlet extends HttpServlet {
         request.setAttribute("users", users);
 
         OrderItemDAO orderDAO = new OrderItemDAO();
-        List<OrderItemDTO> orderList = orderDAO.getCompletedOrderItems();
+        List<OrderItemDTO> orderList = orderDAO.getAllOrderItems();
         BigDecimal PriceAdmin = orderDAO.pricePT();
 
         int quantityStore = storeDAO.countStoreId();
@@ -192,6 +193,20 @@ public class UserServlet extends HttpServlet {
 
         ProductDAO pt = new ProductDAO();
         int countCate = pt.countVisibleProducts();
+
+        OrderDAO orderDAOs = new OrderDAO();
+        List<OrderDTO> orders = orderDAOs.getAllOrders();
+
+        // Chuyển danh sách đơn hàng thành một đối tượng JSON sử dụng Gson
+        Gson gson = new Gson();
+        String orderData = gson.toJson(orders);
+
+        session.setAttribute("orderData", orderData);
+        session.setAttribute("ordermoi", orders); // Set the order list to the session
+        
+        String orderDataFromSession = (String) session.getAttribute("orderData");
+System.out.println(orderDataFromSession); // Kiểm tra xem chuỗi JSON đã được lưu vào session chưa
+
 
         session.setAttribute("countCate", countCate);
         session.setAttribute("countStore", countStore);
@@ -390,7 +405,7 @@ public class UserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String address = new String(request.getParameter("address").getBytes("ISO-8859-1"), "UTF-8");
 
-        System.out.println(fullname );
+        System.out.println(fullname);
         String phoneNumber = request.getParameter("phoneNumber");
         String role = request.getParameter("role");
         boolean foundError = false;
@@ -500,7 +515,7 @@ public class UserServlet extends HttpServlet {
                     if ("Store Manager".equals(roleId)) {
                         session.setAttribute("storeManager", store);
                         url = "ShowProductsServlet";
-                    } else if ("User".equals(roleId)) {                       
+                    } else if ("User".equals(roleId)) {
                         url = "ShowProductsServlet";
                     } else if ("Admin".equals(roleId)) {
                         url = "UserServlet?action=list2";

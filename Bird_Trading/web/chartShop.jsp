@@ -179,6 +179,22 @@
                     </div>
 
 
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="ibox">
+                                <div class="ibox-body">
+                                    <div class="flexbox mb-4">
+                                        
+                                    </div>
+                                    <div>
+                                        <canvas id="line_chart" style="height: 150px;"></canvas>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+</div>
 
                     <!--Date Start-->
                     <div class="ibox">
@@ -633,6 +649,90 @@
     });
 </script>
 
+ <script>
+                // Hàm tính tổng số đơn hàng bán được theo ngày
+                function getTotalOrdersByDate(date, orderData) {
+                    // Chuyển ngày thành chuỗi định dạng YYYY-MM-DD
+                    const formattedDate = moment(date, "MMM D, YYYY h:mm:ss A").format("YYYY-MM-DD");
+
+                    // Lọc dữ liệu đơn hàng theo ngày cụ thể
+                    const ordersByDate = orderData.filter(order => moment(order.orderDate, "MMM D, YYYY h:mm:ss A").format("YYYY-MM-DD") === formattedDate);
+
+                    // Tính tổng số đơn hàng bán được cho ngày cụ thể
+                    const totalOrders = ordersByDate.length;
+                    return totalOrders;
+                }
+
+                // Dữ liệu đơn hàng từ session sẽ được đưa vào đây
+                const orderDataString = '${sessionScope.orderData}';
+                const orderData = orderDataString ? JSON.parse(orderDataString) : [];
+
+                // Chuyển định dạng số totalAmount và orderDate thành dạng đúng
+                orderData.forEach(order => {
+                    order.totalAmount = parseFloat(order.totalAmount.toString().replace(/\./g, '').replace(',', '.'));
+                    order.orderDate = moment(order.orderDate, "MMM D, YYYY h:mm:ss A").format("YYYY-MM-DD h:mm:ss");
+                });
+
+                // Tạo dữ liệu cho biểu đồ đường
+                const startDate = moment("2023-08-01"); // Ngày bắt đầu
+                const endDate = moment("2023-08-15"); // Ngày kết thúc
+                const labels = [];
+                const data = [];
+                const tooltipData = [];
+                let currentDate = startDate.clone();
+                while (currentDate.isSameOrBefore(endDate, 'day')) {
+                    const formattedDate = currentDate.format("YYYY-MM-DD");
+                    labels.push(formattedDate);
+                    const totalRevenue = orderData.reduce((sum, order) => {
+                        if (moment(order.orderDate).format("YYYY-MM-DD") === formattedDate) {
+                            return sum + order.totalAmount;
+                        } else {
+                            return sum;
+                        }
+                    }, 0);
+                    data.push(totalRevenue);
+                    const totalOrders = getTotalOrdersByDate(formattedDate, orderData);
+                    tooltipData.push({date: formattedDate, orders: totalOrders});
+                    currentDate.add(1, 'day');
+                }
+
+                // Dữ liệu biểu đồ đường
+                const chartData = {
+                    labels: labels,
+                    datasets: [{
+                            label: 'Doanh thu hàng ngày',
+                            data: data,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Màu cho đường
+                            borderColor: 'rgba(75, 192, 192, 1)', // Màu viền cho đường
+                            borderWidth: 1 // Độ dày viền cho đường
+                        }]
+                };
+
+                // Tạo biểu đồ đường
+                const ctx = document.getElementById('line_chart').getContext('2d');
+                const myLineChart = new Chart(ctx, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true // Bắt đầu trục y từ giá trị 0
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => {
+                                        const data = tooltipData[context.dataIndex];
+                                        return `Doanh thu: ${context.dataset.data[context.dataIndex].toLocaleString()} VND\nSố đơn hàng: ${data.orders}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            </script>
 
 
 </body>

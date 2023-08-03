@@ -117,30 +117,35 @@ public class OrderDAO extends DBHelper {
     return orders;
 }
 
-
-    public List<OrderDTO> getAllOrders() {
-        List<OrderDTO> orders = new ArrayList<>();
-        try {
-            String query = "SELECT * FROM [Order]";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                OrderDTO order = new OrderDTO();
-                order.setOrderId(resultSet.getInt("order_id"));
-                order.setUserId(resultSet.getInt("user_id"));
-                order.setTotalAmount(resultSet.getBigDecimal("total_amount"));
-                order.setOrderStatus(resultSet.getString("order_status"));
-                orders.add(order);
-            }
-
-            resultSet.close();
-            preparedStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+public List<OrderDTO> getAllOrders() {
+    List<OrderDTO> orders = new ArrayList<>();
+    try {
+        String query = "SELECT * FROM [Order]";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            OrderDTO order = new OrderDTO();
+            order.setOrderId(resultSet.getInt("order_id"));
+            order.setUserId(resultSet.getInt("user_id"));
+            order.setTotalAmount(resultSet.getBigDecimal("total_amount"));
+            order.setOrderStatus(resultSet.getString("order_status"));
+            order.setAddress(resultSet.getString("address"));
+            order.setUser_name(resultSet.getString("user_name"));
+            order.setPhone_number(resultSet.getInt("phone_number"));
+            order.setProvince_name(resultSet.getString("province_name"));
+            order.setOrderDate(resultSet.getTimestamp("order_date"));
+            orders.add(order);
         }
 
-        return orders;
+        resultSet.close();
+        preparedStatement.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+
+    return orders;
+}
+
 
     public OrderDTO getLastOrder() {
         OrderDTO order = null;

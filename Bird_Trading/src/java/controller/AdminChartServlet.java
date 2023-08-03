@@ -4,10 +4,12 @@
  */
 package controller;
 
+import DAO.OrderDAO;
 import DAO.OrderItemDAO;
 import DAO.ProductDAO;
 import DAO.StoreDAO;
 import DAO.UserDAO;
+import DTO.OrderDTO;
 import DTO.OrderItemDTO;
 import DTO.StoreRegisterDTO;
 import DTO.UserDTO;
@@ -44,7 +46,7 @@ public class AdminChartServlet extends HttpServlet {
         request.setAttribute("users", users);
 
         OrderItemDAO orderDAO = new OrderItemDAO();
-        List<OrderItemDTO> orderList = orderDAO.getCompletedOrderItems();
+        List<OrderItemDTO> orderList = orderDAO.getAllOrderItems();
         BigDecimal PriceAdmin = orderDAO.pricePT();
 
         int quantityStore = storeDAO.countStoreId();
@@ -52,6 +54,10 @@ public class AdminChartServlet extends HttpServlet {
 
         ProductDAO pt = new ProductDAO();
         int countCate = pt.countVisibleProducts();
+
+        OrderDAO orderDAOs = new OrderDAO();
+        List<OrderDTO> orders = orderDAOs.getAllOrders();
+        session.setAttribute("ordermoi", orders); // Set the order list to the session
 
         session.setAttribute("countCate", countCate);
         session.setAttribute("countStore", countStore);
@@ -92,7 +98,6 @@ public class AdminChartServlet extends HttpServlet {
         //goi danh sach orderitem theo ngay cu the
         List<OrderItemDTO> orderItems = orderItemDAO.getOrderItemsByDateRange(formattedStartDate, formattedEndDate);
 
-        
         System.out.println("totalPrice" + totalPrice);
         // Lưu kết quả vào request attribute để sử dụng trong JSP hoặc giao diện người dùng
         request.setAttribute("orderItems", orderItems);

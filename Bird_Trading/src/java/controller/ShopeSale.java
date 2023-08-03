@@ -7,6 +7,7 @@ import DAO.StoreDAO;
 import DTO.OrderDTO;
 import DTO.OrderItemDTO;
 import DTO.UserDTO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
@@ -51,10 +52,14 @@ public class ShopeSale extends HttpServlet {
 
             OrderDAO orderDAOs = new OrderDAO();
             List<OrderDTO> order = orderDAOs.getOrdersByIds(orderIds);
-            
-            
 
-             session.setAttribute("ordermoi", order); // Set the order list to the session
+       // Chuyển danh sách đơn hàng thành một đối tượng JSON sử dụng Gson
+        Gson gson = new Gson();
+        String orderData = gson.toJson(order);
+
+        session.setAttribute("orderData", orderData);
+
+            session.setAttribute("ordermoi", order); // Set the order list to the session
 
             session.setAttribute("quantityOrder", quantityOrder);
             session.setAttribute("quantityPT", quantityPT);
@@ -108,6 +113,8 @@ public class ShopeSale extends HttpServlet {
         //goi danh sach orderitem theo ngay cu the
         List<OrderItemDTO> orderItems = orderItemDAO.getOrderItemsByDateRangeAndStoreId(formattedStartDate, formattedEndDate, storeId);
 
+        
+        
         // Lưu kết quả vào request attribute để sử dụng trong JSP hoặc giao diện người dùng
         request.setAttribute("orderItems", orderItems);
         request.setAttribute("totalPrice", totalPrice);
