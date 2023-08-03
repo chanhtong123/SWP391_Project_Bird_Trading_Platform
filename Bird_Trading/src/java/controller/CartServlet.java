@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import DAO.CartDAO;
 import DAO.ProductDAO;
+import DAO.StoreDAO;
 import DTO.CartDTO;
 import DTO.UserDTO;
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class CartServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
         }
     }
+    
 
     protected void addToCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -48,7 +50,7 @@ public class CartServlet extends HttpServlet {
         System.out.println("check add" + user);
         if (user != null) {
             int userId = user.getUserId();
-
+            
             int sttPt = Integer.parseInt(request.getParameter("sttPt"));
             String productName = request.getParameter("productName");
             BigDecimal price = new BigDecimal(request.getParameter("price"));
@@ -56,9 +58,14 @@ public class CartServlet extends HttpServlet {
             CartDAO cartDAO = new CartDAO();
             int quantityProduct = cartDAO.getProductQuantity(sttPt);
             String imageUrl = request.getParameter("imageUrl");
+            String store_id = request.getParameter("storeid");
+            
+            StoreDAO storedao = new StoreDAO();
+            String store_name = storedao.getStoreNameByStoreId(store_id);
 
-            System.out.println("check1" + userId);
-            System.out.println("check2" + sttPt);
+            System.out.println("check store name" + store_name);
+            System.out.println("storeid" + store_id);
+            
             // Kiểm tra quantity
             if (quantityProduct > 0) {
 
@@ -69,21 +76,23 @@ public class CartServlet extends HttpServlet {
                 cartItem.setQuantity(quantity);
                 cartItem.setImageUrl(imageUrl);
                 cartItem.setUserId(userId);
+                cartItem.setStorename(store_name);
 
                 cartDAO.addToCart(cartItem);
 
                 // Thêm thành công
                 ArrayList<CartDTO> cartItems = cartDAO.getCartItemsByUserId(userId);
                 session.setAttribute("CART", cartItems);
-
                 response.sendRedirect("ShowProductsServlet");
             } else {
                 // quantity <= 1
-                response.sendRedirect("ShowProductsServlet"); // Chuyển tới trang cart.jsp mà không thêm vào giỏ hàng
+                response.sendRedirect("ShowProductsServlet"); // Chuyển tới trang cart.jsp m à không thêm vào giỏ hàng
             }
-
         } else {
             //chua dang nhap           
+            String referer = request.getRequestURI();
+            System.out.println(referer);
+            session.setAttribute("originalURL", referer);
             response.sendRedirect("login.jsp");
         }
     }
@@ -142,6 +151,11 @@ public class CartServlet extends HttpServlet {
 
             ArrayList<CartDTO> cartItems = cartDAO.getCartItemsByUserId(userId);
             session.setAttribute("CART", cartItems);
+            double total = 0;
+            for (CartDTO item : cartItems) {
+                total += item.getPrice().doubleValue()* item.getQuantity();
+            }
+            session.setAttribute("total",total);
             response.sendRedirect("CartServlet?action=showCart");
         } else {
             // Chưa đăng nhập

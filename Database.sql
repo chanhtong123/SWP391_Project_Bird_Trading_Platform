@@ -333,6 +333,7 @@ CREATE TABLE [CartItem] (
   price DECIMAL(10, 2) NOT NULL,
   quantity INT NOT NULL,
   image_url VARCHAR(2000),
+  store_name nvarchar(500),
   user_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES [User](user_id),
   FOREIGN KEY (STT_PT) REFERENCES Product(STT_PT)

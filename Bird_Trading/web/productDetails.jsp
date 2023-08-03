@@ -335,17 +335,19 @@
                         <div class="h-100 bg-light p-30">
                             <h3>${product.productName}</h3>
                             <div class="d-flex mb-3">
-                                <div class="text-primary mr-2">
-                                
+                                <div class="pt-1 mr-2">
+                                    <small>(${count} Reviews) &emsp; | &emsp; ${product.soldNumber} Đã Bán &emsp; | &emsp; ${product.quantity} Còn Lại</small>
+                                    <br><small>Loại sản phẩm: &emsp; ${product.categoryName} </small> 
                                 </div>
-                                <small class="pt-1">(${count} Reviews)</small>
                             </div>
                             <h3 class="font-weight-semi-bold mb-4" style="color: red">₫${product.price}</h3>
 <!--                            <p class="mb-4">${product.description}</p>-->
 
                             <div class="d-flex align-items-center mb-4 pt-2">
 
-                                <button class="btn btn-primary px-3" onclick="location.href = 'CartServlet?action=add&sttPt=${product.sttPT}&productName=${product.productName}&price=${product.price}&quantity=1&imageUrl=${product.image}'"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                                
+                                <input class="px-1" type="number" name="quantity" min="1" max="100">
+                                <button class="btn btn-primary px-3" onclick="location.href = 'CartServlet?action=add&sttPt=${product.sttPT}&productName=${product.productName}&price=${product.price}&quantity=1&imageUrl=${product.image}&storeid=${product.storeId}'"><i class="fa fa-shopping-cart mr-1"></i> Add To
                                     Cart</button>
                             </div>
 
@@ -449,7 +451,7 @@
     <!-- Shop Detail End -->
 
 
-   
+
 
     <!-- San pham cung shop -->
     <div class="container-fluid py-5">
@@ -465,7 +467,7 @@
                                 <img class="img-fluid w-100" src="${product.image}" alt="" style="width: 50px; height: 180px">
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square"
-                                       href="CartServlet?action=add&sttPt=${product.sttPT}&productName=${product.productName}&price=${product.price}&quantity=1&imageUrl=${product.image}">
+                                       href="CartServlet?action=add&sttPt=${product.sttPT}&productName=${product.productName}&price=${product.price}&quantity=1&imageUrl=${product.image}&storeid=${product.storeId}">
                                         <i class="fa fa-shopping-cart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href="ProductDetailServlet?productId=${product.productId}"><i class="fa fa-search"></i></a>
                                 </div>
@@ -488,10 +490,10 @@
         </div>
     </div>
     <!-- Products End -->
-    
-    
-    
-     <!-- San pham  cung loai -->
+
+
+
+    <!-- San pham  cung loai -->
     <div class="container-fluid py-5">
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Sản Phẩm Cùng Loại</span></h2>
         <div class="row px-xl-5">
@@ -505,7 +507,7 @@
                                 <img class="img-fluid w-100" src="${product.image}" alt="" style="width: 50px; height: 180px">
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square"
-                                       href="CartServlet?action=add&sttPt=${product.sttPT}&productName=${product.productName}&price=${product.price}&quantity=1&imageUrl=${product.image}">
+                                       href="CartServlet?action=add&sttPt=${product.sttPT}&productName=${product.productName}&price=${product.price}&quantity=1&imageUrl=${product.image}&storeid=${product.storeId}">
                                         <i class="fa fa-shopping-cart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href="ProductDetailServlet?productId=${product.productId}"><i class="fa fa-search"></i></a>
                                 </div>
@@ -593,6 +595,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    
 </body>
 
 </html>

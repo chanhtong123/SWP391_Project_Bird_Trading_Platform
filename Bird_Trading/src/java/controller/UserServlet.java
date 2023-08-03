@@ -500,7 +500,7 @@ public class UserServlet extends HttpServlet {
                     if ("Store Manager".equals(roleId)) {
                         session.setAttribute("storeManager", store);
                         url = "ShowProductsServlet";
-                    } else if ("User".equals(roleId)) {
+                    } else if ("User".equals(roleId)) {                       
                         url = "ShowProductsServlet";
                     } else if ("Admin".equals(roleId)) {
                         url = "UserServlet?action=list2";

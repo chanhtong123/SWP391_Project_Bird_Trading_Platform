@@ -11,11 +11,12 @@ public class CartDTO {
     private int quantity;
     private String imageUrl;
     private int userId;
+    private String storename;
 
     public CartDTO() {
     }
 
-    public CartDTO(int cartItemId, int sttPT, String productName, BigDecimal price, int quantity, String imageUrl, int userId) {
+    public CartDTO(int cartItemId, int sttPT, String productName, BigDecimal price, int quantity, String imageUrl, int userId, String storename) {
         this.cartItemId = cartItemId;
         this.sttPT = sttPT;
         this.productName = productName;
@@ -23,7 +24,18 @@ public class CartDTO {
         this.quantity = quantity;
         this.imageUrl = imageUrl;
         this.userId = userId;
+        this.storename = storename;
     }
+
+    public String getStorename() {
+        return storename;
+    }
+
+    public void setStorename(String storename) {
+        this.storename = storename;
+    }
+
+    
 
     public int getCartItemId() {
         return cartItemId;

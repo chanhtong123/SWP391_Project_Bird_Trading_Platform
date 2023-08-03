@@ -36,6 +36,21 @@ public class StoreDAO extends DBHelper {
         }
         return null;
     }
+    
+    public String getStoreNameByStoreId(String storeId) {
+    try {
+        String sql = "SELECT store_name FROM Store WHERE store_id = ?";
+        PreparedStatement stm = connection.prepareStatement(sql);
+        stm.setString(1, storeId);
+        ResultSet rs = stm.executeQuery();
+        if (rs.next()) {
+            return rs.getString("store_name");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
 
     public List<StoreDTO> getAllStores() throws SQLException {
         List<StoreDTO> stores = new ArrayList<>();

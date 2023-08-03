@@ -42,7 +42,7 @@
         </style>
     </head>
 
-  <body>
+    <body>
         <!-- Topbar Start -->
         <div class="container-fluid">
             <div class="row bg-secondary py-1 px-xl-5">
@@ -267,17 +267,9 @@
                                 <a href="ProductSearchServlet?action=searchByCategory&categoryName=Food" class="nav-item nav-link">Thức ăn cho chim</a>
                                 <a href="ProductSearchServlet?action=searchByCategory&categoryName=Bird cage" class="nav-item nav-link">Lồng chim</a>
                                 <a href="ProductSearchServlet?action=searchByCategory&categoryName=Accessory" class="nav-item nav-link">Phụ kiện</a>
-                                <!--                                <div class="nav-item dropdown">
-                                                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
-                                                                    <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                                                        <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                                                        <a href="checkout.html" class="dropdown-item">Checkout</a>
-                                                                    </div>
-                                                                </div>
-                                                                <a href="contact.html" class="nav-item nav-link">Contact</a>-->
                             </div>
-                            
-                              <!--search store-->
+
+                            <!--search store-->
                             <div class="col-lg-4 col-6 text-left">
                                 <form action="ShopSearchServlet" method="GET">
                                     <div class="input-group">
@@ -292,8 +284,8 @@
                                 </form>
                             </div>
                             <!--search end-->
-                            
-                            
+
+
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                                 <!--                                <a href="" class="btn px-0">
                                                                     <i class="fas fa-heart text-primary"></i>
@@ -318,7 +310,7 @@
                     <table class="table table-light table-borderless table-hover text-center mb-0">
                         <thead class="thead-dark">
                             <tr>
-                                <th>        </th>
+                                <th>Cửa Hàng</th>
                                 <th>Sản phẩm</th>
                                 <th>Giá</th>
                                 <th>Số lượng</th>
@@ -329,6 +321,7 @@
                             <%-- Lặp qua từng mục trong giỏ hàng --%>
                             <c:forEach var="cartItem" items="${CART}">
                                 <tr>
+                                    <td class="align-middle" style="text-align: middle;">${cartItem.storename}</td>
                                     <td class="align-middle">
                                         <img src="${cartItem.imageUrl}" alt="" style="width: 50px; height: 50px;">
                                     </td>
@@ -336,52 +329,20 @@
                                     <td class="align-middle">₫${cartItem.price}</td>
                                     <td class="align-middle">
                                         <div class="input-group quantity mx-auto" style="width: 100px;">
-                                           
-                                            <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center cart-quantity-input" data-cartItemId="${cartItem.cartItemId}" value="${cartItem.quantity}">
-                                           
-                                    </td>
 
-                                    <td class="align-middle">₫${cartItem.price * cartItem.quantity}</td>
-                                   
+                                            <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center cart-quantity-input" data-cartItemId="${cartItem.cartItemId}" value="${cartItem.quantity}">
+
+                                            </td>
+
+                                            <td class="align-middle">₫${cartItem.price * cartItem.quantity}</td>
+
                                 </tr>
                             </c:forEach>
 
                         </tbody>
                     </table>
                 </div>
-                <div class="col-lg-4">
-                    <!--                    <form class="mb-30" action="">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-primary">Apply Coupon</button>
-                                                </div>
-                                            </div>
-                                        </form>-->
-                    <!--                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>-->
-                    <!--                    <div class="bg-light p-30 mb-5">
-                                            <div class="border-bottom pb-2">
-                                                <div class="d-flex justify-content-between mb-3">
-                                                    <h6>Subtotal</h6>
-                                                    <h6>$<%= session.getAttribute("total_price")%></h6>
-                                                </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <h6 class="font-weight-medium">Shipping</h6>
-                                                    <h6 class="font-weight-medium">$<%= session.getAttribute("shipping_cost")%></h6>
-                                                </div>
-                                            </div>
-                                            <div class="pt-2">
-                                                <div class="d-flex justify-content-between mt-2">
-                    
-                                                    <h5>Total</h5>
-                                                    <h5>$<%= session.getAttribute("total_amount")%></h5>                           
-                                                </div>-->
-                    <form method="POST" action="CheckoutServlet">
-                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" type="submit">Proceed To Checkout</button>
-                    </form>
-                    <!--                        </div>
-                                        </div>-->
-                </div>
+
             </div>
         </div>
         <!-- Cart End -->
@@ -394,108 +355,116 @@
         <div class="container-fluid">
             <div class="row px-xl-5">
                 <div class="col-lg-8">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3"></span></h5>
                     <div class="bg-light p-30 mb-5">
-                        <form action="DeliveryServlet" method="post">
-                            <div class="row">
 
-                                <div class="col-md-6 form-group">
-                                    <label for="recipient_name">Ho Ten</label>
-                                    <input class="form-control" type="text"  id="recipient_name" name="recipient_name" required>
-                                </div>
+                        <c:choose>
+                            <c:when test="${message eq 'Delivery created successfully.'}">
+                                <!-- Không hiển thị form -->
+                            </c:when>
+                            <c:otherwise>
+                                <form action="DeliveryServlet" method="post">
+                                    <div class="row">
 
-                                <div class="col-md-6 form-group">
-                                    <label for="phone_number">so dt</label>
-                                    <input class="form-control" type="number" id="phone_number" name="phone_number"  placeholder="+123 456 789">
-                                </div>
-
-                                <div class="col-md-6 form-group">
-                                    <label for="address">Address Line 1</label>
-                                    <input class="form-control" type="text" id="address" name="address" placeholder="123 Street">
-                                </div>
-
-                                <div class="col-md-6 form-group">
-                                    <label for="province_name">tinh</label>
-                                    <select class="custom-select" id="province_name" name="province_name" required>
-                                        <option selected>TP HCM</option>
-                                        <option value="TP HCM">TP HCM</option>
-                                        <option value="Ha Noi">Hà Nội</option>
-                                        <option value="Da Nang">Đà Nẵng</option>
-                                        <option value="An Giang">An Giang</option>
-                                        <option value="Ba Ria - Vung Tau">Bà Rịa - Vũng Tàu</option>
-                                        <option value="Bac Lieu">Bạc Liêu</option>
-                                        <option value="Bac Kan">Bắc Kạn</option>
-                                        <option value="Bac Giang">Bắc Giang</option>
-                                        <option value="Bac Ninh">Bắc Ninh</option>
-                                        <option value="Ben Tre">Bến Tre</option>
-                                        <option value="Binh Duong">Bình Dương</option>
-                                        <option value="Binh Dinh">Bình Định</option>
-                                        <option value="Binh Phuoc">Bình Phước</option>
-                                        <option value="Binh Thuan">Bình Thuận</option>
-                                        <option value="Ca Mau">Cà Mau</option>
-                                        <option value="Cao Bang">Cao Bằng</option>
-                                        <option value="Dak Lak">Đắk Lắk</option>
-                                        <option value="Dak Nong">Đắk Nông</option>
-                                        <option value="Dien Bien">Điện Biên</option>
-                                        <option value="Dong Nai">Đồng Nai</option>
-                                        <option value="Dong Thap">Đồng Tháp</option>
-                                        <option value="Gia Lai">Gia Lai</option>
-                                        <option value="Ha Giang">Hà Giang</option>
-                                        <option value="Ha Nam">Hà Nam</option>
-                                        <option value="Ha Tinh">Hà Tĩnh</option>
-                                        <option value="Hai Dương">Hải Dương</option>
-                                        <option value="Hai Phong">Hải Phòng</option>
-                                        <option value="Hoa Binh">Hòa Bình</option>
-                                        <option value="Hung Yen">Hưng Yên</option>
-                                        <option value="Khanh Hoa">Khánh Hòa</option>
-                                        <option value="Kien Giang">Kiên Giang</option>
-                                        <option value="Kon Tum">Kon Tum</option>
-                                        <option value="Lai Chau">Lai Châu</option>
-                                        <option value="Lam Dong">Lâm Đồng</option>
-                                        <option value="Lang Son">Lạng Sơn</option>
-                                        <option value="Lao Cai">Lào Cai</option>
-                                        <option value="Long An">Long An</option>
-                                        <option value="Nam Dinh">Nam Định</option>
-                                        <option value="Nghe An">Nghệ An</option>
-                                        <option value="Ninh Binh">Ninh Bình</option>
-                                        <option value="Ninh Thuan">Ninh Thuận</option>
-                                        <option value="Phu Tho">Phú Thọ</option>
-                                        <option value="Phu Yen">Phú Yên</option>
-                                        <option value="Quang Binh">Quảng Bình</option>
-                                        <option value="Quang Nam">Quảng Nam</option>
-                                        <option value="Quang Ngai">Quảng Ngãi</option>
-                                        <option value="Quang Ninh">Quảng Ninh</option>
-                                        <option value="Quang Tri">Quảng Trị</option>
-                                        <option value="Soc Trang">Sóc Trăng</option>
-                                        <option value="Sơn La">Sơn La</option>
-                                        <option value="Tay Ninh">Tây Ninh</option>
-                                        <option value="Thai Binh">Thái Bình</option>
-                                        <option value="Thai Nguyen">Thái Nguyên</option>
-                                        <option value="Thanh Hoa">Thanh Hóa</option>
-                                        <option value="Thua Thien Hue">Thừa Thiên Huế</option>
-                                        <option value="Tien Giang">Tiền Giang</option>
-                                        <option value="Tra Vinh">Trà Vinh</option>
-                                        <option value="Tuyen Quang">Tuyên Quang</option>
-                                        <option value="Vinh Long">Vĩnh Long</option>
-                                        <option value="Vinh Phuc">Vĩnh Phúc</option>
-                                        <option value="Yen Bai">Yên Bái</option>
-                                    </select>
+                                        <div class="col-md-6 form-group">
+                                            <label for="recipient_name">Tên người nhận</label>
+                                            <input class="form-control" type="text" id="recipient_name" name="recipient_name" value="${userlogin.username}" >
+                                        </div>
 
 
-                                </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="phone_number">Điện thoại liên lạc</label>
+                                            <input class="form-control" type="number" id="phone_number" name="phone_number" value="${userlogin.phoneNumber}" >
+                                        </div>
 
-                                <!--<input type="submit" value="Đặt Hàng" class="custom-button ml-2">-->
-                                <div class="col-md-12 form-group">
-                                    <input type="submit" value="Đặt Hàng" class="custom-button ml-2" onclick="return confirmOrder();">
-                                </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="address">Số nhà</label>
+                                            <input class="form-control" type="text" id="address" value="${userlogin.address}" name="address">
+                                        </div>
 
-                            </div>
-                        </form>
+                                        <div class="col-md-6 form-group">
+                                            <label for="province_name">Tỉnh</label>
+                                            <select class="custom-select" id="province_name" name="province_name" required>
+                                                <option selected>TP HCM</option>                                              
+                                                <option value="Ha Noi">Hà Nội</option>
+                                                <option value="Da Nang">Đà Nẵng</option>
+                                                <option value="An Giang">An Giang</option>
+                                                <option value="Ba Ria - Vung Tau">Bà Rịa - Vũng Tàu</option>
+                                                <option value="Bac Lieu">Bạc Liêu</option>
+                                                <option value="Bac Kan">Bắc Kạn</option>
+                                                <option value="Bac Giang">Bắc Giang</option>
+                                                <option value="Bac Ninh">Bắc Ninh</option>
+                                                <option value="Ben Tre">Bến Tre</option>
+                                                <option value="Binh Duong">Bình Dương</option>
+                                                <option value="Binh Dinh">Bình Định</option>
+                                                <option value="Binh Phuoc">Bình Phước</option>
+                                                <option value="Binh Thuan">Bình Thuận</option>
+                                                <option value="Ca Mau">Cà Mau</option>
+                                                <option value="Cao Bang">Cao Bằng</option>
+                                                <option value="Dak Lak">Đắk Lắk</option>
+                                                <option value="Dak Nong">Đắk Nông</option>
+                                                <option value="Dien Bien">Điện Biên</option>
+                                                <option value="Dong Nai">Đồng Nai</option>
+                                                <option value="Dong Thap">Đồng Tháp</option>
+                                                <option value="Gia Lai">Gia Lai</option>
+                                                <option value="Ha Giang">Hà Giang</option>
+                                                <option value="Ha Nam">Hà Nam</option>
+                                                <option value="Ha Tinh">Hà Tĩnh</option>
+                                                <option value="Hai Dương">Hải Dương</option>
+                                                <option value="Hai Phong">Hải Phòng</option>
+                                                <option value="Hoa Binh">Hòa Bình</option>
+                                                <option value="Hung Yen">Hưng Yên</option>
+                                                <option value="Khanh Hoa">Khánh Hòa</option>
+                                                <option value="Kien Giang">Kiên Giang</option>
+                                                <option value="Kon Tum">Kon Tum</option>
+                                                <option value="Lai Chau">Lai Châu</option>
+                                                <option value="Lam Dong">Lâm Đồng</option>
+                                                <option value="Lang Son">Lạng Sơn</option>
+                                                <option value="Lao Cai">Lào Cai</option>
+                                                <option value="Long An">Long An</option>
+                                                <option value="Nam Dinh">Nam Định</option>
+                                                <option value="Nghe An">Nghệ An</option>
+                                                <option value="Ninh Binh">Ninh Bình</option>
+                                                <option value="Ninh Thuan">Ninh Thuận</option>
+                                                <option value="Phu Tho">Phú Thọ</option>
+                                                <option value="Phu Yen">Phú Yên</option>
+                                                <option value="Quang Binh">Quảng Bình</option>
+                                                <option value="Quang Nam">Quảng Nam</option>
+                                                <option value="Quang Ngai">Quảng Ngãi</option>
+                                                <option value="Quang Ninh">Quảng Ninh</option>
+                                                <option value="Quang Tri">Quảng Trị</option>
+                                                <option value="Soc Trang">Sóc Trăng</option>
+                                                <option value="Sơn La">Sơn La</option>
+                                                <option value="Tay Ninh">Tây Ninh</option>
+                                                <option value="Thai Binh">Thái Bình</option>
+                                                <option value="Thai Nguyen">Thái Nguyên</option>
+                                                <option value="Thanh Hoa">Thanh Hóa</option>
+                                                <option value="Thua Thien Hue">Thừa Thiên Huế</option>
+                                                <option value="Tien Giang">Tiền Giang</option>
+                                                <option value="Tra Vinh">Trà Vinh</option>
+                                                <option value="Tuyen Quang">Tuyên Quang</option>
+                                                <option value="Vinh Long">Vĩnh Long</option>
+                                                <option value="Vinh Phuc">Vĩnh Phúc</option>
+                                                <option value="Yen Bai">Yên Bái</option>
+                                            </select>
+
+
+                                        </div>
+
+                                        <!--<input type="submit" value="Đặt Hàng" class="custom-button ml-2">-->
+                                        <div class="col-md-12 form-group">
+                                            <input type="submit" value="Đặt Hàng" class="custom-button ml-2" onclick="return confirmOrder();">
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3"></span></h5>
                     <div class="bg-light p-30 mb-5">
                         <div class="border-bottom">
 
@@ -516,7 +485,7 @@
 
                                 <div class="d-flex justify-content-between mb-3">
                                     <h6>Địa Chỉ</h6>
-                                    <h6>${delivery.address} ${delivery.provinceName}</h6>
+                                    <h6>${delivery.address} (${delivery.provinceName})</h6>
 
                                 </div>
 
@@ -611,9 +580,9 @@
 
 
         <script>
-                                        function confirmOrder() {
-                                            return confirm("Bạn có chắc chắn xác nhận đặt hàng với thông tin phía dưới?");
-                                        }
+                                                function confirmOrder() {
+                                                    return confirm("Bạn có chắc chắn xác nhận đặt hàng với thông tin phía dưới?");
+                                                }
         </script>
     </body>
 

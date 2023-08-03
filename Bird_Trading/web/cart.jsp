@@ -18,7 +18,7 @@
 
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
-
+    <a href="cart.jsp"></a>
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
@@ -308,10 +308,7 @@
         <div class="container-fluid">
             <div class="row px-xl-5">
                 <div class="col-12">
-                    <nav class="breadcrumb bg-light mb-30">
-                        <a class="breadcrumb-item text-dark" href="homePage.jsp">Home</a>
-                        <span class="breadcrumb-item active">Shopping Cart</span>
-                    </nav>
+                   
                 </div>
             </div>
         </div>
@@ -322,10 +319,10 @@
         <div class="container-fluid">
             <div class="row px-xl-5">
                 <div class="col-lg-8 table-responsive mb-5">
-                    <table class="table table-light table-borderless table-hover text-center mb-0">
+                    <table id="cartTable" class="table table-light table-borderless table-hover text-center mb-0">
                         <thead class="thead-dark">
                             <tr>
-                                <th>        </th>
+                                <th>Cửa Hàng</th>
                                 <th>Sản phẩm</th>
                                 <th>Giá</th>
                                 <th>Số lượng</th>
@@ -337,8 +334,11 @@
                             <%-- Lặp qua từng mục trong giỏ hàng --%>
                             <c:forEach var="cartItem" items="${CART}">
                                 <tr>
+                                    <td class="align-middle" style="text-align: middle;">${cartItem.storename}</td>
                                     <td class="align-middle">
-                                        <img src="${cartItem.imageUrl}" alt="" style="width: 50px; height: 50px;">
+    
+                                           <img src="${cartItem.imageUrl}" alt="" style="width: 50px; height: 50px;">
+                                 
                                     </td>
                                     <td class="align-middle" style="text-align: middle;">${cartItem.productName}</td>
                                     <td class="align-middle">₫${cartItem.price}</td>
@@ -382,7 +382,7 @@
                     </table>
                 </div>
                 <div class="col-lg-4">
-                    <!--                    <form class="mb-30" action="">
+<!--                                        <form class="mb-30" action="">
                                             <div class="input-group">
                                                 <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
                                                 <div class="input-group-append">
@@ -390,26 +390,21 @@
                                                 </div>
                                             </div>
                                         </form>-->
-                    <!--                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>-->
-                    <!--                    <div class="bg-light p-30 mb-5">
+                                        <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3"></span></h5>
+                                        <div class="bg-light p-30 mb-5">
                                             <div class="border-bottom pb-2">
-                                                <div class="d-flex justify-content-between mb-3">
+<!--                                                <div class="d-flex justify-content-between mb-3">
                                                     <h6>Subtotal</h6>
-                                                    <h6>$<%= session.getAttribute("total_price")%></h6>
-                                                </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <h6 class="font-weight-medium">Shipping</h6>
-                                                    <h6 class="font-weight-medium">$<%= session.getAttribute("shipping_cost")%></h6>
-                                                </div>
+                                                    <h6>${sessionScope.total * 1000} VND</h6>
+                                                </div>-->
                                             </div>
                                             <div class="pt-2">
                                                 <div class="d-flex justify-content-between mt-2">
-                    
-                                                    <h5>Total</h5>
-                                                    <h5>$<%= session.getAttribute("total_amount")%></h5>                           
-                                                </div>-->
+                                                    <h5>Tổng tiền</h5>
+                                                    <h5>${sessionScope.total * 1000} VND</h5>
+                                                </div>
                     <form method="POST" action="CheckoutServlet?action=view">
-                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" type="submit">Proceed To Checkout</button>
+                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" type="submit">Xác nhận</button>
                     </form>
                     <!--                        </div>
                                         </div>-->
@@ -571,6 +566,24 @@
                                                 }
                                             });
         </script>
+        
+        <script>
+    $(document).ready(function () {
+        var rows = $('#cartTable tbody tr');
+
+        // Sắp xếp các dòng trong bảng theo store name
+        rows.sort(function (a, b) {
+            var storeNameA = $(a).find('td:eq(0)').text().trim();
+            var storeNameB = $(b).find('td:eq(0)').text().trim();
+
+            return storeNameA.localeCompare(storeNameB);
+        });
+
+        // Thêm các dòng đã sắp xếp vào tbody
+        $('#cartTable tbody').empty().append(rows);
+    });
+</script>
+
 
     </body>
 

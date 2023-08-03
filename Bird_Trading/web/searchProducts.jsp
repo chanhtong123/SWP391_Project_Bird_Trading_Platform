@@ -322,11 +322,6 @@
         </div>
         <!-- Navbar End -->
 
-
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
         <!-- Shop Start -->
         <div class="container-fluid">
             <div class="row px-xl-5">
@@ -392,7 +387,7 @@
                                         
                                         
                                         <a class="btn btn-outline-dark btn-square"
-                                           href="CartServlet?action=add&sttPt=<%= product.getSttPT()%>&productName=<%= product.getProductName()%>&price=<%= product.getPrice()%>&quantity=1&imageUrl=<%= product.getImage()%>">
+                                           href="CartServlet?action=add&sttPt=<%= product.getSttPT()%>&productName=<%= product.getProductName()%>&price=<%= product.getPrice()%>&quantity=1&imageUrl=<%= product.getImage()%>&storeid=<%= product.getStoreId()%>">
                                             <i class="fa fa-shopping-cart"></i></a>
                                             
                                             
@@ -412,6 +407,10 @@
                                                                                 <small class="fa fa-star text-primary mr-1"></small>
                                                                                 <small class="fa fa-star text-primary mr-1"></small>-->
                                         <small>Số Lượng: <%= product.getQuantity()%></small>
+                                       
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center mb-1">
+                                        <small>Đã Bán: <%= product.getSoldNumber()%></small>
                                     </div>
                                 </div>
                             </div>

@@ -478,7 +478,7 @@
                                     <div class="product-action">
 
                                         <a class="btn btn-outline-dark btn-square"
-                                           href="CartServlet?action=add&sttPt=${product.sttPT}&productName=${product.productName}&price=${product.price}&quantity=1&imageUrl=${product.image}">
+                                           href="CartServlet?action=add&sttPt=${product.sttPT}&productName=${product.productName}&price=${product.price}&quantity=1&imageUrl=${product.image}&storeid=${product.storeId}">
                                             <i class="fa fa-shopping-cart"></i></a>
                                         <a class="btn btn-outline-dark btn-square" href="ProductDetailServlet?productId=${product.productId}"><i class="fa fa-search"></i></a>
                                     </div>

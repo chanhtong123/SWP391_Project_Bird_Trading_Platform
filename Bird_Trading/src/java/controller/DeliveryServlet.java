@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 
 public class DeliveryServlet extends HttpServlet {
@@ -44,6 +44,13 @@ public class DeliveryServlet extends HttpServlet {
         String recipientName = request.getParameter("recipient_name");
         String phoneNumber = request.getParameter("phone_number");
 
+        // Chuyển đổi từ ISO-8859-1 sang UTF-8
+        byte[] bytes = address.getBytes(StandardCharsets.ISO_8859_1);
+        byte[] bytess = recipientName.getBytes(StandardCharsets.ISO_8859_1);
+        address = new String(bytes, StandardCharsets.UTF_8);
+        recipientName = new String(bytess, StandardCharsets.UTF_8);
+
+        System.out.println("dd" + address);
         // Kiểm tra xem tỉnh/thành phố có tồn tại trong bảng Province hay không
         ProvinceDAO provinceDAO = new ProvinceDAO();
         int provinceId = provinceDAO.getProvinceIdByName(provinceName);

@@ -15,10 +15,27 @@ public class ProductDTO implements Serializable {
     private String image;
     private String categoryName;
     private String status;
+    private int soldNumber;
 
     public ProductDTO() {
     }
 
+    public ProductDTO(int sttPT, String productId, String storeId, String productName, String description, BigDecimal price, int quantity, String image, String categoryName, String status, int soldNumber) {
+        this.sttPT = sttPT;
+        this.productId = productId;
+        this.storeId = storeId;
+        this.productName = productName;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.image = image;
+        this.categoryName = categoryName;
+        this.status = status;
+        this.soldNumber = soldNumber;
+    }
+
+    
+    
     public ProductDTO(int sttPT, String productId, String storeId, String productName, String description, BigDecimal price, int quantity, String image, String categoryName, String status) {
         this.sttPT = sttPT;
         this.productId = productId;
@@ -111,5 +128,15 @@ public class ProductDTO implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public int getSoldNumber() {
+        return soldNumber;
+    }
+
+    public void setSoldNumber(int soldNumber) {
+        this.soldNumber = soldNumber;
+    }
+    
+    
 
 }

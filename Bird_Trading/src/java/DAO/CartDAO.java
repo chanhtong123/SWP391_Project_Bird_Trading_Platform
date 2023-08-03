@@ -21,7 +21,7 @@ public class CartDAO extends DBHelper {
     public ArrayList<CartDTO> getCartItemsByUserId(int userId) {
         ArrayList<CartDTO> cartItems = new ArrayList<>();
         try {
-            String sql = "SELECT [cart_item_id], [STT_PT], [product_name], [price], [quantity], [image_url], [user_id] "
+            String sql = "SELECT [cart_item_id], [STT_PT], [product_name], [price], [quantity], [image_url], [user_id], [store_name] "
                     + "FROM [CartItem] WHERE [user_id] = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, userId);
@@ -35,6 +35,7 @@ public class CartDAO extends DBHelper {
                 cartItem.setQuantity(rs.getInt("quantity"));
                 cartItem.setImageUrl(rs.getString("image_url"));
                 cartItem.setUserId(rs.getInt("user_id"));
+                cartItem.setStorename(rs.getString("store_name"));
                 cartItems.add(cartItem);
             }
         } catch (SQLException ex) {
@@ -67,8 +68,8 @@ public class CartDAO extends DBHelper {
                     }
                 } else {
                     // If the STT_PT doesn't exist, insert a new cart item
-                    String insertSql = "INSERT INTO [CartItem] (STT_PT, product_name, price, quantity, image_url, user_id) "
-                            + "VALUES (?, ?, ?, ?, ?, ?)";
+                    String insertSql = "INSERT INTO [CartItem] (STT_PT, product_name, price, quantity, image_url, user_id, store_name ) "
+                            + "VALUES (?, ?, ?, ?, ?, ?, ?)";
                     PreparedStatement insertPs = connection.prepareStatement(insertSql);
                     insertPs.setInt(1, cartItem.getSttPT());
                     insertPs.setString(2, cartItem.getProductName());
@@ -76,6 +77,7 @@ public class CartDAO extends DBHelper {
                     insertPs.setInt(4, cartItem.getQuantity());
                     insertPs.setString(5, cartItem.getImageUrl());
                     insertPs.setInt(6, cartItem.getUserId());
+                    insertPs.setString(7, cartItem.getStorename());
                     int rowsInserted = insertPs.executeUpdate();
                     if (rowsInserted > 0) {
                         success = true;

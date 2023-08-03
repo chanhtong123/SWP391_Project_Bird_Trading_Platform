@@ -22,8 +22,11 @@ public class ProductDAO extends DBHelper {
     public ArrayList<ProductDTO> getAllProducts() {
         ArrayList<ProductDTO> products = new ArrayList<>();
         try {
-            String sql = "SELECT [STT_PT], [product_id], [store_id], [product_name], [description], [price], [quantity], [image_url], [categoryName], [status] "
-                    + "FROM [Product] WHERE [status] <> 'Hidden'";
+            String sql = "SELECT [STT_PT], [product_id], [store_id], [product_name], [description], [price], [quantity], [image_url], [categoryName], [status], "
+                    + "(SELECT SUM([quantity])\n"
+                    + "                   FROM [Bird_Trading].[dbo].[OrderItem] o\n"
+                    + "                   WHERE o.product_name = p.[product_name]) AS [sold]"
+                    + "FROM [Product] p WHERE [status] <> 'Hidden'";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -37,6 +40,7 @@ public class ProductDAO extends DBHelper {
                 p.setQuantity(rs.getInt("quantity"));
                 p.setImage(rs.getString("image_url"));
                 p.setCategoryName(rs.getString("categoryName"));
+                p.setSoldNumber(rs.getInt("sold"));
                 if (p.getQuantity() == 0) {
                     p.setStatus("Out of Stock");
                 } else {
@@ -50,24 +54,39 @@ public class ProductDAO extends DBHelper {
         return products;
     }
 
-   public ProductDTO increaseProductQuantityBySttPT(int sttPT, int quantity) {
-    ProductDTO product = null;
-    try {
-        String sql = "UPDATE [Product] SET [quantity] = [quantity] + ? WHERE [STT_PT] = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, quantity);
-        ps.setInt(2, sttPT);
-        int rowsAffected = ps.executeUpdate();
-
-        if (rowsAffected > 0) {
-            product = getProductBySttPT(sttPT); // Gọi hàm khác để lấy thông tin sản phẩm đã được cập nhật
+    public String findProductIdBySttPT(int sttPT) {
+        String productId = null;
+        try {
+            String sql = "SELECT [product_id] FROM [Product] WHERE [STT_PT] = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, sttPT);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                productId = rs.getString("product_id");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
+        return productId;
     }
-    return product;
-}
 
+    public ProductDTO increaseProductQuantityBySttPT(int sttPT, int quantity) {
+        ProductDTO product = null;
+        try {
+            String sql = "UPDATE [Product] SET [quantity] = [quantity] + ? WHERE [STT_PT] = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, quantity);
+            ps.setInt(2, sttPT);
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                product = getProductBySttPT(sttPT); // Gọi hàm khác để lấy thông tin sản phẩm đã được cập nhật
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return product;
+    }
 
     public ArrayList<ProductDTO> getAllProductsByProductId(String productId) {
         ArrayList<ProductDTO> products = new ArrayList<>();
@@ -115,8 +134,10 @@ public class ProductDAO extends DBHelper {
     public ProductDTO getProductByID(String productID) {
         ProductDTO product = null;
         try {
-            String sql = "SELECT [STT_PT], [product_id], [store_id], [product_name], [description], [price], [quantity], [image_url], [categoryName], [status] "
-                    + "FROM [Product] WHERE [product_id] = ? AND [status] <> 'Hidden'";
+            String sql = "SELECT [STT_PT], [product_id], [store_id], [product_name], [description], [price], [quantity], [image_url], [categoryName], [status], "
+                    + "(SELECT SUM([quantity]) FROM [Bird_Trading].[dbo].[OrderItem] o\n"
+                    + "WHERE o.product_name = p.[product_name]) AS [sold]"
+                    + "FROM [Product] p WHERE [product_id] = ? AND [status] <> 'Hidden'";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, productID);
             ResultSet rs = ps.executeQuery();
@@ -132,6 +153,7 @@ public class ProductDAO extends DBHelper {
                 product.setImage(rs.getString("image_url"));
                 product.setCategoryName(rs.getString("categoryName"));
                 product.setStatus(rs.getString("status"));
+                product.setSoldNumber(rs.getInt("sold"));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -548,5 +570,4 @@ public class ProductDAO extends DBHelper {
 
         return count;
     }
-
 }

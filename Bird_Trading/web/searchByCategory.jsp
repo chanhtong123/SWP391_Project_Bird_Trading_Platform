@@ -406,7 +406,7 @@
                                     <img class="img-fluid w-100" src="<%= product.getImage()%>" alt=""  style="width: 150px; height: 250px">
                                     <div class="product-action">
                                         <a class="btn btn-outline-dark btn-square"
-                                           href="CartServlet?action=add&sttPt=<%= product.getSttPT()%>&productName=<%= product.getProductName()%>&price=<%= product.getPrice()%>&quantity=1&imageUrl=<%= product.getImage()%>">
+                                           href="CartServlet?action=add&sttPt=<%= product.getSttPT()%>&productName=<%= product.getProductName()%>&price=<%= product.getPrice()%>&quantity=1&imageUrl=<%= product.getImage()%>&storeid=<%= product.getStoreId()%>">
                                             <i class="fa fa-shopping-cart"></i></a>
                                         <!--                                        <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                                                                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>-->
